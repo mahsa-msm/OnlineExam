@@ -1,10 +1,12 @@
-﻿using System;
+﻿using OnlineExam.Domain.Contracts.Common;
+using OnlineExam.Domain.Core.QuestionChoices;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OnlineExam.Domain.Contracts.QuestionChoices
 {
-    interface IQuestionChoiceRepository
+   public interface IQuestionChoiceRepository: IBaseRepository<QuestionChoice>
     {
     }
 }
