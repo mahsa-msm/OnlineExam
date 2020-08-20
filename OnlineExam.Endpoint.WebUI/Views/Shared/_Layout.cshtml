@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/vendor/bootstrap.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+<body>
+
+
+    <header>
+        <ul>
+            <li>
+                <i id="menuIcon" class="fa fa-bars menuicon" onclick="openNav(this)"></i>
+            </li>
+            <li>
+                <i id="closeIcon" class="fa fa-bars menuicon" style="display:none" onclick="closeNav(this)"></i>
+            </li>
+            <li>
+                <a><i class="fa fa-user"></i></a>
+                <ul>
+                    <li><a asp-controller="UserAccount" asp-action="Logout">Logout</a></li>
+                    <li><a href="#">Submenu 2</a></li>
+                    <li><a href="#">Submenu 3</a></li>
+                    <li><a href="#">Submenu 4</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Portfolio</a></li>
+
+        </ul>
+    </header>
+
+
+
+    <div id="mySidenav" class="sidenav">
+        <a asp-controller="User" asp-action="Index">لیست کاربران</a>
+        <a href="#">اضافه کردن ادمین</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div id="main">
+        @RenderBody()
+    </div>
+
+
+
+    <script src="~/js/scripts.js"></script>
+
+</body>
+</html>
