@@ -1,0 +1,34 @@
+﻿@model OnlineExam.Domain.Core.AppUsers.MyLoginModel
+
+@{
+    ViewData["Title"] = "Accont";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Accont</h1>
+
+<h4>LoginModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login" asp-controller="UserAccount" method="post">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="form-group">
+                <input asp-for="Name" type="text" class="form-control form-control-user" placeholder=" name...">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" type="password" class="form-control form-control-user" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-primary btn-user btn-block" type="submit">Log In</button>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -21,6 +21,7 @@
     <ProjectReference Include="..\OnlineExam.Domain.Contracts\OnlineExam.Domain.Contracts.csproj" />
     <ProjectReference Include="..\OnlineExam.Domain.Core\OnlineExam.Domain.Core.csproj" />
     <ProjectReference Include="..\OnlineExam.Infrastructures.DataLayer\OnlineExam.Infrastructures.DataLayer.csproj" />
+    <ProjectReference Include="..\OnlineExam.Services.ApplicationService\OnlineExam.Services.ApplicationService.csproj" />
   </ItemGroup>
 
 </Project>
