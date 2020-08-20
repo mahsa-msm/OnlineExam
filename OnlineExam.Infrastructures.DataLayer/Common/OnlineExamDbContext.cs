@@ -18,7 +18,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         {
 
         }
-        public DbSet<Answer> answers { get; set; }
+        public DbSet<Answer> Answers { get; set; }
         public DbSet<Choice> Choices { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<ExamQuestion> ExamQuestions { get; set; }

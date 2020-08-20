@@ -15,15 +15,20 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
 
+
         public UserAccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signInMgr)
+        SignInManager<AppUser> signInMgr
+  )
         {
             userManager = userMgr;
             signInManager = signInMgr;
+        
 
         }
-
-        
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         public IActionResult Login(string returnUrl)
         {
@@ -114,6 +119,6 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             await signInManager.SignOutAsync();
             return Redirect(returnUrl);
         }
-
+        
     }
 }

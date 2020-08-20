@@ -1,0 +1,12 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject SignInManager<OnlineExam.Domain.Core.AppUsers.AppUser> SignInManager
+@inject UserManager<OnlineExam.Domain.Core.AppUsers.AppUser> UserManager
+
+
+<h1>Index</h1>
