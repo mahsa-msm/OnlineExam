@@ -1,4 +1,5 @@
-﻿using OnlineExam.Domain.Contracts.Common;
+﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using OnlineExam.Domain.Contracts.Common;
 using OnlineExam.Domain.Core;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
 
         public TEntity Add(TEntity entity)
         {
+
             dbContext.Add(entity);
+
             dbContext.SaveChanges();
             return entity;
         }

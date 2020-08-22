@@ -1,0 +1,110 @@
+﻿@model IEnumerable<OnlineExam.Domain.Core.Courses.Course>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="main-title">درس ها </h1>
+
+<p>
+    <a asp-action="Create">ایجاد درس جدید </a>
+</p>
+<div class="row">
+    <table class="table col-md-6">
+        @if (User.IsInRole("admin"))
+        {
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id">ایجاد ازمون</a>
+                            <a asp-route-id="@item.Id">لیست ازمون</a>
+                        </td>
+
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
+
+                            <form asp-action="Delete" asp-route-id="@item.Id" class="d-inline-block">
+                                <button type="submit" class="btn btn-danger " onclick="return functionConfirm(this)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+        else
+        {
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+
+                    </th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <a asp-route-id="@item.Id">لیست ازمون</a>
+                        </td>
+
+                       
+                    </tr>
+                }
+            </tbody>
+        }
+  
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    function functionConfirm(event) {
+        swal({
+            title: 'از حدف درس اطمینان دارید؟',
+            text: false,
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'خیر',
+            cancelButtonClass: 'btn btn-danger',
+            showConfirmButton: true,
+            confirmButtonText: 'بله',
+            confirmButtonClass: 'btn btn-success'
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $('form').submit();
+                return true;
+            } else {
+                return false;
+            }
+        });
+        return false;
+    }
+</script>
