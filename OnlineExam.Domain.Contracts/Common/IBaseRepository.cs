@@ -11,6 +11,7 @@ namespace OnlineExam.Domain.Contracts.Common
         TEntity Get(int id);
         IQueryable<TEntity> GetAll();
         TEntity Add(TEntity entity);
+        TEntity Update(TEntity entity);
         void Delete(int id);
     }
 }

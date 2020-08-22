@@ -34,7 +34,7 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            <a asp-route-id="@item.Id">ایجاد ازمون</a>
+                            <a href="@Url.Action("Create", "Exam", new { courseId = item.Id})">content</a> 
                             <a asp-route-id="@item.Id">لیست ازمون</a>
                         </td>
 

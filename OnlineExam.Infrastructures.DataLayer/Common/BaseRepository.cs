@@ -4,6 +4,7 @@ using OnlineExam.Domain.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.Common
@@ -22,7 +23,6 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         {
 
             dbContext.Add(entity);
-
             dbContext.SaveChanges();
             return entity;
         }
@@ -43,6 +43,14 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         public IQueryable<TEntity> GetAll()
         {
             return dbContext.Set<TEntity>().AsQueryable();
+        }
+
+        public TEntity Update(TEntity entity)
+        {
+            dbContext.Update(entity);
+            dbContext.SaveChanges();
+            return entity;
+
         }
     }
 }

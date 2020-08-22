@@ -36,9 +36,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpPost]
         public IActionResult Create(Course model)
         {
-            Course course = new Course { Name = model.Name };
-            courseRepository.Add(course);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+              
+                courseRepository.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     
        
@@ -54,25 +58,25 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             Course course = courseRepository.Get(id);
             return View(course);
         }
+
         [HttpPost]
         public IActionResult Update(Course model)
         {
             if (ModelState.IsValid)
             {
-                Course course = new Course
+                if (model.Id ==0)
                 {
-                   
-                    Name = model.Name
-                };
-                courseRepository.Add(course);
-                return RedirectToAction("Index");
+                    courseRepository.Add(model);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    courseRepository.Update(model);
+                    return RedirectToAction("Index");
+                }
             }
-
             return View(model);
-           
-   
         }
-
-
     }
 }
