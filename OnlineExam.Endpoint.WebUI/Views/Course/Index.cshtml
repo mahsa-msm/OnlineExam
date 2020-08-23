@@ -34,8 +34,10 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            <a href="@Url.Action("Create", "Exam", new { courseId = item.Id})">content</a> 
-                            <a asp-route-id="@item.Id">لیست ازمون</a>
+
+                            @Html.ActionLink("List", "Index", "Exam", new { courseId = item.Id }, null)|
+                            @Html.ActionLink("Add", "Create", "Exam", new { courseId = item.Id }, null)
+
                         </td>
 
                         <td>

@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Courses;
+using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.Courses;
+using OnlineExam.Domain.Core.Exams;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
@@ -17,10 +19,10 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository courseRepository;
-       
-        public CourseController(ICourseRepository courseRepository )
+        private readonly IExamRepository examRepository;
+        public CourseController(ICourseRepository courseRepository , IExamRepository examRepository)
         {
-           
+            this.examRepository = examRepository;
             this.courseRepository = courseRepository;
         }
         public IActionResult Index()
@@ -77,6 +79,24 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 }
             }
             return View(model);
+        }
+
+
+        public IActionResult AddExam()
+        {
+           
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddExam(Exam model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                examRepository.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

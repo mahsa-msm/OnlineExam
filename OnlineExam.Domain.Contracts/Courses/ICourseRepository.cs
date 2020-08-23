@@ -8,5 +8,6 @@ namespace OnlineExam.Domain.Contracts.Courses
 {
    public interface ICourseRepository: IBaseRepository<Course>
     {
+       
     }
 }

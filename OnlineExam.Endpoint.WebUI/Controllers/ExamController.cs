@@ -24,16 +24,22 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             this.examRepository = examRepository;
             this.courseRepository = courseRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(int courseId)
         {
-            var model = examRepository.GetAll().ToList();
+          List<Exam> model =   examRepository.GetAllCourses(courseId);
             return View(model);
+        
         }
 
         [HttpGet]
         public IActionResult Create(int courseId)
         {
-            ViewBag.courseId = courseId;
+          var course =   courseRepository.Get(courseId);
+
+
+
+            ViewBag.Course= courseRepository.Get(courseId); 
+          
             return View();
         }
 
@@ -49,13 +55,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                     Duration = model.Duration,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    
+                    CourseId=model.CourseId
 
                 };
                 examRepository.Add(exam); 
 
               
-                return RedirectToAction("Index");
+                return RedirectToAction("Index" , new { courseId = model.CourseId });
             }
             return View();
         }

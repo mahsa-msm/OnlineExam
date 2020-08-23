@@ -9,9 +9,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Courses
 {
     public class CourseRepository : BaseRepository<Course>, ICourseRepository
     {
+     
+
         public CourseRepository(OnlineExamDbContext dbContext) : base(dbContext)
         {
-
+           
         }
+
+        
     }
 }
