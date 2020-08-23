@@ -1,14 +1,18 @@
 ﻿@model IEnumerable<OnlineExam.Domain.Core.Exams.Exam>
+@{ OnlineExam.Domain.Core.Courses.Course course = ViewBag.Course;}
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<label>@course.Name</label>
+
 <table class="table">
     <thead>
         <tr>
@@ -24,42 +28,63 @@
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+
+                <td>
+                    @Html.ActionLink("update", "Update", "Exam", new { courseId = course.Id, examId = item.Id }, null)|
+                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
+
+                    <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
+                        <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<script type="text/javascript">
+    function functionConfirm(id) {
+        swal({
+            title: 'از حذف اامتحان مطمئن هستید؟',
+            text: false,
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'خیر',
+            cancelButtonClass: 'btn btn-danger',
+            showConfirmButton: true,
+            confirmButtonText: 'بله',
+            confirmButtonClass: 'btn btn-success'
+        }, function (isConfirm) {
+            if (isConfirm) {
+                window.location.href = '/Exam/Delete/' + id;
+            }
+            else {
+                return false;
+            }
+        });
+        return false;
+    }
+</script>

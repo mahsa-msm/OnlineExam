@@ -26,27 +26,24 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
         public IActionResult Index(int courseId)
         {
-          List<Exam> model =   examRepository.GetAllCourses(courseId);
+            List<Exam> model = examRepository.GetAllCourses(courseId);
+
+            ViewBag.Course = courseRepository.Get(courseId);
             return View(model);
-        
+
         }
 
         [HttpGet]
         public IActionResult Create(int courseId)
         {
-          var course =   courseRepository.Get(courseId);
-
-
-
-            ViewBag.Course= courseRepository.Get(courseId); 
-          
+            
+            ViewBag.Course = courseRepository.Get(courseId);
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(ExamViewModel model)
         {
-         
             if (ModelState.IsValid)
             {
                 Exam exam = new Exam
@@ -55,17 +52,67 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                     Duration = model.Duration,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    CourseId=model.CourseId
+                    CourseId = model.CourseId
 
                 };
-                examRepository.Add(exam); 
+                examRepository.Add(exam);
 
-              
-                return RedirectToAction("Index" , new { courseId = model.CourseId });
+
+                return RedirectToAction("Index", new { courseId = model.CourseId });
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Update(int courseId , int examId)
+        {
+            Exam exam = examRepository.Get(examId);
+            ExamViewModel model = new ExamViewModel
+            {
+                CourseId = courseId,
+                Duration =exam.Duration,
+                EndDate=exam.EndDate , 
+                StartDate = exam.StartDate , 
+                Name = exam.Name
+
+
+
+            };
+
+            ViewBag.Course = courseRepository.Get(courseId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(ExamViewModel model)
+        {
+            
+
+            if (ModelState.IsValid)
+            {
+                
+                Exam exam = new Exam
+                {
+                    Name = model.Name,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    Duration = model.Duration,
+                    CourseId=model.CourseId
+
+
+                };
+
+                examRepository.Update(exam);
+
+
+                return RedirectToAction("Index", new { courseId = model.CourseId });
             }
             return View();
         }
 
-
+        public IActionResult Delete(int id ,int courseId)
+        {
+            examRepository.Delete(id);
+          return  RedirectToAction("Index", new { courseId = courseId });
+        }
     }
 }

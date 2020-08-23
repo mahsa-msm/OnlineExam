@@ -29,27 +29,29 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
 
-                            @Html.ActionLink("List", "Index", "Exam", new { courseId = item.Id }, null)|
-                            @Html.ActionLink("Add", "Create", "Exam", new { courseId = item.Id }, null)
+                        @Html.ActionLink("List", "Index", "Exam", new { courseId = item.Id }, null)|
+                        @Html.ActionLink("Add", "Create", "Exam", new { courseId = item.Id }, null)
 
-                        </td>
-
-                        <td>
-                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
-
-                            <form asp-action="Delete" asp-route-id="@item.Id" class="d-inline-block">
-                                <button type="submit" class="btn btn-danger " onclick="return functionConfirm(this)">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
+                       
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn btn-danger" onclick="return functionConfirm(@item.Id)">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
                 }
             </tbody>
         }
@@ -63,7 +65,7 @@
                     <th>
 
                     </th>
-                   
+
                 </tr>
             </thead>
             <tbody>
@@ -77,20 +79,19 @@
                             <a asp-route-id="@item.Id">لیست ازمون</a>
                         </td>
 
-                       
+
                     </tr>
                 }
             </tbody>
         }
-  
+
     </table>
 </div>
 
-
 <script type="text/javascript">
-    function functionConfirm(event) {
+    function functionConfirm(id) {
         swal({
-            title: 'از حدف درس اطمینان دارید؟',
+            title: 'از حذف درس مطمئن هستید؟',
             text: false,
             type: 'warning',
             showCancelButton: true,
@@ -101,9 +102,9 @@
             confirmButtonClass: 'btn btn-success'
         }, function (isConfirm) {
             if (isConfirm) {
-                $('form').submit();
-                return true;
-            } else {
+                window.location.href = '/Course/Delete/' + id;
+            }
+            else {
                 return false;
             }
         });

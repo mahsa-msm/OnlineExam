@@ -1,22 +1,20 @@
 ﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.ExamViewModel
 @{ OnlineExam.Domain.Core.Courses.Course course = ViewBag.Course;}
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Update</h1>
 
 <h4>ExamViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-           
-
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CourseId" value=@course.Id />
             <label>@course.Name</label>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -34,12 +32,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Duration" class="control-label"></label>
-                <input type="number" asp-for="Duration" class="form-control" />
+                <input asp-for="Duration" class="form-control" />
                 <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

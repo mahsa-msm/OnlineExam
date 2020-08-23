@@ -82,21 +82,8 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
 
 
-        public IActionResult AddExam()
-        {
-           
-            return View();
-        }
-        [HttpPost]
-        public IActionResult AddExam(Exam model)
-        {
-            if (ModelState.IsValid)
-            {
-
-                examRepository.Add(model);
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+      
+      
+        
     }
 }
