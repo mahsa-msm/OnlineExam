@@ -12,6 +12,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Courses
         public void Configure(EntityTypeBuilder<Course> builder)
         {
             builder.Property(c => c.Name).HasMaxLength(50).IsRequired();
+
         }
     }
 }

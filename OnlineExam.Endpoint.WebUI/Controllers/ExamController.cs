@@ -72,38 +72,31 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 Duration =exam.Duration,
                 EndDate=exam.EndDate , 
                 StartDate = exam.StartDate , 
-                Name = exam.Name
-
-
-
+                Name = exam.Name,
+                Id= exam.Id            
             };
 
             ViewBag.Course = courseRepository.Get(courseId);
+            ViewBag.examId = courseRepository.Get(examId);
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Update(ExamViewModel model)
         {
-            
-
             if (ModelState.IsValid)
             {
-                
-                Exam exam = new Exam
-                {
-                    Name = model.Name,
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
-                    Duration = model.Duration,
-                    CourseId=model.CourseId
+                Exam exam = examRepository.Get(model.Id);
+
+                exam.Name = model.Name;
+                exam.StartDate = model.StartDate;
+                exam.EndDate = model.EndDate;
+                exam.Duration = model.Duration;
 
 
-                };
+
 
                 examRepository.Update(exam);
-
-
                 return RedirectToAction("Index", new { courseId = model.CourseId });
             }
             return View();

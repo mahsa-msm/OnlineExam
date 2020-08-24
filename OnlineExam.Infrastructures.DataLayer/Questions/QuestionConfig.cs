@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.IdentityModel.Tokens;
 using OnlineExam.Domain.Core.Questions;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Questions
             builder.Property(c => c.Text).HasMaxLength(500).IsRequired();
 
         }
+
     }
 }
+

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using OnlineExam.Domain.Core.ExamQuestions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
             builder.UseSqlServer("Server = hqit-user7\\morsamsqlserver; Database = OnlineExam; Trusted_Connection = True; MultipleActiveResultSets = true");
             return new OnlineExamDbContext(builder.Options);
         }
+        
     }
 }

@@ -50,9 +50,16 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("update", "Update", "Exam", new { courseId = course.Id, examId = item.Id }, null)|
-                    <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("AddQuestion", "ExamQuestion" ,item.Id)" class="btn btn-warning">
+                        <i class="fa fa-trash"></i>
+                    </a>
 
+                </td>
+                <td>
+
+                    <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
+                        <i class="fa fa-trash"></i>
+                    </a>
                     <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
                         <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
                             <i class="fa fa-trash"></i>

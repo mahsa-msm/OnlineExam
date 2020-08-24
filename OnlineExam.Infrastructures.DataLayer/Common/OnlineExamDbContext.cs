@@ -6,6 +6,11 @@ using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Domain.Core.QuestionChoices;
 using OnlineExam.Domain.Core.Questions;
+using OnlineExam.Infrastructures.DataLayer.Choices;
+using OnlineExam.Infrastructures.DataLayer.Courses;
+using OnlineExam.Infrastructures.DataLayer.ExamQuestions;
+using OnlineExam.Infrastructures.DataLayer.Exams;
+using OnlineExam.Infrastructures.DataLayer.Questions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,14 +32,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         public DbSet<Question> Questions { get; set; }
 
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new CourseConfig());
-            //modelBuilder.ApplyConfiguration(new ChoiceConfig());
-            //modelBuilder.ApplyConfiguration(new ExamConfig());
-            //modelBuilder.ApplyConfiguration(new QuestionConfig());
-
+            modelBuilder.ApplyConfiguration(new CourseConfig());
+            modelBuilder.ApplyConfiguration(new ChoiceConfig());
+            modelBuilder.ApplyConfiguration(new ExamConfig());
+            modelBuilder.ApplyConfiguration(new QuestionConfig());
+            modelBuilder.ApplyConfiguration(new ExamQuestionsConfig());
         }
     }
 }
