@@ -1,4 +1,4 @@
-﻿@model OnlineExam.Domain.Core.Questions.Question
+﻿@model IEnumerable<OnlineExam.Domain.Core.ExamQuestions.ExamQuestion>
 @{ OnlineExam.Domain.Core.Exams.Exam exams = ViewBag.Exam;}
 @{
     ViewData["Title"] = "Index";
@@ -7,30 +7,41 @@
 
 <h1>Index</h1>
 
-<h4>Question</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })" class="btn btn-warning">
+    اضافه کردن سوال
+</a>
+<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })"  class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+</a>
 
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <td>
+                @Html.DisplayNameFor(model => model.Question.Text)
+            </td>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question.Text)
+                </td>
+
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -9,7 +9,5 @@ namespace OnlineExam.Domain.Contracts.Questions
 {
   public interface IQuestionRepository : IBaseRepository<Question>
     {
-      
-        
     }
 }

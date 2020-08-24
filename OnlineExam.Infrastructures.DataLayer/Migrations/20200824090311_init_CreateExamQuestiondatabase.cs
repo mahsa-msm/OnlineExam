@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OnlineExam.Infrastructures.DataLayer.Migrations.OnlineExamDb
+namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
-    public partial class init_CreateExamdatabase : Migration
+    public partial class init_CreateExamQuestiondatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations.OnlineExamDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +65,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations.OnlineExamDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(nullable: true)
+                    Text = table.Column<string>(maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +104,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations.OnlineExamDb
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     Duration = table.Column<int>(nullable: false),
@@ -151,14 +151,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations.OnlineExamDb
                 name: "ExamQuestions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionId = table.Column<int>(nullable: false),
-                    ExamId = table.Column<int>(nullable: false)
+                    ExamId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExamQuestions", x => x.Id);
+                    table.PrimaryKey("PK_ExamQuestions", x => new { x.ExamId, x.QuestionId });
                     table.ForeignKey(
                         name: "FK_ExamQuestions_Exams_ExamId",
                         column: x => x.ExamId,
@@ -182,11 +181,6 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations.OnlineExamDb
                 name: "IX_Answers_ChoiceId",
                 table: "Answers",
                 column: "ChoiceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ExamQuestions_ExamId",
-                table: "ExamQuestions",
-                column: "ExamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExamQuestions_QuestionId",

@@ -21,11 +21,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             this.examRepository = examRepository;
 
         }
-        public IActionResult Index(int examId)
-        {
-            List<ExamQuestion> questions = examQuestionRepository.GetAllQuestion(examId);
-            ViewBag.Exam = examRepository.Get(examId);
-            return View(questions);
-        }
+      
     }
 }

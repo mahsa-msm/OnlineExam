@@ -1,4 +1,5 @@
-﻿using OnlineExam.Domain.Contracts.ExamQuestions;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Infrastructures.DataLayer.Common;
 using System;
@@ -22,6 +23,11 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
         {
             List<ExamQuestion> examQuestions = dbContext.ExamQuestions.Where(c => c.ExamId == examId).ToList();
             return examQuestions; 
+        }
+
+        public List<ExamQuestion> GetExamQuestions(int examId)
+        {
+           return dbContext.ExamQuestions.Include(c => c.Question).Where(c=>c.ExamId==examId).ToList();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         private readonly IExamRepository examRepository;
         private readonly IQuestionRepository questionRepository;
 
-        public ExamQuestionController(IExamQuestionRepository examQuestionRepository , IExamRepository examRepository,IQuestionRepository questionRepository)
+        public ExamQuestionController(IExamQuestionRepository examQuestionRepository, IExamRepository examRepository, IQuestionRepository questionRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
             this.examRepository = examRepository;
@@ -27,39 +27,47 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
         public IActionResult Index(int examId)
         {
-            List<ExamQuestion> examQuestions = examQuestionRepository.GetAllQuestion(examId);
+            List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examId);
+
+            
             ViewBag.Exam = examRepository.Get(examId);
+
             return View(examQuestions);
         }
 
 
         public IActionResult AddQuestion(int examId)
         {
-            ViewBag.Exam = examRepository.Get(examId) ;
+            ViewBag.Exam = examRepository.Get(examId);
             return View();
         }
-        //[HttpPost]
-        //public IActionResult AddQuestion(int examId , AddQuestionViewModel questionViewModel)
-        //{
-        //    Exam exam = examRepository.Get(examId);
+        [HttpPost]
+        public IActionResult AddQuestion(QuestionViewModel questionViewModel)
+        {
+            Exam exam = examRepository.Get(questionViewModel.ExamId);
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        questionRepository.Add(questionViewModel);
-        //        examQuestionRepository.Add(
-        //        new ExamQuestion
-        //        {
-        //            ExamId = examId,
-        //            QuestionId = questionViewModel.Id,
-        //            Exam = exam,
-        //            Question = questionViewModel
-        //        }
-        //        );
-        //        return RedirectToAction("Index", new { examId = examId });
-        //    }
+            if (ModelState.IsValid)
+            {
+                Question qusetion = new Question
+                {
+                    Text = questionViewModel.Text
+                };
+                questionRepository.Add(qusetion);
+                ExamQuestion examQuestion = new ExamQuestion
+                {
+                    ExamId = questionViewModel.ExamId,
+                    QuestionId = qusetion.Id,
+                    Exam = exam,
+                    Question = qusetion
+                };
+                examQuestionRepository.Add(examQuestion);
 
-        //    return View();
-        //}
+
+                return RedirectToAction("Index", new { examId = questionViewModel.ExamId });
+            }
+
+            return View();
+        }
 
 
     }

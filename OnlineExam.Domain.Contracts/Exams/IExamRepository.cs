@@ -11,5 +11,6 @@ namespace OnlineExam.Domain.Contracts.Exams
     {
 
         List<Exam> GetAllCourses(int id);
-    }
+        List<Exam> GetExams();
+     }
 }
