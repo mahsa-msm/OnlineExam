@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Contracts.QuestionChoices;
 using OnlineExam.Domain.Contracts.Questions;
+using OnlineExam.Domain.Core.Choices;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Domain.Core.QuestionChoices;
@@ -21,16 +23,19 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         private readonly IExamRepository examRepository;
         private readonly IQuestionRepository questionRepository;
         private readonly IQuestionChoiceRepository questionChoiceRepository;
+        private readonly IChoiceRepository choiceRepository;
 
         public ExamQuestionController(IExamQuestionRepository examQuestionRepository
             , IExamRepository examRepository
             , IQuestionRepository questionRepository
-            , IQuestionChoiceRepository questionChoiceRepository)
+            , IQuestionChoiceRepository questionChoiceRepository,
+            IChoiceRepository choiceRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
             this.examRepository = examRepository;
             this.questionRepository = questionRepository;
             this.questionChoiceRepository = questionChoiceRepository;
+            this.choiceRepository = choiceRepository;
         }
         public IActionResult Index(int examId)
         {
@@ -66,6 +71,25 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                     Exam = exam,
                     Question = qusetion
                 };
+
+                for(int i = 0; i<4; i++)
+                {
+                    Choice  choice = questionViewModel.Choices[i];
+                    choiceRepository.Add(choice);
+                   QuestionChoice questionChoice = new QuestionChoice
+                    {
+                       
+                        Question = qusetion,
+                        Choice = choice , 
+                        ChoiceId = choice.Id,
+                       QuestionId = qusetion.Id,
+
+
+                   };
+                    questionChoiceRepository.Add(questionChoice);
+
+                }
+
                 examQuestionRepository.Add(examQuestion);
 
 

@@ -9,4 +9,5 @@ namespace OnlineExam.Domain.Contracts.Choices
     public interface IChoiceRepository : IBaseRepository<Choice>
     {
     }
+
 }

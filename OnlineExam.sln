@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExam.Infrastructures.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExam.Domain.Contracts", "OnlineExam.Domain.Contracts\OnlineExam.Domain.Contracts.csproj", "{CB3BC727-56CA-4563-B39D-B7DE9A94003D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Endpoint.WebUI", "OnlineExam.Endpoint.WebUI\OnlineExam.Endpoint.WebUI.csproj", "{8F400C45-9AA7-43A3-B336-7A943FD171FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExam.Endpoint.WebUI", "OnlineExam.Endpoint.WebUI\OnlineExam.Endpoint.WebUI.csproj", "{8F400C45-9AA7-43A3-B336-7A943FD171FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Services.ApplicationService", "OnlineExam.Services.ApplicationService\OnlineExam.Services.ApplicationService.csproj", "{DF6F6C11-CD6D-4565-B0D0-A7196FD8AA3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExam.Services.ApplicationService", "OnlineExam.Services.ApplicationService\OnlineExam.Services.ApplicationService.csproj", "{DF6F6C11-CD6D-4565-B0D0-A7196FD8AA3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
