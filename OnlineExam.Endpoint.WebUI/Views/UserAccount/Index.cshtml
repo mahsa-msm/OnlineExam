@@ -9,4 +9,10 @@
 @inject UserManager<OnlineExam.Domain.Core.AppUsers.AppUser> UserManager
 
 
-<h1>Index</h1>
+@if (User.IsInRole("admin"))
+{
+
+}
+else
+{
+}

@@ -10,8 +10,8 @@ using OnlineExam.Infrastructures.DataLayer.Common;
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
     [DbContext(typeof(OnlineExamDbContext))]
-    [Migration("20200824090311_init_CreateExamQuestiondatabase")]
-    partial class init_CreateExamQuestiondatabase
+    [Migration("20200825101813_init-EditExamId")]
+    partial class initEditExamId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,16 +131,20 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
 
             modelBuilder.Entity("OnlineExam.Domain.Core.ExamQuestions.ExamQuestion", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("ExamId", "QuestionId");
+                    b.HasIndex("ExamId");
 
                     b.HasIndex("QuestionId");
 
@@ -237,13 +241,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.HasOne("OnlineExam.Domain.Core.Exams.Exam", "Exam")
                         .WithMany("ExamQuestions")
                         .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OnlineExam.Domain.Core.Questions.Question", "Question")
                         .WithMany("ExamQuestions")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -261,13 +265,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.HasOne("OnlineExam.Domain.Core.Choices.Choice", "Choice")
                         .WithMany("QuestionChoice")
                         .HasForeignKey("ChoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OnlineExam.Domain.Core.Questions.Question", "Question")
                         .WithMany("QuestionChoices")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

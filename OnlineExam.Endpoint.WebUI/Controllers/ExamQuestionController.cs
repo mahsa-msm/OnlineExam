@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
+using OnlineExam.Domain.Contracts.QuestionChoices;
 using OnlineExam.Domain.Contracts.Questions;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
+using OnlineExam.Domain.Core.QuestionChoices;
 using OnlineExam.Domain.Core.Questions;
 using OnlineExam.Endpoint.WebUI.Models.Exams;
 
@@ -18,18 +20,22 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         private readonly IExamQuestionRepository examQuestionRepository;
         private readonly IExamRepository examRepository;
         private readonly IQuestionRepository questionRepository;
+        private readonly IQuestionChoiceRepository questionChoiceRepository;
 
-        public ExamQuestionController(IExamQuestionRepository examQuestionRepository, IExamRepository examRepository, IQuestionRepository questionRepository)
+        public ExamQuestionController(IExamQuestionRepository examQuestionRepository
+            , IExamRepository examRepository
+            , IQuestionRepository questionRepository
+            , IQuestionChoiceRepository questionChoiceRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
             this.examRepository = examRepository;
             this.questionRepository = questionRepository;
+            this.questionChoiceRepository = questionChoiceRepository;
         }
         public IActionResult Index(int examId)
         {
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examId);
-
-            
+            //List<QuestionChoice> questionChoices =questionChoiceRepository.GetQuestionChoices()
             ViewBag.Exam = examRepository.Get(examId);
 
             return View(examQuestions);

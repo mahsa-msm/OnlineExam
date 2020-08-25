@@ -37,21 +37,21 @@
 
     @if (User.IsInRole("admin"))
     {
-        <div id="mySidenav" class="sidenav">
-            <a asp-controller="User" asp-action="Index"> کاربران</a>
-            <a href="#">اضافه کردن ادمین</a>
-            <a href="#">اضافه کردن درس </a>
-            <a href="#">Contact</a>
-        </div>
+<div id="mySidenav" class="sidenav">
+    <a asp-controller="User" asp-action="Index"> کاربران</a>
+
+    <a asp-controller="Course" asp-action="Create">لیست درس ها </a>
+    <a href="#">Contact</a>
+</div>
     }
     else
     {
-        <div id="mySidenav" class="sidenav">
-            <a asp-controller="User" asp-action="Index">آزمون ها</a>
-            <a href="#">اضافه کردن ادمین</a>
-            <a href="#">اضافه کردن درس </a>
-            <a href="#">Contact</a>
-        </div>
+<div id="mySidenav" class="sidenav">
+    <a asp-controller="User" asp-action="Index">آزمون ها</a>
+    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+
+    <a href="#">Contact</a>
+</div>
     }
 
 

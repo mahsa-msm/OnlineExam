@@ -8,7 +8,6 @@ namespace OnlineExam.Domain.Contracts.ExamQuestions
 {
   public  interface IExamQuestionRepository: IBaseRepository<ExamQuestion>
     {
-        List<ExamQuestion> GetAllQuestion(int examId);
         List<ExamQuestion> GetExamQuestions(int examId);
 
     }

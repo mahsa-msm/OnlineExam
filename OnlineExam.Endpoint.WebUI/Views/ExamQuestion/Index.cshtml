@@ -14,7 +14,7 @@
 <a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })" class="btn btn-warning">
     اضافه کردن سوال
 </a>
-<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })"  class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
     Open modal
 </a>
 
@@ -27,7 +27,6 @@
                 @Html.DisplayNameFor(model => model.Question.Text)
             </td>
 
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,8 +38,20 @@
                     @Html.DisplayFor(modelItem => item.Question.Text)
                 </td>
 
-                <td>
-                </td>
+                @{
+                    var choices = item.Question.QuestionChoices.Select(x => x.Choice.Text);
+
+                    foreach (var choice in choices)
+                    {
+                        <td>
+                            @choice
+                        </td>
+                    }
+                    <td>
+                    </td>
+
+
+                }
             </tr>
         }
     </tbody>

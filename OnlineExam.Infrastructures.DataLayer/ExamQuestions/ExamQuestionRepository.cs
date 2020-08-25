@@ -19,15 +19,18 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
             this.dbContext = dbContext;
         }
 
-        public List<ExamQuestion> GetAllQuestion(int examId)
-        {
-            List<ExamQuestion> examQuestions = dbContext.ExamQuestions.Where(c => c.ExamId == examId).ToList();
-            return examQuestions; 
-        }
-
         public List<ExamQuestion> GetExamQuestions(int examId)
         {
-           return dbContext.ExamQuestions.Include(c => c.Question).Where(c=>c.ExamId==examId).ToList();
+            
+                var exam = dbContext.ExamQuestions
+                .Include(c => c.Question)
+                .ThenInclude(x => x.QuestionChoices)
+                .ThenInclude(a => a.Choice)
+                .Where(q => q.ExamId == examId)
+                .ToList();
+                return exam;
+           
+            
         }
     }
 }

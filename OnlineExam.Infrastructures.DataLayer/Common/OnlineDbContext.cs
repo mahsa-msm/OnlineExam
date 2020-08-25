@@ -10,6 +10,7 @@ using OnlineExam.Infrastructures.DataLayer.Choices;
 using OnlineExam.Infrastructures.DataLayer.Courses;
 using OnlineExam.Infrastructures.DataLayer.ExamQuestions;
 using OnlineExam.Infrastructures.DataLayer.Exams;
+using OnlineExam.Infrastructures.DataLayer.QuestionChoices;
 using OnlineExam.Infrastructures.DataLayer.Questions;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
             modelBuilder.ApplyConfiguration(new ExamConfig());
             modelBuilder.ApplyConfiguration(new QuestionConfig());
             modelBuilder.ApplyConfiguration(new ExamQuestionsConfig());
+            modelBuilder.ApplyConfiguration(new QuestionChoiceConfig());
         }
     }
 }

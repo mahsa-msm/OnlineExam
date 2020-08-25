@@ -1,4 +1,5 @@
-﻿using OnlineExam.Domain.Core.Questions;
+﻿using OnlineExam.Domain.Core.Choices;
+using OnlineExam.Domain.Core.Questions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace OnlineExam.Endpoint.WebUI.Models.Exams
         public int ExamName { get; set; }
         public int QuestionID { get; set; }
         public string Text { get; set; }
-        public List<Question> questions { get; set; }
+        public List<Choice> Choices { get; set; }
     }
 }

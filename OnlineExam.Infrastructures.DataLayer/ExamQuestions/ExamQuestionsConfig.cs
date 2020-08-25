@@ -13,13 +13,18 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
         public void Configure(EntityTypeBuilder<ExamQuestion> modelBuilder)
         {
 
-            modelBuilder.HasKey(b => new { b.ExamId, b.QuestionId });
-            modelBuilder.HasOne(bc => bc.Exam)
+            modelBuilder.HasKey(x=>x.Id);
+
+            modelBuilder.HasOne(b => b.Exam)
                 .WithMany(b => b.ExamQuestions)
-                .HasForeignKey(bc => bc.ExamId);
-            modelBuilder.HasOne(bc => bc.Question)
+                .HasForeignKey(b => b.ExamId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+
+            modelBuilder.HasOne(b => b.Question)
                 .WithMany(c => c.ExamQuestions)
-                .HasForeignKey(bc => bc.QuestionId);
+                .HasForeignKey(c => c.QuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }
