@@ -1,0 +1,32 @@
+﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.GiveExamViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+@foreach (var item in Model.Questions)
+{
+
+    @item.Text
+    <br />
+
+    var choices = item.QuestionChoices.Select(c => c.Choice);
+    @foreach (var choice in choices)
+    {
+        @*<input asp-for="AnswersId" value=@choice.Id />*@
+        <input type="radio" name="@choice.Text" value="@choice.Text" />
+        @choice.Text
+        <br />
+
+    }
+}
+

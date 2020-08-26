@@ -76,6 +76,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 {
                     Choice  choice = questionViewModel.Choices[i];
                     choiceRepository.Add(choice);
+
                    QuestionChoice questionChoice = new QuestionChoice
                     {
                        

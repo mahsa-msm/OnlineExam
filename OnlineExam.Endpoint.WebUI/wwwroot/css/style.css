@@ -7,7 +7,11 @@ body {
  
     text-align: right;
 }
+.bg-bluecolor {
+    background: #384d98;
+    color:#efefef
 
+}
 
 main-title {
     color: #e06f0e
@@ -79,20 +83,6 @@ header {
     cursor: pointer
 }
 
-@media (max-width: 768px) {
-    header ul {
-        display: inline-flex;
-    }
-
-        header ul li {
-            display: inline-flex;
-        }
-
-            header ul li ul {
-                width: 100%;
-                z-index: 1;
-            }
-}
 
 .sidenav {
     height: 100%;
@@ -134,15 +124,6 @@ header {
     padding-top: 50px
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 45px;
-    }
-
-        .sidenav a {
-            font-size: 18px;
-        }
-}
 
 .mainpagebox {
     position: absolute;
@@ -166,3 +147,48 @@ header {
         background: #fff;
         color: #e96b56
     }
+
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 30%;
+}
+
+.login-form {
+    text-align: center;
+    text-align: -webkit-center;
+}
+.login-form form{
+    width:80%
+}
+
+
+
+@media (max-width: 768px) {
+    header ul {
+        display: inline-flex;
+    }
+
+        header ul li {
+            display: inline-flex;
+        }
+
+            header ul li ul {
+                width: 100%;
+                z-index: 1;
+            }
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 45px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}

@@ -16,23 +16,50 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
     {
         private readonly IExamQuestionRepository examQuestionRepository;
         private readonly IQuestionRepository questionRepository;
+        private readonly IExamRepository examRepository;
         private readonly IAnswerRepository answerRepository;
 
-        public TakeExamController(IExamQuestionRepository examQuestionRepository, IQuestionRepository questionRepository, IAnswerRepository answerRepository)
+        public TakeExamController(IExamQuestionRepository examQuestionRepository,
+            IQuestionRepository questionRepository,
+            IExamRepository examRepository ,
+             IAnswerRepository answerRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
             this.questionRepository = questionRepository;
+            this.examRepository = examRepository;
             this.answerRepository = answerRepository;
         }
         public IActionResult Index(int examID)
         {
 
-            TakeExamViewModel takeExam = new TakeExamViewModel();
+            GiveExamViewModel takeExam = new GiveExamViewModel();
+            takeExam.Exam = examRepository.Get(examID);
             takeExam.ExamId = examID;
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
 
             return View(takeExam);
+        }
+
+
+        public IActionResult TakeExam(int examID , int userId)
+        {
+            GiveExamViewModel takeExam = new GiveExamViewModel();
+            ViewBag.examId = examID;
+            takeExam.ExamId = examID;
+            List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
+            takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
+            return View(takeExam);
+        }
+        [HttpPost]
+        public IActionResult TakeExam(GiveExamViewModel takeExamViewModel , int examId)
+        {
+            GiveExamViewModel takeExam = new GiveExamViewModel();
+            takeExam.ExamId = examId;
+            List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examId).ToList();
+            takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
+            return RedirectToAction("Index");
+
         }
     }
 }
