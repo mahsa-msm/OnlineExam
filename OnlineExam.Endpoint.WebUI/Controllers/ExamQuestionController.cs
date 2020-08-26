@@ -42,7 +42,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examId);
             //List<QuestionChoice> questionChoices =questionChoiceRepository.GetQuestionChoices()
             ViewBag.Exam = examRepository.Get(examId);
-
+            ViewBag.ExamId = examId;
             return View(examQuestions);
         }
 

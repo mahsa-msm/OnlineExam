@@ -1,18 +1,24 @@
 ﻿
-@using Microsoft.AspNetCore.Identity
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@inject SignInManager<OnlineExam.Domain.Core.AppUsers.AppUser> SignInManager
-@inject UserManager<OnlineExam.Domain.Core.AppUsers.AppUser> UserManager
 
-
+fsdfsdfsdgsg dvkgfvg
+fdsjsdiogjp
 @if (User.IsInRole("admin"))
 {
-
+    <div>
+        hldk
+    </div>
 }
 else
 {
+
+    
+    <div>
+        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+    </div>
 }

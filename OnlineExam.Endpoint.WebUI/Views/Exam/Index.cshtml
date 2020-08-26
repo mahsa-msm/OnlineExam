@@ -7,70 +7,138 @@
 
 
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <label>@course.Name</label>
+@if (User.IsInRole("admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duration)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
 
-                <td>
-                    <a href="@Url.Action("Index", "ExamQuestion" ,new {examId= item.Id })" class="btn">
-                        اضافه کردن سوال
-                    </a>
-
-                </td>
-                <td>
-
-                    <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
-                        <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </form>
-
-                </td>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration)
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("Index", "ExamQuestion" ,new {examId= item.Id })" class="btn">
+                            اضافه کردن سوال
+                        </a>
+
+                    </td>
+                    <td>
+
+                        <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
+                            <i class="fa fa-trash"></i>
+                        </a>
+
+
+                        <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
+                            <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Index", "TakeExam" ,new {examId= item.Id })" class="btn">
+                            شرکت در ازمون 
+                        </a>
+
+                    </td>
+                    <td>
+
+                        <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
+                            <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 
 <script type="text/javascript">
     function functionConfirm(id) {

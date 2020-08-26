@@ -1,4 +1,5 @@
-﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.QuestionViewModel
+﻿
+@model OnlineExam.Endpoint.WebUI.Models.Exams.QuestionViewModel
 @{ OnlineExam.Domain.Core.Exams.Exam exams = ViewBag.Exam;}
 
 
@@ -15,7 +16,7 @@
     <div class="col-md-4">
         <form asp-action="AddQuestion">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ExamId" value=@exams.Id class="form-control" />
+            <input asp-for="ExamId" value=@exams.Id  />
 
 
             <div class="form-group">
@@ -25,25 +26,26 @@
             </div>
 
             <div class="form-group">
-               
-
-                    @for(int i = 0; i <4; i++ )
-                    {
-                        <input asp-for="Choices[i].Text" /> 
 
 
-                   }
-                   
+                @for (int i = 0; i < 4; i++)
+                {
+                    <input asp-for="Choices[i].Text" />
+
+
+
+                }
+
             </div>
 
             <div class=" form-group">
-                        <input asp-route-examId=@ViewBag.Exam type="submit" value="Create" class="btn btn-primary" />
-                    </div>
-                </form>
+                <input asp-route-examId=@exams.Id type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </div>
+        </form>
+    </div>
+</div>
 
-        <div>
-            <a asp-action="Index">Back to List</a>
-        </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
