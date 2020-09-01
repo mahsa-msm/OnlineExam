@@ -148,24 +148,43 @@ header {
         color: #e96b56
     }
 
-
+.login-form .form-control {
+    margin: 10px 0 15px 0px;
+    border: 1px solid #6a879c;
+}
 .login-box {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -30%);
     text-align: center;
-    width: 30%;
+    width: 26%;
+    padding: 0 0 30px 0;
+    border: 1px solid #4970b7;
 }
-
+.login-title {
+    background: #384d98
+}
+.login-icon {
+    font-size: 100px;
+    color: #fff;
+    padding: 10px;
+}
 .login-form {
     text-align: center;
     text-align: -webkit-center;
 }
 .login-form form{
-    width:80%
+    width:85%
 }
+.login-lable{
+   display:block;
+  text-align:right;
 
+}
+.login-box button, .login-box {
+    margin: 40px 0 20px 0;
+}
 
 
 @media (max-width: 768px) {

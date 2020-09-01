@@ -1,5 +1,7 @@
 ﻿@model OnlineExam.Domain.Core.AppUsers.MyLoginModel
 <link rel="stylesheet" href="~/vendor/bootstrap.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="~/css/style.css">
 @{
     ViewData["Title"] = "Accont";
@@ -7,32 +9,35 @@
 }
 
 <div class="login-box">
-    <h1>Accont</h1>
-
-    <h4>LoginModel</h4>
+    <div class="login-title">
+        <i class="fa fa-user login-icon"></i>
+    </div>
     <hr />
-   
-        <div class="login-form">
-            <form  asp-action="Login" asp-controller="UserAccount" method="post">
-                @*<div class="imgcontainer">
-                        <img src="img_avatar2.png" alt="Avatar" class="avatar">
-                    </div>*@
-                <div class="text-danger" asp-validation-summary="All"></div>
-                <div class="form-group">
-                    <input asp-for="Name" type="text" class="form-control form-control-user" placeholder=" name...">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Password" type="password" class="form-control form-control-user" placeholder="Password">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-
-                <button class="btn bg-bluecolor  btn-block" type="submit">Log In</button>
 
 
 
-            </form>
-        </div>
-   
+    <div class="login-form">
+        <form asp-action="Login" asp-controller="UserAccount" method="post">
+
+
+            <div class="form-group">
+                <label class="login-lable">نام کاربری:</label>
+                <input asp-for="Name" type="text" class="form-control form-control-user">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="login-lable">رمز عبور:</label>
+
+                <input asp-for="Password" type="password" class="form-control form-control-user">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button class="btn bg-bluecolor  btn-block" type="submit">ورود</button>
+
+
+
+        </form>
+    </div>
+
 
 </div>
