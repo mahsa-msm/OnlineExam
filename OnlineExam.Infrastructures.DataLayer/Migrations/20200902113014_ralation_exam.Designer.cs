@@ -10,8 +10,8 @@ using OnlineExam.Infrastructures.DataLayer.Common;
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
     [DbContext(typeof(OnlineExamDbContext))]
-    [Migration("20200826062148_init-AddIsCorrect")]
-    partial class initAddIsCorrect
+    [Migration("20200902113014_ralation_exam")]
+    partial class ralation_exam
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

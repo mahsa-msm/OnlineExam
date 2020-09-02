@@ -5,15 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1 class="main-title">آزمونها</h1>
 
+<hr />
 
-
-<label>@course.Name</label>
+<span class="courselable"> درس: </span>
+<span class="coursename">@course.Name</span>
+<hr />
 @if (User.IsInRole("admin"))
 {
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+    <div>
+        <a href="@Url.ActionLink("Create", "Exam", new { courseId = course.Id })" class="btn main-btn">
+            <i class="fa fa-plus" aria-hidden="true"> </i> ایجاد آزمون
+        </a>
+    </div>
+    <hr />
+
 
     <table class="table">
         <thead>
@@ -53,7 +60,7 @@
 
                     <td>
                         <a href="@Url.Action("Index", "ExamQuestion" ,new {examId= item.Id })" class="btn">
-                            اضافه کردن سوال
+                            مشاهده سوال ها
                         </a>
 
                     </td>
@@ -117,7 +124,7 @@ else
                     </td>
                     <td>
                         <a href="@Url.Action("TakeExam", "TakeExam" ,new {examId= item.Id })" class="btn">
-                            شرکت در ازمون 
+                            شرکت در ازمون
                         </a>
 
                     </td>

@@ -4,17 +4,20 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="main-title">درس ها </h1>
+<h1 class="main-title">لیست دروس</h1>
+<hr />
 
 
-<div class="row">
-    @if (User.IsInRole("admin"))
-    {
-        <div>
-            <a asp-action="Create">ایجاد درس جدید </a>
-        </div>
-        <table class="table col-md-6">
-            <thead>
+@if (User.IsInRole("admin"))
+{
+
+    <div>
+        <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
+    </div>
+    <hr />
+    <div class="">
+        <table class="table border">
+            <thead class="thead">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
@@ -36,31 +39,38 @@
                         </td>
                         <td>
 
-                            <a href=@Url.ActionLink( "Index", "Exam", new { courseId = item.Id }, null) > list</a>|
-                               @Html.ActionLink("Add", "Create", "Exam", new { courseId = item.Id }, null)
+                            <a href=@Url.ActionLink("Index", "Exam", new { courseId = item.Id }, null)> لیست آزمون ها </a>|
+                            <a href=@Url.ActionLink("Create", "Exam", new { courseId = item.Id }, null)> اضافه کردن آزمون</a>
 
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
+
                         <td>
                             <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
 
-                            <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+
+
+                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline-block">
                                 <button type="submit" class="btn btn-danger" onclick="return functionConfirm(@item.Id)">
-                                    Delete
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </form>
+
+
+
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    }
-    else
-    {
-        <table>
-            <thead>
+    </div>
+
+
+}
+else
+{
+    <div class="">
+        <table class="table border">
+            <thead class="thead-inverse">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
@@ -79,14 +89,16 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            <a href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null) >لیست ازمون</a>
+                            <a href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست ازمون</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-    }
-</div>
+    </div>
+
+}
+
 <script>
     function functionConfirm(id) {
         swal({

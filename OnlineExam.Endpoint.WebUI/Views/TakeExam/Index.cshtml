@@ -5,11 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+
+
+
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+
+
 <table class="table">
     <thead>
         <tr>
@@ -20,25 +25,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Questions) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
+        @foreach (var item in Model.Questions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
 
 
-                @{
-                  var choices =   item.QuestionChoices.Select(c => c.Choice);
-                    @foreach (var choice in choices )
-                    {
-                        @choice.Text 
-                        <br>
+                    @{
+                        var choices = item.QuestionChoices.Select(c => c.Choice);
+                        @foreach (var choice in choices)
+                        {
+                            @choice.Text
+                            <br>
+                        }
                     }
-                }
 
 
-</tr>
-}
+            </tr>
+        }
     </tbody>
 </table>
+

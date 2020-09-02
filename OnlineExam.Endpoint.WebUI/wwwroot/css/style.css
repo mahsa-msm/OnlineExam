@@ -1,28 +1,42 @@
-﻿*{
-   padding: 0;
+﻿* {
+    padding: 0;
     margin: 0;
 }
+
 body {
     direction: rtl;
- 
     text-align: right;
 }
+
 .bg-bluecolor {
     background: #384d98;
-    color:#efefef
-
+    color: #efefef
 }
 
-main-title {
-    color: #e06f0e
+.main-title {
+    color: #303ea7
 }
+
+.main-btn {
+    background: #384d98;
+    width: 150px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 10px;
+    color: white;
+}
+
+    .main-btn:hover {
+        color: #fff
+    }
+
 header {
     width: 100%;
     background: #0a185f;
     position: fixed;
     z-index: 9999;
     height: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, .2) 
+    border-bottom: 1px solid rgba(255, 255, 255, .2)
 }
 
     header ul {
@@ -132,6 +146,7 @@ header {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
 .mainbtn {
     display: inline-block;
     padding: 12px 30px;
@@ -143,6 +158,7 @@ header {
     border: 2px solid #e96b56;
     background: #e96b56;
 }
+
     .mainbtn:hover {
         background: #fff;
         color: #e96b56
@@ -152,6 +168,7 @@ header {
     margin: 10px 0 15px 0px;
     border: 1px solid #6a879c;
 }
+
 .login-box {
     position: absolute;
     top: 30%;
@@ -162,30 +179,47 @@ header {
     padding: 0 0 30px 0;
     border: 1px solid #4970b7;
 }
+
 .login-title {
     background: #384d98
 }
+
 .login-icon {
     font-size: 100px;
     color: #fff;
     padding: 10px;
 }
+
 .login-form {
     text-align: center;
-    text-align: -webkit-center;
 }
-.login-form form{
-    width:85%
-}
-.login-lable{
-   display:block;
-  text-align:right;
 
+    .login-form form {
+        width: 85%;
+        text-align: center;
+        display: inline-block;
+    }
+
+.login-lable {
+    display: block;
+    text-align: right;
 }
+
 .login-box button, .login-box {
     margin: 40px 0 20px 0;
 }
 
+.courselable {
+    font-size: 30px;
+    font-weight: 600;
+  
+    color: #384d98;
+}
+.coursename {
+    font-size: 25px;
+    font-weight: 400;
+    color: #878ea5;
+}
 
 @media (max-width: 768px) {
     header ul {

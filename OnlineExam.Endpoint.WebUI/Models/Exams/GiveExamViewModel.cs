@@ -11,13 +11,9 @@ namespace OnlineExam.Endpoint.WebUI.Models.Exams
 {
     public class GiveExamViewModel
     {
-        public int  AppUser  { get; set; }
+        public int AppUser { get; set; }
         public List<Question> Questions { get; set; }
-        public List<Choice> Choices { get; set; }
-        
-            
-            
-            public int ExamId { get; set; }
-        public Exam Exam{ get; set; }
+        public int ExamId { get; set; }
+
     }
 }

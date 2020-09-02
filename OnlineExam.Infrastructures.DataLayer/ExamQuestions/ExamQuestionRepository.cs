@@ -19,7 +19,7 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
             this.dbContext = dbContext;
         }
 
-        public List<ExamQuestion> GetExamQuestions(int examId)
+        public List<ExamQuestion> GetExamQuestions(int examId )
         {
             
                 var exam = dbContext.ExamQuestions

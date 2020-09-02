@@ -13,6 +13,11 @@ namespace OnlineExam.Infrastructures.DataLayer.Exams
         public void Configure(EntityTypeBuilder<Exam> builder)
         {
             builder.Property(c => c.Name).HasMaxLength(50).IsRequired();
+
+            builder.HasOne(b => b.Course)
+                 .WithMany(c => c.Exams)
+                 .HasForeignKey(c => c.CourseId)
+                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

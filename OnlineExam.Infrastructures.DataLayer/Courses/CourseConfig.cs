@@ -13,6 +13,9 @@ namespace OnlineExam.Infrastructures.DataLayer.Courses
         {
             builder.Property(c => c.Name).HasMaxLength(50).IsRequired();
 
+            
+            
+
         }
     }
 }

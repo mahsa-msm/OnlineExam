@@ -37,21 +37,21 @@
 
     @if (User.IsInRole("admin"))
     {
-<div id="mySidenav" class="sidenav">
-    <a asp-controller="User" asp-action="Index"> کاربران</a>
+        <div id="mySidenav" class="sidenav">
+            <a asp-controller="User" asp-action="Index"> کاربران</a>
 
-    <a asp-controller="Course" asp-action="Create">لیست درس ها </a>
-    <a href="#">Contact</a>
-</div>
+            <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+            <a href="#">Contact</a>
+        </div>
     }
     else
     {
-<div id="mySidenav" class="sidenav">
-    <a asp-controller="User" asp-action="Index">آزمون ها</a>
-    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+        <div id="mySidenav" class="sidenav">
+            <a asp-controller="User" asp-action="Index">آزمون ها</a>
+            <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
 
-    <a href="#">Contact</a>
-</div>
+            <a href="#">Contact</a>
+        </div>
     }
 
 
@@ -59,11 +59,10 @@
         @RenderBody()
     </div>
 
-
+    <script src="~/vendor/jquery.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="~/vendor/jquery.js"></script>
     <script src="~/js/scripts.js"></script>
 
 </body>

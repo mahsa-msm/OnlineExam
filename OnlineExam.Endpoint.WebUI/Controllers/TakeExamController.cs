@@ -33,7 +33,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         {
 
             GiveExamViewModel takeExam = new GiveExamViewModel();
-            takeExam.Exam = examRepository.Get(examID);
             takeExam.ExamId = examID;
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
@@ -42,7 +41,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
 
 
-        public IActionResult TakeExam(int examID , int userId)
+        public IActionResult TakeExam(int examID , int userId,int pagenumber=1 , int pagesize=3)
         {
             GiveExamViewModel takeExam = new GiveExamViewModel();
             ViewBag.examId = examID;
@@ -51,15 +50,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
             return View(takeExam);
         }
-        [HttpPost]
-        public IActionResult TakeExam(GiveExamViewModel takeExamViewModel , int examId)
-        {
-            GiveExamViewModel takeExam = new GiveExamViewModel();
-            takeExam.ExamId = examId;
-            List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examId).ToList();
-            takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
-            return RedirectToAction("Index");
-
-        }
+      
     }
 }

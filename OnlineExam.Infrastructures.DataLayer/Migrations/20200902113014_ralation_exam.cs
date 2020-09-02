@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
-    public partial class initEditExamId : Migration
+    public partial class ralation_exam : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,8 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(nullable: true)
+                    Text = table.Column<string>(nullable: true),
+                    IsCorrect = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

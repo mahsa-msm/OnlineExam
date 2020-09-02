@@ -5,14 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
-<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })" class="btn btn-warning">
-    اضافه کردن سوال
+<hr />
+
+<span class="courselable"> امتحان : </span>
+<span class="coursename">@exams.Name</span>
+<hr />
+
+<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })" class="btn main-btn">
+    <i class="fa fa-plus" aria-hidden="true"> </i>  اضافه کردن سوال
 </a>
 
 
@@ -34,21 +36,20 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Question.Text)
                 </td>
+                <td>
+                    @{
+                        var choices = item.Question.QuestionChoices.Select(x => x.Choice);
+ 
+                        int i = 1;
+                        foreach (var choice in choices)
+                        {
 
-                @{
-                    var choices = item.Question.QuestionChoices.Select(x => x.Choice.Text);
-
-                    foreach (var choice in choices)
-                    {
-                        <td>
-                            @choice
-                        </td>
+                            <div>@i- @choice.Text</div>
+                            <span>@choice.IsCorrect</span>
+                            i = i + 1;
+                        }
                     }
-                    <td>
-                    </td>
-
-
-                }
+                </td>
             </tr>
         }
     </tbody>
