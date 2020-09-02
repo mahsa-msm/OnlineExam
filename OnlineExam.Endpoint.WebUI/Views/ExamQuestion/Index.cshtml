@@ -13,44 +13,35 @@
 <span class="coursename">@exams.Name</span>
 <hr />
 
-<a href="@Url.Action("AddQuestion", "ExamQuestion" ,new {examId=  exams.Id })" class="btn main-btn">
+<a href="@Url.Action("AddQuestion", "ExamQuestion", new { examId = exams.Id })" class="btn main-btn">
     <i class="fa fa-plus" aria-hidden="true"> </i>  اضافه کردن سوال
 </a>
 
 
-<table class="table">
-    <thead>
-        <tr>
 
-            <td>
-                @Html.DisplayNameFor(model => model.Question.Text)
-            </td>
+@{int questionNumber = 1;}
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Question.Text)
-                </td>
-                <td>
-                    @{
-                        var choices = item.Question.QuestionChoices.Select(x => x.Choice);
- 
-                        int i = 1;
-                        foreach (var choice in choices)
-                        {
+@foreach (var item in Model)
+{
+    <hr class="hr" />
+    <div>@questionNumber _ @Html.DisplayFor(modelItem => item.Question.Text) </div>
 
-                            <div>@i- @choice.Text</div>
-                            <span>@choice.IsCorrect</span>
-                            i = i + 1;
-                        }
-                    }
-                </td>
-            </tr>
+    <div class="choicebox">
+        @{
+            var choices = item.Question.QuestionChoices.Select(x => x.Choice);
+
+            int i = 1;
+            foreach (var choice in choices)
+            {
+
+                <div class="choice-@choice.IsCorrect">@i- @choice.Text</div>
+               
+                i = i + 1;
+            }
+
         }
-    </tbody>
-</table>
+    </div>
+
+    questionNumber++;
+}

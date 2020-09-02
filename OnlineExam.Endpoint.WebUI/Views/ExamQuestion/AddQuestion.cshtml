@@ -8,17 +8,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>AddQuestion</h1>
-
-<h4>Question</h4>
 <hr />
+
+<span class="courselable"> امتحان : </span>
+<span class="coursename">@exams.Name</span>
+<hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddQuestion">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="ExamId" value=@exams.Id />
-
-
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
                 <input asp-for="Text" class="form-control" />
@@ -30,23 +28,23 @@
 
                 @for (int i = 0; i < 4; i++)
                 {
-                    <input asp-for="Choices[i].Text" />
+                    <input class="form-control" asp-for="Choices[i].Text" />
 
-                   <input type="checkbox" asp-for="Choices[i].IsCorrect"  /> 
+                    <input type="checkbox" asp-for="Choices[i].IsCorrect" />
                 }
-                </div>
+            </div>
 
 
-                <div class=" form-group">
-                    <input asp-route-examId=@exams.Id type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
+            <div class=" form-group">
+                <input asp-route-examId=@exams.Id type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
+</div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 
 

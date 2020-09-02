@@ -7,7 +7,9 @@ body {
     direction: rtl;
     text-align: right;
 }
-
+.hr {
+    border-top: 1px solid rgba(86, 116 ,154 ,69);
+}
 .bg-bluecolor {
     background: #384d98;
     color: #efefef
@@ -19,7 +21,7 @@ body {
 
 .main-btn {
     background: #384d98;
-    width: 150px;
+    width: 160px;
     height: 40px;
     display: inline-block;
     border-radius: 10px;
@@ -219,6 +221,14 @@ header {
     font-size: 25px;
     font-weight: 400;
     color: #878ea5;
+}
+.choicebox {
+    padding: 20px;
+}
+
+
+.choice-True {
+    color: #3ccc7b
 }
 
 @media (max-width: 768px) {
