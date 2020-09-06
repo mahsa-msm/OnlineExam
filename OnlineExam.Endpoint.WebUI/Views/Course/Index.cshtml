@@ -50,7 +50,7 @@
 
 
                             <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline-block">
-                                <button type="submit" class="btn btn-danger" onclick="return functionConfirm(@item.Id)">
+                                <button type="submit" class="btn btn-danger" onclick="return DeleteCourse(@item.Id)">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </form>
@@ -99,26 +99,3 @@ else
 
 }
 
-<script>
-    function functionConfirm(id) {
-        swal({
-            title: 'از حذف درس مطمئن هستید؟',
-            text: false,
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'خیر',
-            cancelButtonClass: 'btn btn-danger',
-            showConfirmButton: true,
-            confirmButtonText: 'بله',
-            confirmButtonClass: 'btn btn-success'
-        }, function (isConfirm) {
-            if (isConfirm) {
-                window.location.href = '/Course/Delete/' + id;
-            }
-            else {
-                return false;
-            }
-        });
-        return false;
-    }
-</script>

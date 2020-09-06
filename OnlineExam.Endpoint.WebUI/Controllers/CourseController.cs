@@ -82,8 +82,12 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
 
 
-      
-      
-        
+
+        public IActionResult GetDataTableCourse()
+        {
+            var course = courseRepository.GetAll().ToList();
+            return Json( new {data= course });
+        }
+
     }
 }

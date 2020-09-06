@@ -1,24 +1,62 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-fsdfsdfsdgsg dvkgfvg
-fdsjsdiogjp
+
+
 @if (User.IsInRole("admin"))
 {
-    <div>
-        hldk
+    <div class="">
+        <br />
+        <div>
+            <table id="Course" class="table " width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Id</th>
+                        <th>Id</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 }
 else
 {
 
-    
+
     <div>
         <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
     </div>
+
+
+    <form method="post">
+        <input type="button" value="Add" onclick="AddTextBox()" />
+        <div id="divCont">
+
+        </div>
+        <input type="submit" value="submit" />
+    </form>
 }
+
+<script>
+    function AddTextBox() {
+        var div = document.createElement('DIV');
+        div.innerHTML = GetDynamicTextbox("");
+        document.getElementById("divCont").appendChild(div);
+    }
+
+    function GetDynamicTextbox(value) {
+        return '<div id="frd" class="form-row">' +
+            '<div id = "fr" class="col-md-7 mb-3" >' +
+            '<input type="text" name="txttest" class="form-control" /></div >' +
+            '<div ="cd" class="col-md-3 mb-3" > <input type="button" onclick="RemoveTextBox(this)" value="Remove" class="btn btn-primary" /></div ></div > ';
+    }
+
+    function RemoveTextBox(div) {
+        document.getElementById("divCont").removeChild(div.parentNode.parentNode.parentNode);
+    }
+</script>

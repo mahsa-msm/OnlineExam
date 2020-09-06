@@ -25,13 +25,19 @@
 
             <div class="form-group">
 
+                <input type="button" value="AddQuestion" onclick="AddTextBox()" />
+                <div id="divCont">
 
+                </div>
+                <input type="submit" value="submit" />
                 @for (int i = 0; i < 4; i++)
                 {
                     <input class="form-control" asp-for="Choices[i].Text" />
 
                     <input type="checkbox" asp-for="Choices[i].IsCorrect" />
+
                 }
+              
             </div>
 
 

@@ -16,12 +16,12 @@ namespace OnlineExam.Infrastructures.DataLayer.QuestionChoices
             builder.HasOne(b => b.Question)
                 .WithMany(b => b.QuestionChoices)
                 .HasForeignKey(b => b.QuestionId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(b => b.Choice)
                 .WithMany(b => b.QuestionChoice)
                 .HasForeignKey(b => b.ChoiceId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

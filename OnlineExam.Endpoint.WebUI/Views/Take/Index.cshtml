@@ -1,5 +1,4 @@
 ﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.GiveExamViewModel
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -65,12 +64,7 @@
             "columns": [
                 { "data": "appUser", "autoWidth": true },
                 { "data": "questions.Text", "autoWidth": true },
-                { "data": "questions.QuestionChoices.Select(c => c.Choice)", "autoWidth": true },
-
-
-
-
-
+                { "data": "questions.QuestionChoices.Select(c => c.Choice)", "autoWidth": true }
             ]
 
         })

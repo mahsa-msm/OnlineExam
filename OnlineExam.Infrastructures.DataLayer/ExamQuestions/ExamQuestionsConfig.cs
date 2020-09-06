@@ -18,14 +18,14 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
             modelBuilder.HasOne(b => b.Exam)
                 .WithMany(b => b.ExamQuestions)
                 .HasForeignKey(b => b.ExamId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             
 
             modelBuilder.HasOne(b => b.Question)
                 .WithMany(c => c.ExamQuestions)
                 .HasForeignKey(c => c.QuestionId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+                .OnDelete(DeleteBehavior.Cascade);
+     
         }
     }
 

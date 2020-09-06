@@ -72,7 +72,7 @@
 
 
                         <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
-                            <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
+                            <button type="submit" class="btn btn-danger " onclick="return DeleteExam(@item.Id)">
                                 <i class="fa fa-trash"></i>
                             </button>
                         </form>
@@ -128,18 +128,7 @@ else
                         </a>
 
                     </td>
-                    <td>
-
-                        <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                        <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
-                            <button type="submit" class="btn btn-danger " onclick="return functionConfirm(@item.Id)">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
-
-                    </td>
+                 
                 </tr>
             }
         </tbody>
@@ -147,26 +136,3 @@ else
 }
 
 
-<script type="text/javascript">
-    function functionConfirm(id) {
-        swal({
-            title: 'از حذف اامتحان مطمئن هستید؟',
-            text: false,
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'خیر',
-            cancelButtonClass: 'btn btn-danger',
-            showConfirmButton: true,
-            confirmButtonText: 'بله',
-            confirmButtonClass: 'btn btn-success'
-        }, function (isConfirm) {
-            if (isConfirm) {
-                window.location.href = '/Exam/Delete/' + id;
-            }
-            else {
-                return false;
-            }
-        });
-        return false;
-    }
-</script>
