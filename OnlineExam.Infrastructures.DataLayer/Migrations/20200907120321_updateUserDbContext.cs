@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
-    public partial class ralation_exam : Migration
+    public partial class updateUserDbContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -80,7 +80,8 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AppUserId = table.Column<int>(nullable: false),
-                    ChoiceId = table.Column<int>(nullable: false)
+                    ChoiceId = table.Column<int>(nullable: false),
+                    IsSelected = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +91,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUser",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Answers_Choices_ChoiceId",
                         column: x => x.ChoiceId,
@@ -139,13 +140,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                         column: x => x.ChoiceId,
                         principalTable: "Choices",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_QuestionChoices_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,13 +166,13 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ExamQuestions_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

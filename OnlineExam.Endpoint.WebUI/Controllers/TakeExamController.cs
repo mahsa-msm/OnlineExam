@@ -49,7 +49,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
 
 
-        public IActionResult TakeExam2(int examID, int userId)
+        public IActionResult TakeExam2(int examID)
         {
             TakeExamViewModel takeExam = new TakeExamViewModel();
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
@@ -70,7 +70,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 Answer answer = new Answer
                 {
                     ChoiceId = item.ChoiceId,
-                    IsSelected = item.IsSelected,
+                    IsSelected = item.IsSelected
 
                 };
                 answerRepository.Add(answer);

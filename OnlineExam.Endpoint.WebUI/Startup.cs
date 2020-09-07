@@ -42,7 +42,6 @@ namespace OnlineExam.Endpoint.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<OnlineExamDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("OnlineExam")));
             services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped<IChoiceRepository, ChoiceRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
@@ -51,7 +50,10 @@ namespace OnlineExam.Endpoint.WebUI
             services.AddScoped<IQuestionChoiceRepository, QuestionChoiceRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
 
+
+            services.AddDbContext<OnlineExamDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("OnlineExam")));
             services.AddDbContext<UserDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("UserContext")));
+
             services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidator>();
 
 

@@ -230,7 +230,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.HasOne("OnlineExam.Domain.Core.AppUsers.AppUser", "AppUser")
                         .WithMany("Answers")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OnlineExam.Domain.Core.Choices.Choice", "Choice")
