@@ -13,6 +13,8 @@ namespace OnlineExam.Endpoint.WebUI.Models.Exams
     {
         public int AppUser { get; set; }
         public List<Question> Questions { get; set; }
+        public int QuestionId { get; set; }
+
         public int ExamId { get; set; }
 
     }

@@ -27,7 +27,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult Index(int courseId)
         {
             List<Exam> model = examRepository.GetAllCourses(courseId);
-
             ViewBag.Course = courseRepository.Get(courseId);
             return View(model);
 
@@ -36,7 +35,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpGet]
         public IActionResult Create(int courseId)
         {
-            
             ViewBag.Course = courseRepository.Get(courseId);
             return View();
         }
@@ -56,24 +54,22 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
                 };
                 examRepository.Add(exam);
-
-
                 return RedirectToAction("Index", new { courseId = model.CourseId });
             }
             return View();
         }
         [HttpGet]
-        public IActionResult Update(int courseId , int examId)
+        public IActionResult Update(int courseId, int examId)
         {
             Exam exam = examRepository.Get(examId);
             ExamViewModel model = new ExamViewModel
             {
                 CourseId = courseId,
-                Duration =exam.Duration,
-                EndDate=exam.EndDate , 
-                StartDate = exam.StartDate , 
+                Duration = exam.Duration,
+                EndDate = exam.EndDate,
+                StartDate = exam.StartDate,
                 Name = exam.Name,
-                Id= exam.Id            
+                Id = exam.Id
             };
 
             ViewBag.Course = courseRepository.Get(courseId);
@@ -92,20 +88,16 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 exam.StartDate = model.StartDate;
                 exam.EndDate = model.EndDate;
                 exam.Duration = model.Duration;
-
-
-
-
                 examRepository.Update(exam);
                 return RedirectToAction("Index", new { courseId = model.CourseId });
             }
             return View();
         }
 
-        public IActionResult Delete(int id ,int courseId)
+        public IActionResult Delete(int id, int courseId)
         {
             examRepository.Delete(id);
-          return  RedirectToAction("Index", new { courseId = courseId });
+            return RedirectToAction("Index", new { courseId = courseId });
         }
     }
 }

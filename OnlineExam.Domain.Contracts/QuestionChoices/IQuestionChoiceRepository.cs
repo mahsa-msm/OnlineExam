@@ -8,7 +8,6 @@ namespace OnlineExam.Domain.Contracts.QuestionChoices
 {
    public interface IQuestionChoiceRepository: IBaseRepository<QuestionChoice>
     {
-        List<QuestionChoice> GetQuestionChoices(int questionID);
     }
     
 }

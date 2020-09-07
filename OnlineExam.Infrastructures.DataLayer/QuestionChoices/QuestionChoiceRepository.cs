@@ -19,16 +19,9 @@ namespace OnlineExam.Infrastructures.DataLayer.QuestionChoices
         {
             this.dbContext = dbContext;
         }
-        public List<Question> GetQuestionChoices(int questionID)
-        {
-            return dbContext.Questions.Include(x=>x.QuestionChoices).ThenInclude(c => c.Choice).ToList();
-
-        }
-
-        List<QuestionChoice> IQuestionChoiceRepository.GetQuestionChoices(int questionID)
-        {
-            throw new NotImplementedException();
-        }
+    
+        
+        
     }
    
 }

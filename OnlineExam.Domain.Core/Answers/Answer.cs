@@ -12,6 +12,7 @@ namespace OnlineExam.Domain.Core.Answers
         public int ChoiceId { get; set; }
         public Choice Choice { get; set; }
         public AppUser AppUser { get; set; }
+        public bool IsSelected { get; set; }
 
     }
 }

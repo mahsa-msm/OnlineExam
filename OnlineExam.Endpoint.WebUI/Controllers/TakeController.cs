@@ -103,27 +103,10 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         // POST: Home
         [HttpPost]
-        public ActionResult Take2(string[] DynamicTextBox , QuestionViewModel questionViewModel)
+        public ActionResult Take2(QuestionViewModel data)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-            Question question = new Question { Text = questionViewModel.Text };
-            questionRepository.Add(question);
-
-            //Loop through the dynamic TextBox values.
-            foreach (string textboxValue in DynamicTextBox)
-            {
-                Choice choice = new Choice { Text = textboxValue };
-                choiceRepository.Add(choice);
-                QuestionChoice questionChoice = new QuestionChoice
-                {
-                    Choice = choice,
-                    Question = question
-                };
-                questionChoiceRepository.Add(questionChoice);
-
-            }
-            return View();
+             
+            return RedirectToAction("Index");
         }
    
     }

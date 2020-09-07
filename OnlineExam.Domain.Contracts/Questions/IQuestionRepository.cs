@@ -7,7 +7,7 @@ using System.Text;
 
 namespace OnlineExam.Domain.Contracts.Questions
 {
-  public interface IQuestionRepository : IBaseRepository<Question>
+    public interface IQuestionRepository : IBaseRepository<Question>
     {
     }
 }

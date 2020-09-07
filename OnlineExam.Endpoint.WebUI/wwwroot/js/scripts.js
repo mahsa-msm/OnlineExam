@@ -23,7 +23,7 @@
 
 function DeleteExam(id) {
     swal({
-        title: 'از حذف اامتحان مطمئن هستید؟',
+        title: 'از حذف امتحان مطمئن هستید؟',
         text: false,
         type: 'warning',
         showCancelButton: true,

@@ -1,32 +1,35 @@
-﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.GiveExamViewModel
+﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.TakeExamViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 
+    <form asp-action="TakeExam" method="post">
+        <input type="hidden" asp-for="ExamId" value="@ViewBag.ExamId" />
 
-@foreach (var item in Model.Questions)
-{
+        @foreach (var item in ViewBag.takeExam)
+        {
 
-    @item.Text
-    <br />
+            @item.Text
+            <br />
 
-    var choices = item.QuestionChoices.Select(c => c.Choice);
-    @foreach (var choice in choices)
-    {
-        @*<input asp-for="AnswersId" value=@choice.Id />*@
-        <input type="radio" name="@choice.Text" value="@choice.Text" />
-        @choice.Text
-        <br />
+            //var choices = item.QuestionChoices.Select(c => c.Choice);
+            @*@foreach (var choice in choices)
+            {
+                <div class="d-inline"> @choice.Text</div>
 
-    }
-}
+                <input type="checkbox" asp-for="@choice" />
+                <br />
+            }*@
+            <hr />
+
+        }
+
+
+        <input type="submit" />
+    </form>
+
 

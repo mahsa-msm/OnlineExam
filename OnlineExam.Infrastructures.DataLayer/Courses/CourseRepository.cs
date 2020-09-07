@@ -18,11 +18,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Courses
            _dbContext = dbContext;
         }
 
-        //public void GetResult(int examId)
-        //{
-        //    var exam = _dbContext.Courses
-        //    .Include(c => c.Exams).ThenInclude(d => d.ExamQuestions).ThenInclude(x => x.Question).ThenInclude(g => g.QuestionChoices).ThenInclude(m => m.Choice);
-        //}
+  
 
     }
 }

@@ -13,7 +13,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Answers
 
         public void Configure(EntityTypeBuilder<Answer> builder)
         {
-           
+          
         }
     }
 }

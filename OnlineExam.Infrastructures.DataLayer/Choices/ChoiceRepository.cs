@@ -1,5 +1,7 @@
-﻿using OnlineExam.Domain.Contracts.Choices;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Core.Choices;
+using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Infrastructures.DataLayer.Common;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,10 @@ namespace OnlineExam.Infrastructures.DataLayer.Choices
             this.dbContext = dbContext;
         }
 
-        
+        //public List<Exam> GetALlChoice(int examId)
+        //{
+        //return    dbContext.Choices.Include(c => c.QuestionChoice).ThenInclude(d => d.Question).ThenInclude(x => x.ExamQuestions).ThenInclude(g => g.Exam).ToListAsync();
+
+        //}
     }
 }

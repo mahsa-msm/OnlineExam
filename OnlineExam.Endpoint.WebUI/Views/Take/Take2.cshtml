@@ -1,20 +1,40 @@
 ﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.QuestionViewModel
 
 
-    <form asp-action="Take2" asp-controller="Take" method="post">
+<form id="GenForm">
 
-        <input id="" type="text"   asp-for="Text" />
-        <br />
-        <input id="btnAdd" type="button" value="add" onclick="AddTextBox()" />
-        <br />
-        <br />
-        <div id="TextBoxContainer">
+    <input name="Text" type="text" />
+    <br />
+    <input id="btnAdd" type="button" value="add" onclick="AddTextBox()" />
+    <br />
+    <br />
+    <div id="TextBoxContainer">
 
-        </div>
-        <br />
-        <input type="submit" value="Submit" />
+    </div>
+    <br />
+    <input type="submit" id="btnGetData" value="Submit" />
 
-    </form>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+
+
+<script>
+    $("#btnGetData").click(function () {
+        var formData = $('#GenForm').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/Take/Take2',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+            }
+        });
+        return false;
+    });
+</script>
 
 
 
@@ -22,7 +42,7 @@
     function GetDynamicTextBox(value) {
         var div = $("<div />");
 
-        var textBox = $("<input />").attr("type", "textbox").attr("name", "DynamicTextBox");
+        var textBox = $("<input />").attr("type", "textbox").attr("name", "Choices");
         textBox.val(value);
         div.append(textBox);
 
