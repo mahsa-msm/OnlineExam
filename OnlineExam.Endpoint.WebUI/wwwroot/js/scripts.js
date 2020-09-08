@@ -101,3 +101,5 @@ function DeleteCourse(courseId) {
     window.location.href = '@Url.Action("Delete", "Course")?id=' + courseId;
 
 }
+
+

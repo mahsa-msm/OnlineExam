@@ -45,16 +45,16 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             this.resultRepository = resultRepository;
             this.examRepository = examRepository;
         }
-        public IActionResult Index(int examID)
-        {
+        //public IActionResult Index(int examID)
+        //{
 
-            GiveExamViewModel takeExam = new GiveExamViewModel();
-            takeExam.ExamId = examID;
-            List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
-            takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
+        //    GiveExamViewModel takeExam = new GiveExamViewModel();
+        //    takeExam.ExamId = examID;
+        //    List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
+        //    takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
 
-            return View(takeExam);
-        }
+        //    return View(takeExam);
+        //}
 
 
         public IActionResult TakeExam2(int examID)
