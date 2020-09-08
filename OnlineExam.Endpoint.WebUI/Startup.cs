@@ -52,7 +52,6 @@ namespace OnlineExam.Endpoint.WebUI
 
 
             services.AddDbContext<OnlineExamDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("OnlineExam")));
-            services.AddDbContext<UserDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("UserContext")));
 
             services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidator>();
 
@@ -68,14 +67,14 @@ namespace OnlineExam.Endpoint.WebUI
                 c.Password.RequireNonAlphanumeric = false;
             }
 
-            ).AddEntityFrameworkStores<UserDbContext>();
+            ).AddEntityFrameworkStores<OnlineExamDbContext>();
 
 
 
             services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            .AddNewtonsoftJson(options =>
+              options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
 
         }
 

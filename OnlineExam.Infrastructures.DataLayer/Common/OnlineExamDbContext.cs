@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnlineExam.Domain.Core.Answers;
+using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.Choices;
 using OnlineExam.Domain.Core.Courses;
 using OnlineExam.Domain.Core.ExamQuestions;
@@ -19,14 +21,13 @@ using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.Common
 {
-    public class OnlineExamDbContext : DbContext
+    public class OnlineExamDbContext : IdentityDbContext<AppUser, MyIdentityRole, int>
     {
         public OnlineExamDbContext(DbContextOptions<OnlineExamDbContext> options) : base(options)
         {
 
         }
-
-
+        
 
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Choice> Choices { get; set; }
@@ -46,6 +47,10 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
             modelBuilder.ApplyConfiguration(new QuestionConfig());
             modelBuilder.ApplyConfiguration(new ExamQuestionsConfig());
             modelBuilder.ApplyConfiguration(new QuestionChoiceConfig());
+            base.OnModelCreating(modelBuilder);
         }
+      
+
+
     }
 }

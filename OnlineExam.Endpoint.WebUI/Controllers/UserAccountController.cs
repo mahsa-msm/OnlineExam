@@ -14,16 +14,15 @@ namespace OnlineExam.Endpoint.MVC.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
-
+        private readonly RoleManager<MyIdentityRole> roleManager;
 
         public UserAccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signInMgr
+        SignInManager<AppUser> signInMgr, RoleManager<MyIdentityRole> roleManager
   )
         {
             userManager = userMgr;
             signInManager = signInMgr;
-        
-
+            this.roleManager = roleManager;
         }
         public IActionResult Index()
         {
@@ -119,6 +118,18 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             await signInManager.SignOutAsync();
             return Redirect(returnUrl);
         }
-        
+
+
+        public IActionResult role()
+        {
+            MyIdentityRole role = new MyIdentityRole
+            {
+                Name = "user"
+            };
+            var result = roleManager.CreateAsync(role).Result;
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
