@@ -10,8 +10,8 @@ using OnlineExam.Infrastructures.DataLayer.Common;
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
     [DbContext(typeof(OnlineExamDbContext))]
-    [Migration("20200907123841_AddappUser")]
-    partial class AddappUser
+    [Migration("20200908061324_AddResult")]
+    partial class AddResult
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -370,6 +370,31 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.ToTable("Questions");
                 });
 
+            modelBuilder.Entity("OnlineExam.Domain.Core.Results.Result", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Score")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Results");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("OnlineExam.Domain.Core.AppUsers.MyIdentityRole", null)
@@ -471,6 +496,21 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.HasOne("OnlineExam.Domain.Core.Questions.Question", "Question")
                         .WithMany("QuestionChoices")
                         .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("OnlineExam.Domain.Core.Results.Result", b =>
+                {
+                    b.HasOne("OnlineExam.Domain.Core.AppUsers.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineExam.Domain.Core.Exams.Exam", "Exam")
+                        .WithMany("Results")
+                        .HasForeignKey("ExamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
-    public partial class updateUserDbContext : Migration
+    public partial class Answer3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,7 +212,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Answers_Choices_ChoiceId",
                         column: x => x.ChoiceId,

@@ -19,6 +19,7 @@ using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Contracts.QuestionChoices;
 using OnlineExam.Domain.Contracts.Questions;
+using OnlineExam.Domain.Contracts.Results;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Infrastructures.DataLayer.Answers;
 using OnlineExam.Infrastructures.DataLayer.Choices;
@@ -28,6 +29,7 @@ using OnlineExam.Infrastructures.DataLayer.ExamQuestions;
 using OnlineExam.Infrastructures.DataLayer.Exams;
 using OnlineExam.Infrastructures.DataLayer.QuestionChoices;
 using OnlineExam.Infrastructures.DataLayer.Questions;
+using OnlineExam.Infrastructures.DataLayer.Results;
 using OnlineExam.Services.ApplicationService.MyPasswordValidator;
 
 namespace OnlineExam.Endpoint.WebUI
@@ -49,7 +51,7 @@ namespace OnlineExam.Endpoint.WebUI
             services.AddScoped<IExamRepository, ExamRepository>();
             services.AddScoped<IQuestionChoiceRepository, QuestionChoiceRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
-
+            services.AddScoped<IResultRepository, ResultRepository>();
 
             services.AddDbContext<OnlineExamDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("OnlineExam")));
 

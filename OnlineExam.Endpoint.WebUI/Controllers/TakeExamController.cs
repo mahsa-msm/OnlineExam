@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Answers;
 using OnlineExam.Domain.Contracts.Choices;
@@ -10,6 +11,7 @@ using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Contracts.Questions;
 using OnlineExam.Domain.Core.Answers;
+using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Domain.Core.Questions;
@@ -20,18 +22,20 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
     public class TakeExamController : Controller
     {
         private readonly IExamQuestionRepository examQuestionRepository;
+        private readonly UserManager<AppUser> userManager;
         private readonly IQuestionRepository questionRepository;
         private readonly IExamRepository examRepository;
         private readonly IAnswerRepository answerRepository;
         private readonly IChoiceRepository choiceRepository;
 
-        public TakeExamController(IExamQuestionRepository examQuestionRepository,
+        public TakeExamController(IExamQuestionRepository examQuestionRepository, UserManager<AppUser> userManager,
             IQuestionRepository questionRepository,
             IExamRepository examRepository,
              IAnswerRepository answerRepository,
-             IChoiceRepository  choiceRepository)
+             IChoiceRepository choiceRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
+            this.userManager = userManager;
             this.questionRepository = questionRepository;
             this.examRepository = examRepository;
             this.answerRepository = answerRepository;
@@ -62,13 +66,15 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         public IActionResult TakeExam2(TakeExamViewModel giveExamViewModel)
         {
-
             var Choice = examQuestionRepository.GetExamQuestions(giveExamViewModel.ExamId).Select(c => c.Question).Select(c => c.QuestionChoices.Select(v => v.Choice.IsCorrect)).ToList();
             int score = 0;
+            var user = userManager.GetUserId(User);
+
             foreach (var item in giveExamViewModel.Answers)
             {
                 Answer answer = new Answer
                 {
+                    AppUserId = int.Parse(user),
                     ChoiceId = item.ChoiceId,
                     IsSelected = item.IsSelected
 
@@ -81,7 +87,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 }
             }
 
-            
+
 
 
             return RedirectToAction("Index");

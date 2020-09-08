@@ -10,8 +10,8 @@ using OnlineExam.Infrastructures.DataLayer.Common;
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
     [DbContext(typeof(OnlineExamDbContext))]
-    [Migration("20200907123101_updateUserDbContext")]
-    partial class updateUserDbContext
+    [Migration("20200908033958_Answer3")]
+    partial class Answer3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -426,7 +426,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.HasOne("OnlineExam.Domain.Core.AppUsers.AppUser", "AppUser")
                         .WithMany("Answers")
                         .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OnlineExam.Domain.Core.Choices.Choice", "Choice")

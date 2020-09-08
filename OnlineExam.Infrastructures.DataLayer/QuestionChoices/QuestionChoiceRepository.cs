@@ -13,15 +13,9 @@ namespace OnlineExam.Infrastructures.DataLayer.QuestionChoices
 {
     public class QuestionChoiceRepository : BaseRepository<QuestionChoice>, IQuestionChoiceRepository
     {
-        private readonly OnlineExamDbContext dbContext;
-
         public QuestionChoiceRepository(OnlineExamDbContext dbContext) : base(dbContext)
         {
-            this.dbContext = dbContext;
         }
-    
-        
-        
+
     }
-   
 }
