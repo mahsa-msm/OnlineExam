@@ -10,36 +10,40 @@ using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Contracts.Questions;
+using OnlineExam.Domain.Contracts.Results;
 using OnlineExam.Domain.Core.Answers;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Domain.Core.Questions;
+using OnlineExam.Domain.Core.Results;
 using OnlineExam.Endpoint.WebUI.Models.Exams;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
     public class TakeExamController : Controller
     {
-        private readonly IExamQuestionRepository examQuestionRepository;
         private readonly UserManager<AppUser> userManager;
-        private readonly IQuestionRepository questionRepository;
-        private readonly IExamRepository examRepository;
+        private readonly IExamQuestionRepository examQuestionRepository;
         private readonly IAnswerRepository answerRepository;
         private readonly IChoiceRepository choiceRepository;
+        private readonly IResultRepository resultRepository;
+        private readonly IExamRepository examRepository;
 
-        public TakeExamController(IExamQuestionRepository examQuestionRepository, UserManager<AppUser> userManager,
-            IQuestionRepository questionRepository,
-            IExamRepository examRepository,
-             IAnswerRepository answerRepository,
-             IChoiceRepository choiceRepository)
+        public TakeExamController(
+           UserManager<AppUser> userManager,
+           IExamQuestionRepository examQuestionRepository,
+           IAnswerRepository answerRepository,
+           IChoiceRepository choiceRepository,
+           IResultRepository resultRepository,
+           IExamRepository examRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
             this.userManager = userManager;
-            this.questionRepository = questionRepository;
-            this.examRepository = examRepository;
             this.answerRepository = answerRepository;
             this.choiceRepository = choiceRepository;
+            this.resultRepository = resultRepository;
+            this.examRepository = examRepository;
         }
         public IActionResult Index(int examID)
         {
@@ -56,17 +60,18 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult TakeExam2(int examID)
         {
             TakeExamViewModel takeExam = new TakeExamViewModel();
+           var Exam= examRepository.Get(examID);
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
             takeExam.ExamId = examID;
-
+            takeExam.ExamDuration = Exam.Duration;
             return View(takeExam);
         }
         [HttpPost]
 
         public IActionResult TakeExam2(TakeExamViewModel giveExamViewModel)
         {
-            var Choice = examQuestionRepository.GetExamQuestions(giveExamViewModel.ExamId).Select(c => c.Question).Select(c => c.QuestionChoices.Select(v => v.Choice.IsCorrect)).ToList();
+            var questions = examQuestionRepository.GetExamQuestions(giveExamViewModel.ExamId).Select(c => c.Question).Select(c => c.QuestionChoices.Select(v => v.Choice.IsCorrect)).ToList();
             int score = 0;
             var user = userManager.GetUserId(User);
 
@@ -81,13 +86,21 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 };
                 answerRepository.Add(answer);
                 var choice = choiceRepository.Get(item.ChoiceId);
-                if (item.IsSelected == choice.IsCorrect)
+                if (item.IsSelected == true && choice.IsCorrect == true)
                 {
                     score++;
                 }
             }
 
-
+            double resultScore = Math.Round((((double)score / (double)questions.Count) * 100),2);
+            
+            Result result = new Result
+            {
+                AppUserId = int.Parse(user),
+                ExamId = giveExamViewModel.ExamId,
+                Score = resultScore
+            };
+            resultRepository.Add(result);
 
 
             return RedirectToAction("Index");

@@ -10,7 +10,7 @@ namespace OnlineExam.Domain.Core.Results
     {
         public int ExamId { get; set; }
         public int AppUserId { get; set; }
-        public float Score { get; set; }
+        public double Score { get; set; }
         public Exam Exam { get; set; }
         public AppUser AppUser { get; set; }
     }
