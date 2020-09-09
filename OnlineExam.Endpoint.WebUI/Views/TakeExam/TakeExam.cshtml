@@ -1,35 +1,73 @@
 ﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.TakeExamViewModel
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
+<div>Time left = <span id="timer"></span></div>
 
 
+<form asp-action="TakeExam">
 
-    <form asp-action="TakeExam" method="post">
-        <input type="hidden" asp-for="ExamId" value="@ViewBag.ExamId" />
+    <input type="hidden" asp-for="@Model.ExamId" value="@Model.ExamId">
 
-        @foreach (var item in ViewBag.takeExam)
+    @{int i = 0;
+        @foreach (var item in Model.Questions)
         {
 
-            @item.Text
-            <br />
+            <div>@item.Text</div>
+            var choices = item.QuestionChoices.Select(c => c.Choice);
 
-            //var choices = item.QuestionChoices.Select(c => c.Choice);
-            @*@foreach (var choice in choices)
+            @foreach (var choice in choices)
             {
-                <div class="d-inline"> @choice.Text</div>
+                <Lable>  @choice.Text</Lable>
+                <input type="hidden" asp-for="Answers[i].ChoiceId" value="@choice.Id">
+                <input type="hidden" asp-for="Answers[i].Id">
+                <input type="checkbox" asp-for="Answers[i].IsSelected">
+                <br>
+                i++;
+            }
+        }
+    }
+    <button type="submit" id="submit"></button>
+</form>
 
-                <input type="checkbox" asp-for="@choice" />
-                <br />
-            }*@
-            <hr />
 
+
+<script>
+
+    document.getElementById('timer').innerHTML =
+    0 + ":" + 05;
+    startTimer();
+
+    function startTimer() {
+        var presentTime = document.getElementById('timer').innerHTML;
+        var timeArray = presentTime.split(/[:]+/);
+        var m = timeArray[0];
+        var s = checkSecond((timeArray[1] - 1));
+        if (s == 59) { m = m - 1 }
+
+
+
+        if (m == 0 && s==0) {
+ 
+            $( "#submit" ).click();
         }
 
 
-        <input type="submit" />
-    </form>
 
 
+        document.getElementById('timer').innerHTML =
+            m + ":" + s;
+        console.log(m)
+        setTimeout(startTimer, 1000);
+    }
+
+    function checkSecond(sec) {
+        if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
+        if (sec < 0) { sec = "59" };
+        return sec;
+    }
+
+
+
+
+
+</script>

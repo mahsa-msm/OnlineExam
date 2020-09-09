@@ -12,8 +12,8 @@ namespace OnlineExam.Endpoint.MVC.Controllers
 {
     public class UserAccountController : Controller
     {
-        private UserManager<AppUser> userManager;
-        private SignInManager<AppUser> signInManager;
+        private readonly UserManager<AppUser> userManager;
+        private readonly SignInManager<AppUser> signInManager;
         private readonly RoleManager<MyIdentityRole> roleManager;
 
         public UserAccountController(UserManager<AppUser> userMgr,
@@ -120,13 +120,13 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         }
 
 
-        public IActionResult role()
+        public IActionResult Role()
         {
             MyIdentityRole role = new MyIdentityRole
             {
                 Name = "admin"
             };
-            var result = roleManager.CreateAsync(role).Result;
+            roleManager.CreateAsync(role);
             return RedirectToAction("Index");
         }
 

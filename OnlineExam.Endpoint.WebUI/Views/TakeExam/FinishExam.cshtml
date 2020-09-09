@@ -1,0 +1,10 @@
+﻿@model OnlineExam.Domain.Core.Results.Result
+@{
+    ViewData["Title"] = "FinishExam";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+رتبه ی شما در این آزمون :
+    <div> @Model.Score </div>
+<div>@Model.Exam.Name</div>
+

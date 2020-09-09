@@ -5,17 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Converters;
 using OnlineExam.Domain.Contracts.Answers;
 using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
-using OnlineExam.Domain.Contracts.Questions;
 using OnlineExam.Domain.Contracts.Results;
 using OnlineExam.Domain.Core.Answers;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
-using OnlineExam.Domain.Core.Questions;
 using OnlineExam.Domain.Core.Results;
 using OnlineExam.Endpoint.WebUI.Models.Exams;
 
@@ -45,22 +44,21 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             this.resultRepository = resultRepository;
             this.examRepository = examRepository;
         }
-        //public IActionResult Index(int examID)
-        //{
 
-        //    GiveExamViewModel takeExam = new GiveExamViewModel();
-        //    takeExam.ExamId = examID;
-        //    List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
-        //    takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
+        public IActionResult Index()
+        {
 
-        //    return View(takeExam);
-        //}
+            ExamsResultViewModel Results = new ExamsResultViewModel();
+            
+         
+            return View(Results);
+        }
 
 
-        public IActionResult TakeExam2(int examID)
+        public IActionResult TakeExam(int examID)
         {
             TakeExamViewModel takeExam = new TakeExamViewModel();
-           var Exam= examRepository.Get(examID);
+            var Exam = examRepository.Get(examID);
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
             takeExam.ExamId = examID;
@@ -68,8 +66,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View(takeExam);
         }
         [HttpPost]
-
-        public IActionResult TakeExam2(TakeExamViewModel giveExamViewModel)
+        public IActionResult TakeExam(TakeExamViewModel giveExamViewModel)
         {
             var questions = examQuestionRepository.GetExamQuestions(giveExamViewModel.ExamId).Select(c => c.Question).Select(c => c.QuestionChoices.Select(v => v.Choice.IsCorrect)).ToList();
             int score = 0;
@@ -92,21 +89,31 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 }
             }
 
-            double resultScore = Math.Round((((double)score / (double)questions.Count) * 100),2);
-            
+            double resultScore = Math.Round((((double)score / (double)questions.Count) * 100), 2);
+
             Result result = new Result
             {
                 AppUserId = int.Parse(user),
                 ExamId = giveExamViewModel.ExamId,
-                Score = resultScore
+                Score = resultScore,
+                Exam = examRepository.Get(giveExamViewModel.ExamId),
+
+
+
             };
             resultRepository.Add(result);
-
-
-            return RedirectToAction("Index");
-
+            return RedirectToAction("FinishExam", new { ResultId = result.Id });
 
         }
 
+
+
+        public IActionResult FinishExam(int ResultId)
+        {
+
+            Result examResult = resultRepository.Get(ResultId);
+            examResult.Exam = examRepository.Get(examResult.ExamId);
+            return View(examResult);
+        }
     }
 }

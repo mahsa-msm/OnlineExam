@@ -19,16 +19,14 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseRepository courseRepository;
-        private readonly IExamRepository examRepository;
-        public CourseController(ICourseRepository courseRepository , IExamRepository examRepository)
+        public CourseController(ICourseRepository courseRepository)
         {
-            this.examRepository = examRepository;
             this.courseRepository = courseRepository;
         }
         public IActionResult Index()
         {
-            var course = courseRepository.GetAll().ToList();
-            return View(course);
+            var courses = courseRepository.GetAll().ToList();
+            return View(courses);
         }
 
         public IActionResult Create()
