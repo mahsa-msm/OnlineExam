@@ -10,8 +10,8 @@ using OnlineExam.Infrastructures.DataLayer.Common;
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
     [DbContext(typeof(OnlineExamDbContext))]
-    [Migration("20200908061324_AddResult")]
-    partial class AddResult
+    [Migration("20200928143038_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -383,8 +383,8 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
-                    b.Property<float>("Score")
-                        .HasColumnType("real");
+                    b.Property<double>("Score")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

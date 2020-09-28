@@ -124,7 +124,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         {
             MyIdentityRole role = new MyIdentityRole
             {
-                Name = "admin"
+                Name = "user"
             };
             roleManager.CreateAsync(role);
             return RedirectToAction("Index");

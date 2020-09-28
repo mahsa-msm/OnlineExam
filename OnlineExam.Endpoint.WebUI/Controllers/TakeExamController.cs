@@ -47,10 +47,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         public IActionResult Index()
         {
-
             ExamsResultViewModel Results = new ExamsResultViewModel();
-            
-         
             return View(Results);
         }
 
@@ -97,20 +94,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 ExamId = giveExamViewModel.ExamId,
                 Score = resultScore,
                 Exam = examRepository.Get(giveExamViewModel.ExamId),
-
-
-
             };
             resultRepository.Add(result);
             return RedirectToAction("FinishExam", new { ResultId = result.Id });
 
         }
-
-
-
         public IActionResult FinishExam(int ResultId)
         {
-
             Result examResult = resultRepository.Get(ResultId);
             examResult.Exam = examRepository.Get(examResult.ExamId);
             return View(examResult);

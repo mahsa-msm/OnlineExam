@@ -8,11 +8,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hr />
+<hr class="seprator-hr" />
 
 <span class="courselable"> امتحان : </span>
 <span class="coursename">@exams.Name</span>
-<hr />
+<hr class="seprator-hr" />
 
 <div class="row">
     <div class="col-md-4">
@@ -31,7 +31,7 @@
                     <input type="checkbox" asp-for="Choices[i].IsCorrect" />
 
                 }
-              
+
             </div>
 
 

@@ -7,11 +7,11 @@
 
 <h1 class="main-title">آزمونها</h1>
 
-<hr />
+<hr class="seprator-hr" />
 
 <span class="courselable"> درس: </span>
 <span class="coursename">@course.Name</span>
-<hr />
+<hr class="seprator-hr" />
 @if (User.IsInRole("admin"))
 {
     <div>
@@ -19,7 +19,7 @@
             <i class="fa fa-plus" aria-hidden="true"> </i> ایجاد آزمون
         </a>
     </div>
-    <hr />
+    <hr class="seprator-hr" />
 
 
     <table class="table">
@@ -128,7 +128,7 @@ else
                         </a>
 
                     </td>
-                 
+
                 </tr>
             }
         </tbody>

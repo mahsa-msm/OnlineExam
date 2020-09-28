@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>ExamViewModel</h4>
-<hr />
+
+<h1 class="main-title"> ایجاد آزمون </h1>
+
+<hr class="seprator-hr" />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -27,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
+                <input class="persiandate" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,7 +44,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 

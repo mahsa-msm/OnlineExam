@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineExam.Infrastructures.DataLayer.Migrations
 {
-    public partial class Answer3 : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -296,6 +296,33 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Results",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ExamId = table.Column<int>(nullable: false),
+                    AppUserId = table.Column<int>(nullable: false),
+                    Score = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Results", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Results_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Results_Exams_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Exams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_AppUserId",
                 table: "Answers",
@@ -369,6 +396,16 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                 name: "IX_QuestionChoices_QuestionId",
                 table: "QuestionChoices",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Results_AppUserId",
+                table: "Results",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Results_ExamId",
+                table: "Results",
+                column: "ExamId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -398,19 +435,22 @@ namespace OnlineExam.Infrastructures.DataLayer.Migrations
                 name: "QuestionChoices");
 
             migrationBuilder.DropTable(
+                name: "Results");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Exams");
 
             migrationBuilder.DropTable(
                 name: "Choices");
 
             migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Exams");
 
             migrationBuilder.DropTable(
                 name: "Courses");

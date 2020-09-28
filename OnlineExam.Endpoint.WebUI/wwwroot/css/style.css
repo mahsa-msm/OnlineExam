@@ -10,6 +10,9 @@ body {
 .hr {
     border-top: 1px solid rgba(86, 116 ,154 ,69);
 }
+.seprator-hr{
+    color:#dcdcdc
+}
 .bg-bluecolor {
     background: #384d98;
     color: #efefef
@@ -255,3 +258,10 @@ header {
             font-size: 18px;
         }
 }
+
+
+
+
+
+
+
