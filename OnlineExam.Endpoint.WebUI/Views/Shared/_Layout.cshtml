@@ -19,49 +19,30 @@
 
 </head>
 <body>
-
-
     <header>
-        <ul>
-            <li>
-                <i id="menuIcon" class="fa fa-bars menuicon" onclick="openNav(this)"></i>
-            </li>
-            <li>
-                <i id="closeIcon" class="fa fa-bars menuicon" style="display:none" onclick="closeNav(this)"></i>
-            </li>
-            <li>
-                <a><i class="fa fa-user"></i></a>
-                <ul>
-                    <li><a asp-controller="UserAccount" asp-action="Logout">Logout</a></li>
-                    <li><a href="#">Submenu 2</a></li>
-                    <li><a href="#">Submenu 3</a></li>
-                    <li><a href="#">Submenu 4</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Portfolio</a></li>
-
-        </ul>
+        <figure class="brand">آزمون آنلاین</figure>
+        <nav class="menu">
+            <input type="checkbox" id="menuToggle">
+            <label for="menuToggle" class="menu-icon"><i class="fa fa-bars"></i></label>
+            <ul>
+                <li>
+                    <a asp-controller="User" asp-action="Index">خانه </a>
+                </li>
+                <li>
+                    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                </li>
+                <li>
+                    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                </li>
+                <li>
+                    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                </li>
+                <li>
+                    <a asp-controller="UserAccount" asp-action="Logout">خروج</a>
+                </li>
+            </ul>
+        </nav>
     </header>
-
-
-    @if (User.IsInRole("admin"))
-    {
-        <div id="mySidenav" class="sidenav">
-            <a asp-controller="User" asp-action="Index"> کاربران</a>
-
-            <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
-            <a href="#">Contact</a>
-        </div>
-    }
-    else
-    {
-        <div id="mySidenav" class="sidenav">
-            <a asp-controller="User" asp-action="Index">آزمون ها</a>
-            <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
-
-            <a href="#">Contact</a>
-        </div>
-    }
 
 
     <div id="main">

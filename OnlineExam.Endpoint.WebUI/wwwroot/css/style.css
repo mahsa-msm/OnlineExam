@@ -7,12 +7,24 @@ body {
     direction: rtl;
     text-align: right;
 }
+
+a {
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+li {
+    list-style: none;
+}
+
 .hr {
-    border-top: 1px solid rgba(86, 116 ,154 ,69);
+    border-top: 1px solid rgba(86, 116,154,69);
 }
-.seprator-hr{
-    color:#dcdcdc
+
+.seprator-hr {
+    color: #dcdcdc
 }
+
 .bg-bluecolor {
     background: #384d98;
     color: #efefef
@@ -35,107 +47,112 @@ body {
         color: #fff
     }
 
+
 header {
     width: 100%;
-    background: #0a185f;
-    position: fixed;
-    z-index: 9999;
-    height: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, .2)
+    height: 52px;
+    line-height: 50px;
+    text-align: center;
+    font-family: sans-serif;
+    background-color: #044086;
+    color: #fff;
 }
 
-    header ul {
-        display: flex;
-        max-width: 1200px;
-        margin: 0 15px;
-        padding: 0;
-    }
-
-        header ul li {
-            list-style: none;
-            position: relative;
-            height: 40px;
-            padding: 10px 0;
-            transition: 0.5s;
-            box-sizing: border-box;
-            border-right: 1px solid rgba(255, 255, 255, .2);
-        }
-
-            header ul li:hover {
-                background: #2196f3;
-            }
-
-            header ul li:last-child {
-                border-right: none;
-            }
-
-            header ul li a, header ul li i {
-                text-decoration: none;
-                padding: 0 20px;
-                color: #fff;
-            }
-
-            header ul li ul {
-                position: absolute;
-                background: #14215f;
-                top: 38px;
-                right: 0;
-                display: block;
-                width: 200px;
-                transition: 0.5s;
-                visibility: hidden;
-                opacity: 0;
-            }
-
-            header ul li:hover ul {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            header ul li ul li {
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, .2);
-            }
-
-.menuicon {
-    font-size: 25px;
-    cursor: pointer
-}
-
-
-.sidenav {
+.brand {
+    width: auto;
     height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    background-color: #14215f;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 50px;
+    float: left;
+    margin: 0 0 0 5%;
+}
+.menu {
+    width: 60%;
+    height: 100%;
+    float: right;
 }
 
-    .sidenav a {
-        padding: 8px 8px 8px 8px;
-        text-decoration: none;
-        font-size: 18px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
+    .menu ul {
+        width: 100%;
+        height: inherit;
+        margin: 0;
+        padding: 0;
+        display: -webkit-box;
+        display: -moz-box; 
+        display: -ms-flexbox; 
+        display: -webkit-flex; 
+        display: flex; 
     }
 
-        .sidenav a:hover {
-            color: #f1f1f1;
+        .menu ul li {
+            width: 15%;
+            display: inline-block;
         }
 
-    .sidenav .closebtn {
+            .menu ul li a {
+                color: #fff;
+                font-size: 18px;
+                font-weight: 500;
+                display: inline-block;
+                text-decoration-line:none
+            }
+
+            .menu ul li a :hover {
+                border-bottom: 1px solid white
+            }
+
+#menuToggle {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .menu {
+        width: 100%;
+        height: auto;
+    }
+
+        .menu ul {
+            display: block;
+            max-height: 0;
+            overflow: hidden;
+            -webkit-transition: max-height 0.3s;
+            -moz-transition: max-height 0.3s;
+            -o-transition: max-height 0.3s;
+            transition: max-height 0.3s;
+        }
+            .menu ul li {
+                text-align: right;
+                width: 100%;
+                height: 52px;
+                background-color: #044086;
+                border-top: 1px solid #1f0b71
+            }
+                .menu ul li a {
+                    padding: 0px 5% 0px;
+                    width: 100%;
+                    text-decoration-line: none;
+                    color: #fff;
+                }
+    .menu-icon {
+        width: 100px;
+        height: inherit;
+        display: block;
         position: absolute;
         top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
+        right: 0;
+        line-height: 60px;
     }
+
+    #menuToggle:checked ~ ul {
+        max-height: 350px;
+    }
+
+    .menu-icon i {
+        font-size: 1.7em;
+    }
+}
+
 
 #main {
     transition: margin-left 0.5s;
@@ -217,14 +234,15 @@ header {
 .courselable {
     font-size: 30px;
     font-weight: 600;
-  
     color: #384d98;
 }
+
 .coursename {
     font-size: 25px;
     font-weight: 400;
     color: #878ea5;
 }
+
 .choicebox {
     padding: 20px;
 }
@@ -233,35 +251,6 @@ header {
 .choice-True {
     color: #3ccc7b
 }
-
-@media (max-width: 768px) {
-    header ul {
-        display: inline-flex;
-    }
-
-        header ul li {
-            display: inline-flex;
-        }
-
-            header ul li ul {
-                width: 100%;
-                z-index: 1;
-            }
-}
-
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 45px;
-    }
-
-        .sidenav a {
-            font-size: 18px;
-        }
-}
-
-
-
-
 
 
 
