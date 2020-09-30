@@ -31,7 +31,8 @@ li {
 }
 
 .main-title {
-    color: #303ea7
+    color: #303ea7;
+    font-size:1.5rem
 }
 
 .main-btn {
@@ -253,4 +254,25 @@ header {
 }
 
 
+*{
+    outline:none !important
+}
 
+.question-box input[type="text"] {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    width: calc(100% - 30px);
+    border-radius: 0;
+    outline: none !important;
+    box-shadow: none !important
+}
+.question-box input[type="checkbox"]{
+    width:29px;
+    margin-top:20px
+}
+.question-box input[type="text"]:focus {
+    border:0;
+    border-bottom: 1px solid #384d98;
+    outline: none !important;
+    box-shadow: none !important
+}

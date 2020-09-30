@@ -19,21 +19,3 @@ else
     </div>
 }
 
-<script>
-    function AddTextBox() {
-        var div = document.createElement('DIV');
-        div.innerHTML = GetDynamicTextbox("");
-        document.getElementById("divCont").appendChild(div);
-    }
-
-    function GetDynamicTextbox(value) {
-        return '<div id="frd" class="form-row">' +
-            '<div id = "fr" class="col-md-7 mb-3" >' +
-            '<input type="text" name="txttest" class="form-control" /></div >' +
-            '<div ="cd" class="col-md-3 mb-3" > <input type="button" onclick="RemoveTextBox(this)" value="Remove" class="btn btn-primary" /></div ></div > ';
-    }
-
-    function RemoveTextBox(div) {
-        document.getElementById("divCont").removeChild(div.parentNode.parentNode.parentNode);
-    }
-</script>

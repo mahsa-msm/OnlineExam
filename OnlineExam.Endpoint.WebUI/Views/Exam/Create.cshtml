@@ -7,14 +7,16 @@
 
 
 
-<h1 class="main-title"> ایجاد آزمون </h1>
-
-<hr class="seprator-hr" />
-<div class="row">
-    <div class="col-md-4">
+<div class="row  d-flex justify-content-center align-items-center ">
+    <div class="col-md-5 shadow p-5">
         <form asp-action="Create">
             <input type="hidden" asp-for="CourseId" value=@course.Id />
-            <label>@course.Name</label>
+            <h1 class="main-title">  ایجاد آزمون برای درس 
+                @course.Name
+            </h1>
+            <hr class="seprator-hr mb-3" />
+
+            
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -28,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input class="persiandate" />
+                <input asp-for="EndDate" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,8 +39,8 @@
                 <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group text-left">
+                <input type="submit" value="ثبت" class="btn btn-primary" />
             </div>
         </form>
     </div>

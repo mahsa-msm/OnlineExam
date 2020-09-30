@@ -68,22 +68,27 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             var questions = examQuestionRepository.GetExamQuestions(giveExamViewModel.ExamId).Select(c => c.Question).Select(c => c.QuestionChoices.Select(v => v.Choice.IsCorrect)).ToList();
             int score = 0;
             var user = userManager.GetUserId(User);
-
-            foreach (var item in giveExamViewModel.Answers)
+            try
             {
-                Answer answer = new Answer
+                foreach (var item in giveExamViewModel.Answers)
                 {
-                    AppUserId = int.Parse(user),
-                    ChoiceId = item.ChoiceId,
-                    IsSelected = item.IsSelected
-
-                };
-                answerRepository.Add(answer);
-                var choice = choiceRepository.Get(item.ChoiceId);
-                if (item.IsSelected == true && choice.IsCorrect == true)
-                {
-                    score++;
+                    Answer answer = new Answer
+                    {
+                        AppUserId = int.Parse(user),
+                        ChoiceId = item.ChoiceId,
+                        IsSelected = item.IsSelected
+                    };
+                    answerRepository.Add(answer);
+                    var choice = choiceRepository.Get(item.ChoiceId);
+                    if (item.IsSelected == true && choice.IsCorrect == true)
+                    {
+                        score++;
+                    }
                 }
+            }
+            catch
+            {
+                return NotFound();
             }
 
             double resultScore = Math.Round((((double)score / (double)questions.Count) * 100), 2);
