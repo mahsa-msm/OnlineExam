@@ -32,7 +32,7 @@ li {
 
 .main-title {
     color: #303ea7;
-    font-size:1.5rem
+    font-size: 1.5rem
 }
 
 .main-btn {
@@ -65,6 +65,7 @@ header {
     float: left;
     margin: 0 0 0 5%;
 }
+
 .menu {
     width: 60%;
     height: 100%;
@@ -77,10 +78,10 @@ header {
         margin: 0;
         padding: 0;
         display: -webkit-box;
-        display: -moz-box; 
-        display: -ms-flexbox; 
-        display: -webkit-flex; 
-        display: flex; 
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
     }
 
         .menu ul li {
@@ -93,12 +94,12 @@ header {
                 font-size: 18px;
                 font-weight: 500;
                 display: inline-block;
-                text-decoration-line:none
+                text-decoration-line: none
             }
 
-            .menu ul li a :hover {
-                border-bottom: 1px solid white
-            }
+                .menu ul li a :hover {
+                    border-bottom: 1px solid white
+                }
 
 #menuToggle {
     display: none;
@@ -107,6 +108,7 @@ header {
 .menu-icon {
     display: none;
 }
+
 @media screen and (max-width: 768px) {
     .menu {
         width: 100%;
@@ -122,6 +124,7 @@ header {
             -o-transition: max-height 0.3s;
             transition: max-height 0.3s;
         }
+
             .menu ul li {
                 text-align: right;
                 width: 100%;
@@ -129,12 +132,14 @@ header {
                 background-color: #044086;
                 border-top: 1px solid #1f0b71
             }
+
                 .menu ul li a {
                     padding: 0px 5% 0px;
                     width: 100%;
                     text-decoration-line: none;
                     color: #fff;
                 }
+
     .menu-icon {
         width: 100px;
         height: inherit;
@@ -254,8 +259,8 @@ header {
 }
 
 
-*{
-    outline:none !important
+* {
+    outline: none !important
 }
 
 .question-box input[type="text"] {
@@ -266,13 +271,24 @@ header {
     outline: none !important;
     box-shadow: none !important
 }
-.question-box input[type="checkbox"]{
-    width:29px;
-    margin-top:20px
+
+.question-box input[type="checkbox"] {
+    width: 29px;
+    margin-top: 20px
 }
+
 .question-box input[type="text"]:focus {
-    border:0;
+    border: 0;
     border-bottom: 1px solid #384d98;
     outline: none !important;
     box-shadow: none !important
+}
+
+.result-box {
+    text-align: center;
+    font-size: 25px;
+    border: 1px solid;
+    margin: 0 30%;
+    padding: 60px 0;
+    box-shadow: 5px 5px 15px 5px #c1d2ff;
 }

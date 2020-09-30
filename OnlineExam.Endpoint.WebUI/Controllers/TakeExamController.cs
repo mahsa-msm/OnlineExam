@@ -107,7 +107,20 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult FinishExam(int ResultId)
         {
             Result examResult = resultRepository.Get(ResultId);
+            
             examResult.Exam = examRepository.Get(examResult.ExamId);
+            if (examResult.Score >80)
+            {
+                ViewBag.Score ="good"; 
+            }
+            else if(examResult.Score < 80 && examResult.Score > 40 )
+            {
+                ViewBag.Score = "medium";
+            }
+            else
+            {
+                ViewBag.Score = "bad";
+            }
             return View(examResult);
         }
     }

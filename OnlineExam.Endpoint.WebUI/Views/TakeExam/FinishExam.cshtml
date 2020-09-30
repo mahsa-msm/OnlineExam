@@ -4,7 +4,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-رتبه ی شما در این آزمون :
-    <div> @Model.Score </div>
-<div>@Model.Exam.Name</div>
+<div class="result-box">
+    <div>پایان ازمون </div>
+    رتبه ی شما در آزمون   @Model.Exam.Name  :
+    <div> @Model.Score درصد  </div>
+    <div>
+        @{ if (@ViewBag.Score == "good")
+            {
+                <div style="color:green"> <div><i class="fa fa-smile-o" aria-hidden="true"></i></div> سطح شما خوب است</div>
+            }
+           else if (@ViewBag.Score == "medium")
+            {
+                <div style="color:darkblue"> <div><i class="fa fa-smile-o" aria-hidden="true"></i></div> سطح شما متوسط است</div>
+            }
+            if (@ViewBag.Score == "bad")
+            {
+                <div style="color:red"> <div><i class="fa fa-frown-o" aria-hidden="true"></i></div> سطح شما بد است</div>
+            }
+        }
+
+    </div>
+</div>
 
