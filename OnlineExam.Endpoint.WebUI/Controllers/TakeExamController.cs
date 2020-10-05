@@ -60,6 +60,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
             takeExam.ExamId = examID;
             takeExam.ExamDuration = Exam.Duration;
+            int startDateCompare = DateTime.Compare(Exam.StartDate, DateTime.Now);
+            int endDateCompare = DateTime.Compare( Exam.EndDate , DateTime.Now );
+
+            if (startDateCompare < 0 && endDateCompare > 0)
+            {
+                return RedirectToAction("NotExistExam");
+            }
             return View(takeExam);
         }
         [HttpPost]
@@ -107,13 +114,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult FinishExam(int ResultId)
         {
             Result examResult = resultRepository.Get(ResultId);
-            
+
             examResult.Exam = examRepository.Get(examResult.ExamId);
-            if (examResult.Score >80)
+            if (examResult.Score > 80)
             {
-                ViewBag.Score ="good"; 
+                ViewBag.Score = "good";
             }
-            else if(examResult.Score < 80 && examResult.Score > 40 )
+            else if (examResult.Score < 80 && examResult.Score > 40)
             {
                 ViewBag.Score = "medium";
             }
@@ -123,5 +130,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             }
             return View(examResult);
         }
+        public IActionResult NotExistExam()
+        {
+
+            return View();
+        }
+
     }
 }

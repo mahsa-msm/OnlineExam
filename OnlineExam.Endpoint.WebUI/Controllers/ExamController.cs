@@ -42,8 +42,12 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpPost]
         public IActionResult Create(ExamViewModel model)
         {
+
             if (ModelState.IsValid)
             {
+                if (model.StartDate == null)
+                    model.StartDate = DateTime.Now;
+
                 Exam exam = new Exam
                 {
                     Name = model.Name,
@@ -61,6 +65,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpGet]
         public IActionResult Update(int courseId, int examId)
         {
+
             Exam exam = examRepository.Get(examId);
             ExamViewModel model = new ExamViewModel
             {
@@ -82,6 +87,8 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.StartDate == null)
+                    model.StartDate = DateTime.Now;
                 Exam exam = examRepository.Get(model.Id);
 
                 exam.Name = model.Name;

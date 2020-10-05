@@ -24,30 +24,53 @@
         <nav class="menu">
             <input type="checkbox" id="menuToggle">
             <label for="menuToggle" class="menu-icon"><i class="fa fa-bars"></i></label>
-            <ul>
-                <li>
-                    <a asp-controller="User" asp-action="Index">خانه </a>
-                </li>
-                <li>
-                    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
-                </li>
-                <li>
-                    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
-                </li>
-                <li>
-                    <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
-                </li>
-                <li>
-                    <a asp-controller="UserAccount" asp-action="Logout">خروج</a>
-                </li>
-            </ul>
+            @if (User.IsInRole("admin"))
+            {
+                <ul>
+                    <li>
+                        <a asp-controller="UserAccount" asp-action="Index">خانه </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                    </li>
+                    <li>
+                        <a asp-controller="UserAccount" asp-action="Logout">خروج</a>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <ul>
+                    <li>
+                        <a asp-controller="UserAccount" asp-action="Index">خانه </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">لیست نتایج آزمون  </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                    </li>
+                    <li>
+                        <a asp-controller="UserAccount" asp-action="Logout">خروج</a>
+                    </li>
+                </ul>
+            }
+
         </nav>
     </header>
 
 
     <div id="main">
         @RenderBody()
-
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
