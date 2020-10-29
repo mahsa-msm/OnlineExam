@@ -10,18 +10,21 @@
 <div class="row  d-flex justify-content-center align-items-center ">
     <div class="col-md-5 shadow p-5">
         <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <input type="hidden" asp-for="CourseId" value=@course.Id />
+            <span asp-validation-for="CourseId" class="text-danger"></span>
+
             <h1 class="main-title">
                 ایجاد آزمون برای درس
                 @course.Name
             </h1>
             <hr class="seprator-hr mb-3" />
-           
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" required />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -32,12 +35,12 @@
 
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" autocomplete="off" class="form-control" />
+                <input type="datetime-local" asp-for="EndDate" autocomplete="off" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Duration" class="control-label"></label>
-                <input type="number" asp-for="Duration" class="form-control" />
+                <input type="number" asp-for="Duration" class="form-control"  />
                 <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
 

@@ -129,7 +129,66 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             roleManager.CreateAsync(role);
             return RedirectToAction("Index");
         }
-
-
+        public IActionResult AddAdmin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddAdmin(CreateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = new AppUser
+                {
+                    Email = model.Email,
+                    UserName = model.Name
+                };
+                var userExists = userManager.FindByNameAsync(user.UserName).Result;
+                if(userExists == null || userExists.Id==0 )
+                {
+                    var result = userManager.CreateAsync(user, model.Password).Result;
+                    if (result.Succeeded)
+                    {
+                        var result2 = userManager.AddToRoleAsync(user, "admin").Result;
+                        if (result2.Succeeded)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            foreach (var item in result2.Errors)
+                            {
+                                ModelState.AddModelError(item.Code, item.Description);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError(item.Code, item.Description);
+                        }
+                    }
+                }
+                else
+                {
+                    var result2 = userManager.AddToRoleAsync(userExists, "admin").Result;
+                    if (result2.Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (var item in result2.Errors)
+                        {
+                            ModelState.AddModelError(item.Code, item.Description);
+                        }
+                    }
+                }
+             
+            }
+            return View(model);
+        }
     }
 }
+

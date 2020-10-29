@@ -63,7 +63,6 @@ $(function () {
 
 $(document).ready(function () {
     $("#Course").DataTable({
-
         "ajax": {
             "url": "/Course/GetDataTableCourse",
             "type": "Get",
@@ -90,6 +89,32 @@ $(document).ready(function () {
 })
 
 
+$(document).ready(function () {
+    $("#AllExamResults").DataTable({
+        "ajax": {
+            "url": "/Course/GetDataTableCourse",
+            "type": "Get",
+            "datatype": "json"
+        },
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
+        },
+        "columns": [
+            { "data": "name" },
+            {
+                "data": "id",
+                "render": function btn(data) {
+                    var Updatebtn = "<a  onclick='UpdateCourse(" + data + ")' class='btn btn-primary d-inline-block'><i class='fa fa-edit'></i></a>";
+                    var Deletebtn = "<form onclick='DeleteCourse(" + data + ")' class='d-inline-block'><button type='submit' class='btn btn-danger' onclick='return DeleteCourse(" + data + ")'><i class='fa fa-trash'></i> </button> </form>";
+
+                    return Updatebtn + Deletebtn;
+
+
+                }
+            }
+        ]
+    })
+})
 
 function UpdateCourse(courseId) {
 

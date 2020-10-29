@@ -61,6 +61,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             var Exam = examRepository.Get(examID);
             List<ExamQuestion> examQuestions = examQuestionRepository.GetExamQuestions(examID).ToList();
             takeExam.Questions = examQuestions.Select(c => c.Question).ToList();
+
+            if (takeExam.Questions.Count == 0)
+            {
+                return RedirectToAction("NotExistExam");
+            }
             takeExam.ExamId = examID;
             takeExam.ExamDuration = Exam.Duration;
             int startDateCompare = DateTime.Compare(Exam.StartDate, DateTime.Now);
@@ -109,6 +114,8 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 ExamId = giveExamViewModel.ExamId,
                 Score = resultScore,
                 Exam = examRepository.Get(giveExamViewModel.ExamId),
+                dateTime = DateTime.Now
+
             };
             resultRepository.Add(result);
             return RedirectToAction("FinishExam", new { ResultId = result.Id });
@@ -117,7 +124,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult FinishExam(int ResultId)
         {
             Result examResult = resultRepository.Get(ResultId);
-
             examResult.Exam = examRepository.Get(examResult.ExamId);
             if (examResult.Score > 80)
             {
@@ -149,12 +155,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             {
                 var examId = result.ExamId;
                 var courseId = examRepository.Get(result.ExamId).CourseId;
-                           
+
                 ExamResultsViewModel examResult = new ExamResultsViewModel
                 {
                     ExamName = examRepository.Get(examId).Name,
                     CourseName = courseRepository.Get(courseId).Name,
-                    Score = result.Score
+                    Score = result.Score,
+                    DateTime=result.dateTime
                 };
 
                 examResults.Add(examResult);
@@ -163,6 +170,34 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View(examResults);
         }
 
+        public ActionResult AllExamResultsForAdmin()
+        {
+             List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
+
+            var Results = resultRepository.GetAll().ToList();
+           
+
+            foreach (var result in Results)
+            {
+                var examId = result.ExamId;
+                var courseId = examRepository.Get(result.ExamId).CourseId;
+                var user = userManager.FindByIdAsync(result.AppUserId.ToString()).Result;
+
+                ExamResultsViewModel examResult = new ExamResultsViewModel
+                {
+                    UserName=user.UserName,
+                    ExamName = examRepository.Get(examId).Name,
+                    CourseName = courseRepository.Get(courseId).Name,
+                    Score = result.Score,
+                    DateTime=result.dateTime
+
+                };
+                examResults.Add(examResult);
+            }
+
+            return Json(new { data = examResults });
+
+        }
 
 
     }

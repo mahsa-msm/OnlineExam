@@ -13,5 +13,7 @@ namespace OnlineExam.Domain.Core.Results
         public double Score { get; set; }
         public Exam Exam { get; set; }
         public AppUser AppUser { get; set; }
+        public DateTime dateTime { get; set; }
+
     }
 }
