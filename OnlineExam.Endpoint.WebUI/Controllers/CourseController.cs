@@ -53,7 +53,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         }
 
-        public IActionResult Update(int id)
+        public  IActionResult Update(int id)
         {
             Course course = courseRepository.Get(id);
             return View(course);

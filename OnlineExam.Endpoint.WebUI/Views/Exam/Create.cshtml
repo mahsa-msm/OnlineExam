@@ -11,12 +11,13 @@
     <div class="col-md-5 shadow p-5">
         <form asp-action="Create">
             <input type="hidden" asp-for="CourseId" value=@course.Id />
-            <h1 class="main-title">  ایجاد آزمون برای درس 
+            <h1 class="main-title">
+                ایجاد آزمون برای درس
                 @course.Name
             </h1>
             <hr class="seprator-hr mb-3" />
+           
 
-            
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -25,12 +26,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
+                <input asp-for="StartDate" autocomplete="off" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
+                <input asp-for="EndDate" autocomplete="off" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">

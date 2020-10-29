@@ -53,9 +53,9 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult AddQuestion(QuestionViewModel questionViewModel)
+        public   IActionResult AddQuestion(QuestionViewModel questionViewModel)
         {
-            Exam exam = examRepository.Get(questionViewModel.ExamId);
+            Exam exam =  examRepository.Get(questionViewModel.ExamId);
 
             if (ModelState.IsValid)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
@@ -18,11 +19,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         private readonly IExamRepository examRepository;
         private readonly ICourseRepository courseRepository;
 
-
         public ExamController(IExamRepository examRepository, ICourseRepository courseRepository)
         {
             this.examRepository = examRepository;
             this.courseRepository = courseRepository;
+
         }
         public IActionResult Index(int courseId)
         {
@@ -42,6 +43,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpPost]
         public IActionResult Create(ExamViewModel model)
         {
+            
 
             if (ModelState.IsValid)
             {
@@ -63,10 +65,10 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Update(int courseId, int examId)
+        public  IActionResult Update(int courseId, int examId)
         {
 
-            Exam exam = examRepository.Get(examId);
+            Exam exam =  examRepository.Get(examId);
             ExamViewModel model = new ExamViewModel
             {
                 CourseId = courseId,
@@ -83,13 +85,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(ExamViewModel model)
+        public  IActionResult Update(ExamViewModel model)
         {
             if (ModelState.IsValid)
             {
                 if (model.StartDate == null)
                     model.StartDate = DateTime.Now;
-                Exam exam = examRepository.Get(model.Id);
+                Exam exam =  examRepository.Get(model.Id);
 
                 exam.Name = model.Name;
                 exam.StartDate = model.StartDate;

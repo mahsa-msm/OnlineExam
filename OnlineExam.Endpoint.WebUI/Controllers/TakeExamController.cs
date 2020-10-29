@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Converters;
 using OnlineExam.Domain.Contracts.Answers;
 using OnlineExam.Domain.Contracts.Choices;
+using OnlineExam.Domain.Contracts.Courses;
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Contracts.Results;
@@ -28,14 +29,15 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         private readonly IChoiceRepository choiceRepository;
         private readonly IResultRepository resultRepository;
         private readonly IExamRepository examRepository;
-
+        private readonly ICourseRepository courseRepository;
         public TakeExamController(
            UserManager<AppUser> userManager,
            IExamQuestionRepository examQuestionRepository,
            IAnswerRepository answerRepository,
            IChoiceRepository choiceRepository,
            IResultRepository resultRepository,
-           IExamRepository examRepository)
+           IExamRepository examRepository,
+             ICourseRepository courseRepository)
         {
             this.examQuestionRepository = examQuestionRepository;
             this.userManager = userManager;
@@ -43,12 +45,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             this.choiceRepository = choiceRepository;
             this.resultRepository = resultRepository;
             this.examRepository = examRepository;
+            this.courseRepository = courseRepository;
+
         }
 
         public IActionResult Index()
         {
-            ExamsResultViewModel Results = new ExamsResultViewModel();
-            return View(Results);
+            return View();
         }
 
 
@@ -61,7 +64,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             takeExam.ExamId = examID;
             takeExam.ExamDuration = Exam.Duration;
             int startDateCompare = DateTime.Compare(Exam.StartDate, DateTime.Now);
-            int endDateCompare = DateTime.Compare( Exam.EndDate , DateTime.Now );
+            int endDateCompare = DateTime.Compare(Exam.EndDate, DateTime.Now);
 
             if (startDateCompare < 0 && endDateCompare > 0)
             {
@@ -135,6 +138,32 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
             return View();
         }
+        public ActionResult ExamResults()
+        {
+            var user = userManager.GetUserId(User);
+            List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
+
+            var Results = resultRepository.GetAll().Where(c => c.AppUserId == int.Parse(user)).ToList();
+
+            foreach (var result in Results)
+            {
+                var examId = result.ExamId;
+                var courseId = examRepository.Get(result.ExamId).CourseId;
+                           
+                ExamResultsViewModel examResult = new ExamResultsViewModel
+                {
+                    ExamName = examRepository.Get(examId).Name,
+                    CourseName = courseRepository.Get(courseId).Name,
+                    Score = result.Score
+                };
+
+                examResults.Add(examResult);
+            }
+
+            return View(examResults);
+        }
+
+
 
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineExam.Infrastructures.DataLayer.Common
 {
@@ -36,9 +37,11 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         }
 
 
-        public TEntity Get(int id)
+        public  TEntity  Get(int id)
         {
-            return dbContext.Set<TEntity>().Find(id);
+            //dbContext.Dispose();
+
+            return  dbContext.Set<TEntity>().Where(x=>x.Id== id).FirstOrDefault();
         }
 
         public IQueryable<TEntity> GetAll()
