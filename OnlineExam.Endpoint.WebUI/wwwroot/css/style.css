@@ -292,3 +292,17 @@ header {
     padding: 60px 0;
     box-shadow: 5px 5px 15px 5px #c1d2ff;
 }
+
+.timerbox {
+    width: 230px;
+    background: #e8efff;
+    height: 100px;
+    position: fixed;
+    left: 50px;
+    text-align: center;
+}
+
+.timercounter{
+    text-align:center;
+    font-size : 30px
+}

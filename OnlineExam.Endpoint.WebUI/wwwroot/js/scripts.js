@@ -90,9 +90,9 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    $("#AllExamResults").DataTable({
+    $("#AllExamResult").DataTable({
         "ajax": {
-            "url": "/Course/GetDataTableCourse",
+            "url": "/TakeExam/AllExamResultsForAdminDataTable",
             "type": "Get",
             "datatype": "json"
         },
@@ -100,18 +100,12 @@ $(document).ready(function () {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Persian.json"
         },
         "columns": [
-            { "data": "name" },
-            {
-                "data": "id",
-                "render": function btn(data) {
-                    var Updatebtn = "<a  onclick='UpdateCourse(" + data + ")' class='btn btn-primary d-inline-block'><i class='fa fa-edit'></i></a>";
-                    var Deletebtn = "<form onclick='DeleteCourse(" + data + ")' class='d-inline-block'><button type='submit' class='btn btn-danger' onclick='return DeleteCourse(" + data + ")'><i class='fa fa-trash'></i> </button> </form>";
-
-                    return Updatebtn + Deletebtn;
-
-
-                }
-            }
+            { "data": "UserName" },
+            { "data": "ExamName" },
+            { "data": "CourseName" },
+            { "data": "Score" },
+            { "data": "DateTime" }
+            
         ]
     })
 })
@@ -128,5 +122,40 @@ function DeleteCourse(courseId) {
 
 }
 
+
+
+
+
+
+
+
+
+
+    document.getElementById('timer').innerHTML =
+        0 + ":" +@Model.ExamDuration;
+    startTimer();
+
+    function startTimer() {
+        var presentTime = document.getElementById('timer').innerHTML;
+    var timeArray = presentTime.split(/[:]+/);
+    var m = timeArray[0];
+    var s = checkSecond((timeArray[1] - 1));
+        if (s == 59) {m = m - 1}
+
+    if (m == 0 && s == 0) {
+
+        $("#submit").click();
+}
+document.getElementById('timer').innerHTML =
+    m + ":" + s;
+console.log(m)
+setTimeout(startTimer, 1000000);
+}
+
+    function checkSecond(sec) {
+        if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+    if (sec < 0) {sec = "59"};
+    return sec;
+}
 
 

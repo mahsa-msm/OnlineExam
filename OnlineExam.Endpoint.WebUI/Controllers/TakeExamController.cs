@@ -161,7 +161,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                     ExamName = examRepository.Get(examId).Name,
                     CourseName = courseRepository.Get(courseId).Name,
                     Score = result.Score,
-                    DateTime=result.dateTime
+                    DateTime = result.dateTime
                 };
 
                 examResults.Add(examResult);
@@ -172,10 +172,16 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         public ActionResult AllExamResultsForAdmin()
         {
-             List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
+
+            return View();
+        }
+
+        public ActionResult AllExamResultsForAdminDataTable()
+        {
+            List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
 
             var Results = resultRepository.GetAll().ToList();
-           
+
 
             foreach (var result in Results)
             {
@@ -185,11 +191,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
                 ExamResultsViewModel examResult = new ExamResultsViewModel
                 {
-                    UserName=user.UserName,
+                    UserName = user.UserName,
                     ExamName = examRepository.Get(examId).Name,
                     CourseName = courseRepository.Get(courseId).Name,
                     Score = result.Score,
-                    DateTime=result.dateTime
+                    DateTime = result.dateTime
 
                 };
                 examResults.Add(examResult);
