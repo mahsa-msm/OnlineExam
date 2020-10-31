@@ -43,24 +43,23 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpPost]
         public IActionResult Create(ExamViewModel model)
         {
-            if (ModelState.IsValid)
+            if (model.StartDate == DateTime.MinValue)
+                model.StartDate = DateTime.Now;
+
+            if (model.EndDate == DateTime.MinValue)
+                model.EndDate = DateTime.Now.AddYears(10);
+
+            Exam exam = new Exam
             {
-                if (model.StartDate == null)
-                    model.StartDate = DateTime.Now;
-
-                Exam exam = new Exam
-                {
-                    Name = model.Name,
-                    Duration = model.Duration,
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
-                    CourseId = model.CourseId
-
-                };
+                Name = model.Name,
+                Duration = model.Duration,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                CourseId = model.CourseId
+            };
                 examRepository.Add(exam);
-                return RedirectToAction("Index", new { courseId = model.CourseId });
-            }
-            return View();
+            return RedirectToAction("Index", new { courseId = model.CourseId });
+
         }
         [HttpGet]
         public IActionResult Update(int courseId, int examId)

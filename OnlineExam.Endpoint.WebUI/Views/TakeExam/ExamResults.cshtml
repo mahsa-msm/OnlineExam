@@ -14,37 +14,38 @@
 
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.ExamName)
+                    @Html.DisplayNameFor(model => model.CourseName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CourseName)
+                    @Html.DisplayNameFor(model => model.ExamName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Score)
                 </th>
-               
-                <th></th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.DateTime)
+                </th>
+
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ExamName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CourseName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Score)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+            </tr>
             }
         </tbody>
     </table>

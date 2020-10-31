@@ -105,7 +105,6 @@ $(document).ready(function () {
             { "data": "CourseName" },
             { "data": "Score" },
             { "data": "DateTime" }
-            
         ]
     })
 })
@@ -123,39 +122,4 @@ function DeleteCourse(courseId) {
 }
 
 
-
-
-
-
-
-
-
-
-    document.getElementById('timer').innerHTML =
-        0 + ":" +@Model.ExamDuration;
-    startTimer();
-
-    function startTimer() {
-        var presentTime = document.getElementById('timer').innerHTML;
-    var timeArray = presentTime.split(/[:]+/);
-    var m = timeArray[0];
-    var s = checkSecond((timeArray[1] - 1));
-        if (s == 59) {m = m - 1}
-
-    if (m == 0 && s == 0) {
-
-        $("#submit").click();
-}
-document.getElementById('timer').innerHTML =
-    m + ":" + s;
-console.log(m)
-setTimeout(startTimer, 1000000);
-}
-
-    function checkSecond(sec) {
-        if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
-    if (sec < 0) {sec = "59"};
-    return sec;
-}
-
-
+  

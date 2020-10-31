@@ -1,7 +1,7 @@
 ﻿@model OnlineExam.Endpoint.WebUI.Models.Exams.ExamViewModel
 @{ OnlineExam.Domain.Core.Courses.Course course = ViewBag.Course;}
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "ایجاد ازمون";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,18 +29,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" autocomplete="off" class="form-control" />
+                <input asp-for="StartDate" autocomplete="off" class="form-control"  value=@DateTime.Now/>
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
-                <input type="datetime-local" asp-for="EndDate" autocomplete="off" class="form-control" />
+                <input type="datetime-local" asp-for="EndDate" autocomplete="off" class="form-control"  value=@DateTime.Now />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Duration" class="control-label"></label>
-                <input type="number" asp-for="Duration" class="form-control"  />
+                <input required type="number" asp-for="Duration" class="form-control"  />
                 <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
 

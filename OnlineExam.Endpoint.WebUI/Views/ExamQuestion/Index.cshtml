@@ -1,47 +1,47 @@
 ﻿@model IEnumerable<OnlineExam.Domain.Core.ExamQuestions.ExamQuestion>
 @{ OnlineExam.Domain.Core.Exams.Exam exams = ViewBag.Exam;}
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "لیست سوال ها ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-10 shadow p-4">
 
-<hr />
+        <span class="courselable"> امتحان : </span>
+        <span class="coursename">@exams.Name</span>
+        <hr />
 
-<span class="courselable"> امتحان : </span>
-<span class="coursename">@exams.Name</span>
-<hr />
-
-<a href="@Url.Action("AddQuestion", "ExamQuestion", new { examId = exams.Id })" class="btn main-btn">
-    <i class="fa fa-plus" aria-hidden="true"> </i>  اضافه کردن سوال
-</a>
-
-
-
-@{int questionNumber = 1;}
+        <a href="@Url.Action("AddQuestion", "ExamQuestion", new { examId = exams.Id })" class="btn main-btn">
+            <i class="fa fa-plus" aria-hidden="true"> </i>  اضافه کردن سوال
+        </a>
 
 
-@foreach (var item in Model)
-{
-    <hr class="hr" />
-    <div>@questionNumber _ @Html.DisplayFor(modelItem => item.Question.Text) </div>
 
-    <div class="choicebox">
-        @{
-            var choices = item.Question.QuestionChoices.Select(x => x.Choice);
+        @{int questionNumber = 1;}
 
-            int i = 1;
-            foreach (var choice in choices)
-            {
 
-                <div class="choice-@choice.IsCorrect">@i- @choice.Text</div>
-               
-                i = i + 1;
-            }
+        @foreach (var item in Model)
+        {
+            <hr class="hr" />
+            <div>@questionNumber _ @Html.DisplayFor(modelItem => item.Question.Text) </div>
 
+            <div class="choicebox">
+                @{
+                    var choices = item.Question.QuestionChoices.Select(x => x.Choice);
+
+                    int i = 1;
+                    foreach (var choice in choices)
+                    {
+                        <div class="choice-@choice.IsCorrect">@i- @choice.Text</div>
+                        i = i + 1;
+                    }
+                }
+            </div>
+
+            questionNumber++;
         }
     </div>
 
-    questionNumber++;
-}
+</div>

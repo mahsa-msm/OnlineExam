@@ -1,99 +1,100 @@
 ﻿@model IEnumerable<OnlineExam.Domain.Core.Courses.Course>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "لیست دروس";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="main-title">لیست دروس</h1>
-<hr />
+    <div class="row  d-flex justify-content-center align-items-center ">
+        <div class="col-md-10 shadow p-3">
+            <h1 class="main-title">لیست دروس</h1>
+
+            <hr />
+
+            @if (User.IsInRole("admin"))
+            {
+
+                <div>
+                    <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
+                </div>
+                <hr style=" border-top: 1px solid white" />
+                <div class="">
+                    <table class="table border">
+                        <thead class="thead">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    عملیات آزمون
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                               
+                                    <td>
+
+                                        <a href=@Url.ActionLink("Index", "Exam", new { courseId = item.Id }, null)> لیست آزمون ها </a>|
+                                        <a href=@Url.ActionLink("Create", "Exam", new { courseId = item.Id }, null)> اضافه کردن آزمون</a>
+
+                                    </td>
+
+                                    <td>
+                                        <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
+
+                                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline-block">
+                                            <button type="submit" class="btn btn-danger" onclick="return DeleteCourse(@item.Id)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
 
-@if (User.IsInRole("admin"))
-{
+            }
+            else
+            {
+                <div class="">
+                    <table class="table border">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
 
-    <div>
-        <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
-    </div>
-    <hr />
-    <div class="">
-        <table class="table border">
-            <thead class="thead">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
+                                </th>
 
-                    </th>
-                    <th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        <a href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست ازمون</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
+            }
 
-                            <a href=@Url.ActionLink("Index", "Exam", new { courseId = item.Id }, null)> لیست آزمون ها </a>|
-                            <a href=@Url.ActionLink("Create", "Exam", new { courseId = item.Id }, null)> اضافه کردن آزمون</a>
-
-                        </td>
-
-                        <td>
-                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
-              
-                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline-block">
-                                <button type="submit" class="btn btn-danger" onclick="return DeleteCourse(@item.Id)">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-
-
-
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-
-}
-else
-{
-    <div class="">
-        <table class="table border">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            <a href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست ازمون</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-}
-
+        </div>
+</div>

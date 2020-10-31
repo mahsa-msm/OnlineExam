@@ -306,3 +306,10 @@ header {
     text-align:center;
     font-size : 30px
 }
+
+.adminaddtext {
+    font-size: 18px;
+    margin: 10px;
+    font-weight: 500;
+    color: #5c72bf;
+}
