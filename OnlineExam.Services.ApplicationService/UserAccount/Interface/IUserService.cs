@@ -1,7 +1,4 @@
 ﻿using OnlineExam.Domain.Core.AppUsers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineExam.Services.ApplicationService.UserAccount.Interface
 {

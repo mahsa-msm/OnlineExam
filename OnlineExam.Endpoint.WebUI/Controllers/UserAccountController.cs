@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Endpoint.WebUI.Models.UserApp;
+using System.Threading.Tasks;
 
 namespace OnlineExam.Endpoint.MVC.Controllers
 {
@@ -144,7 +140,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                     UserName = model.Name
                 };
                 var userExists = userManager.FindByNameAsync(user.UserName).Result;
-                if(userExists == null || userExists.Id==0 )
+                if (userExists == null || userExists.Id == 0)
                 {
                     var result = userManager.CreateAsync(user, model.Password).Result;
                     if (result.Succeeded)
@@ -185,7 +181,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                         }
                     }
                 }
-             
+
             }
             return View(model);
         }

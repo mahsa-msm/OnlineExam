@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Converters;
 using OnlineExam.Domain.Contracts.Answers;
 using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Contracts.Courses;
@@ -18,6 +12,9 @@ using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Domain.Core.Results;
 using OnlineExam.Endpoint.WebUI.Models.Exams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
@@ -200,6 +197,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 };
                 examResults.Add(examResult);
             }
+          
 
             return Json(new { data = examResults });
 

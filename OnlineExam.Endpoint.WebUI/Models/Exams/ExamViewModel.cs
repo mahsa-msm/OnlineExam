@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineExam.Endpoint.WebUI.Models.Exams
 {
@@ -10,7 +7,7 @@ namespace OnlineExam.Endpoint.WebUI.Models.Exams
     {
         public int Id { get; set; }
         [Display(Name = "نام آزمون")]
-        [Required(ErrorMessage ="فیلد اجباری است")]
+        [Required(ErrorMessage = "فیلد اجباری است")]
         public string Name { get; set; }
         [Display(Name = "تاریخ شروع")]
         public DateTime StartDate { get; set; }

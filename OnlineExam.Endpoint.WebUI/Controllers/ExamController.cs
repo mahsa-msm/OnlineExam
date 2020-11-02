@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Courses;
 using OnlineExam.Domain.Contracts.Exams;
-using OnlineExam.Domain.Core.Courses;
 using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Endpoint.WebUI.Models.Exams;
+using System;
+using System.Collections.Generic;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
@@ -48,17 +42,19 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
             if (model.EndDate == DateTime.MinValue)
                 model.EndDate = DateTime.Now.AddYears(10);
-
-            Exam exam = new Exam
-            {
-                Name = model.Name,
-                Duration = model.Duration,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate,
-                CourseId = model.CourseId
-            };
+        
+                Exam exam = new Exam
+                {
+                    Name = model.Name,
+                    Duration = model.Duration,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    CourseId = model.CourseId
+                };
                 examRepository.Add(exam);
-            return RedirectToAction("Index", new { courseId = model.CourseId });
+                return RedirectToAction("Index", new { courseId = model.CourseId });
+           
+          
 
         }
         [HttpGet]

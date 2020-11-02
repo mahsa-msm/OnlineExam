@@ -1,11 +1,7 @@
-﻿using System;
+﻿using OnlineExam.Domain.Core.Answers;
+using OnlineExam.Domain.Core.QuestionChoices;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using OnlineExam.Domain.Core;
-using OnlineExam.Domain.Core.Answers;
-using OnlineExam.Domain.Core.QuestionChoices;
-using OnlineExam.Domain.Core.Questions;
 
 namespace OnlineExam.Domain.Core.Choices
 {

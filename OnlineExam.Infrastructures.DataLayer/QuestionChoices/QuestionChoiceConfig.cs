@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnlineExam.Domain.Core.QuestionChoices;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.QuestionChoices
 {
@@ -11,7 +8,7 @@ namespace OnlineExam.Infrastructures.DataLayer.QuestionChoices
     {
         public void Configure(EntityTypeBuilder<QuestionChoice> builder)
         {
-            builder.HasKey(x=> x.Id );
+            builder.HasKey(x => x.Id);
 
             builder.HasOne(b => b.Question)
                 .WithMany(b => b.QuestionChoices)

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineExam.Endpoint.WebUI.Models.Exams
 {
@@ -12,7 +9,7 @@ namespace OnlineExam.Endpoint.WebUI.Models.Exams
         public string UserName { get; set; }
         [Display(Name = "نام آزمون")]
 
-        public string ExamName{ get; set; }
+        public string ExamName { get; set; }
         [Display(Name = "نام درس ")]
 
         public string CourseName { get; set; }

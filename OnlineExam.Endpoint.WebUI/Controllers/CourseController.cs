@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Courses;
-using OnlineExam.Domain.Contracts.Exams;
-using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.Courses;
-using OnlineExam.Domain.Core.Exams;
+using System.Linq;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
@@ -38,14 +29,14 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+
                 courseRepository.Add(model);
                 return RedirectToAction("Index");
             }
             return View();
         }
-    
-       
+
+
         public IActionResult Delete(int id)
         {
             courseRepository.Delete(id);
@@ -53,7 +44,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         }
 
-        public  IActionResult Update(int id)
+        public IActionResult Update(int id)
         {
             Course course = courseRepository.Get(id);
             return View(course);
@@ -64,7 +55,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Id ==0)
+                if (model.Id == 0)
                 {
                     courseRepository.Add(model);
                     return RedirectToAction("Index");
@@ -84,7 +75,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult GetDataTableCourse()
         {
             var course = courseRepository.GetAll().ToList();
-            return Json( new {data= course });
+            return Json(new { data = course });
         }
 
     }

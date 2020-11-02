@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineExam.Domain.Contracts.Courses;
+﻿using OnlineExam.Domain.Contracts.Courses;
 using OnlineExam.Domain.Core.Courses;
-using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Infrastructures.DataLayer.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.Courses
 {
@@ -15,10 +10,10 @@ namespace OnlineExam.Infrastructures.DataLayer.Courses
 
         public CourseRepository(OnlineExamDbContext dbContext) : base(dbContext)
         {
-           _dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
-  
+
 
     }
 }

@@ -1,13 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using OnlineExam.Domain.Contracts.Common;
+﻿using OnlineExam.Domain.Contracts.Common;
 using OnlineExam.Domain.Core;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineExam.Infrastructures.DataLayer.Common
 {
@@ -23,7 +16,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
 
         public TEntity Add(TEntity entity)
         {
-        
+
             dbContext.Add(entity);
             dbContext.SaveChanges();
             return entity;
@@ -37,11 +30,11 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         }
 
 
-        public  TEntity  Get(int id)
+        public TEntity Get(int id)
         {
             //dbContext.Dispose();
 
-            return  dbContext.Set<TEntity>().Where(x=>x.Id== id).FirstOrDefault();
+            return dbContext.Set<TEntity>().Where(x => x.Id == id).FirstOrDefault();
         }
 
         public IQueryable<TEntity> GetAll()

@@ -2,11 +2,8 @@
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Core.ExamQuestions;
 using OnlineExam.Infrastructures.DataLayer.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
 {
@@ -19,18 +16,18 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
             this.dbContext = dbContext;
         }
 
-        public List<ExamQuestion> GetExamQuestions(int examId )
+        public List<ExamQuestion> GetExamQuestions(int examId)
         {
-            
-                var exam = dbContext.ExamQuestions
-                .Include(c => c.Question)
-                .ThenInclude(x => x.QuestionChoices)
-                .ThenInclude(a => a.Choice)
-                .Where(q => q.ExamId == examId)
-                .ToList();
-                return exam;
-           
-            
+
+            var exam = dbContext.ExamQuestions
+            .Include(c => c.Question)
+            .ThenInclude(x => x.QuestionChoices)
+            .ThenInclude(a => a.Choice)
+            .Where(q => q.ExamId == examId)
+            .ToList();
+            return exam;
+
+
         }
     }
 }

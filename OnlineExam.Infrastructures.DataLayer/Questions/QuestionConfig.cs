@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.IdentityModel.Tokens;
 using OnlineExam.Domain.Core.Questions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.Questions
 {

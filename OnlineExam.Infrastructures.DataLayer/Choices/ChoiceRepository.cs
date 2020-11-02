@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineExam.Domain.Contracts.Choices;
+﻿using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Core.Choices;
-using OnlineExam.Domain.Core.Exams;
 using OnlineExam.Infrastructures.DataLayer.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.Choices
 {

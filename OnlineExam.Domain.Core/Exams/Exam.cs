@@ -1,11 +1,9 @@
 ﻿using OnlineExam.Domain.Core.Courses;
 using OnlineExam.Domain.Core.ExamQuestions;
-using OnlineExam.Domain.Core.Questions;
 using OnlineExam.Domain.Core.Results;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace OnlineExam.Domain.Core.Exams
 {

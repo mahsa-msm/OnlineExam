@@ -1,9 +1,5 @@
 ﻿using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Domain.Core.Choices;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace OnlineExam.Domain.Core.Answers
 {

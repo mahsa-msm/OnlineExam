@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OnlineExam.Domain.Core.AppUsers
 {
-   public class MyCreeateAppUser
+    public class MyCreeateAppUser
     {
         [Required(ErrorMessage = "فیلد اجباری میباشد")]
         [MaxLength(50)]

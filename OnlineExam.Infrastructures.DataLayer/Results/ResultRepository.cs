@@ -2,10 +2,8 @@
 using OnlineExam.Domain.Contracts.Results;
 using OnlineExam.Domain.Core.Results;
 using OnlineExam.Infrastructures.DataLayer.Common;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineExam.Infrastructures.DataLayer.Results

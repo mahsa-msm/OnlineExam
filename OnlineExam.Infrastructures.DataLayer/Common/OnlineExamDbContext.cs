@@ -16,9 +16,6 @@ using OnlineExam.Infrastructures.DataLayer.ExamQuestions;
 using OnlineExam.Infrastructures.DataLayer.Exams;
 using OnlineExam.Infrastructures.DataLayer.QuestionChoices;
 using OnlineExam.Infrastructures.DataLayer.Questions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OnlineExam.Infrastructures.DataLayer.Common
 {

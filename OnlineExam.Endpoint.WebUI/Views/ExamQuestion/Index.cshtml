@@ -17,16 +17,11 @@
             <i class="fa fa-plus" aria-hidden="true"> </i>  اضافه کردن سوال
         </a>
 
-
-
         @{int questionNumber = 1;}
-
-
         @foreach (var item in Model)
         {
             <hr class="hr" />
             <div>@questionNumber _ @Html.DisplayFor(modelItem => item.Question.Text) </div>
-
             <div class="choicebox">
                 @{
                     var choices = item.Question.QuestionChoices.Select(x => x.Choice);
@@ -39,7 +34,6 @@
                     }
                 }
             </div>
-
             questionNumber++;
         }
     </div>
