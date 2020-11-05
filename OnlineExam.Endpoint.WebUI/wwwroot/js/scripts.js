@@ -147,8 +147,6 @@ function DeleteCourse(courseId) {
 });
 
 
-
-
     $(document).ready(function () {
 
         dataTable = $('#resultForAdminTable').DataTable({
@@ -174,15 +172,13 @@ function DeleteCourse(courseId) {
         });
 });
 
-
-
 $(document).ready(function () {
 
     $.ajax({
         type: "POST",
         url: "/TakeExam/ExamsCountForAdmin",
         success: function (response) {
-            document.getElementById("ExamCounts").innerHTML=response.data;
+            document.getElementById("ExamCounts").innerHTML = response.data;
         },
         failure: function (response) {
             alert(response.responseText);
@@ -191,7 +187,38 @@ $(document).ready(function () {
             alert(response.responseText);
         }
     })
-        
+
 
 });
+
+function loadAllExamDataTable(courseId) {
+
+        dataTable = $('#GetAllExamsDataTables').DataTable({
+            "ajax": {
+                "url": "/Exam/GetAllExamsDataTables?courseId="+courseId,
+                "type": 'GEt',
+                "datatype": 'json'
+            },
+            //"stateSave": "true",
+            "columns": [
+                { "data": "name" },
+                { "data": "startDate" },
+                { "data": "endDate" },
+                { "data": "duration" },
+                {}
+            ],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+            },
+            "lengthChange": true,
+            //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+            autoWidth: true
+        });
+ 
+}
+    
+
+
+
+
 

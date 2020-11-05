@@ -1,141 +1,164 @@
 ﻿@model IEnumerable<OnlineExam.Domain.Core.Exams.Exam>
-@{ OnlineExam.Domain.Core.Courses.Course course = ViewBag.Course;}
+@{OnlineExam.Domain.Core.Courses.Course course = ViewBag.Course;}
+
 @{
     ViewData["Title"] = "لیست آزمونها";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="main-title">آزمونها</h1>
+@*<div class="row  d-flex justify-content-center align-items-center ">
+    <div class="col-md-10  p-3 text-justify">
+        <h1 class="main-title">آزمونها</h1>
 
-<hr class="seprator-hr" />
+        <hr style="border-top:1px solid white"/>
 
-<span class="courselable"> درس: </span>
-<span class="coursename">@course.Name</span>
-<hr class="seprator-hr" />
-@if (User.IsInRole("admin"))
-{
-    <div>
-        <a href="@Url.ActionLink("Create", "Exam", new { courseId = course.Id })" class="btn main-btn">
-            <i class="fa fa-plus" aria-hidden="true"> </i> ایجاد آزمون
-        </a>
+        <span class="courselable"> درس: </span>
+        <span class="coursename">@course.Name</span>
+        <hr class="seprator-hr" />
+        @if (User.IsInRole("admin"))
+        {
+            <div>
+                <a href="@Url.ActionLink("Create", "Exam", new { courseId = course.Id })" class="btn main-btn">
+                    <i class="fa fa-plus" aria-hidden="true"> </i> ایجاد آزمون
+                </a>
+            </div>
+            <hr class="seprator-hr" />
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EndDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Duration)
+                        </th>
+
+
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Duration)
+                            </td>
+
+                            <td>
+                                <a href="@Url.Action("Index", "ExamQuestion" ,new {examId= item.Id })" class="btn">
+                                    مشاهده سوال ها
+                                </a>
+
+                            </td>
+                            <td>
+
+                                <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+
+                                <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
+                                    <button type="submit" class="btn btn-danger " onclick="return DeleteExam(@item.Id)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EndDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Duration)
+                        </th>
+                        <th></th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Duration)
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
-    <hr class="seprator-hr" />
+</div>*@
 
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Duration)
-                </th>
-
-
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Duration)
-                    </td>
-
-                    <td>
-                        <a href="@Url.Action("Index", "ExamQuestion" ,new {examId= item.Id })" class="btn">
-                            مشاهده سوال ها
-                        </a>
-
-                    </td>
-                    <td>
-
-                        <a href="@Url.Action("Update", "Exam" ,new { courseId = course.Id, examId = item.Id })" class="btn btn-warning">
-                            <i class="fa fa-trash"></i>
-                        </a>
-
-
-                        <form asp-action="Delete" asp-route-id="@item.Id" asp-route-courseId=@course.Id class="d-inline-block">
-                            <button type="submit" class="btn btn-danger " onclick="return DeleteExam(@item.Id)">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
-
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Duration)
-                </th>
-                <th></th>
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Duration)
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        <a href="@Url.Action("TakeExam", "TakeExam" ,new {examId= item.Id })" class="btn">
-                            شرکت در ازمون
-                        </a>
-
-                    </td>
-
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-
+@*<a href="@Url.Action("TakeExam", "TakeExam" ,new {examId= item.Id })" class="btn">
+            شرکت در ازمون
+        </a>
+    @{OnlineExam.Domain.Core.Courses.Course course = ViewBag.Course;}*@
+    <div onload="loadAllExamDataTable(course.Id)"> </div>
+    <div class="row  d-flex justify-content-center align-items-center ">
+        <div class="col-md-10  p-3 text-justify">
+            <span class="courselable"> درس: </span>
+            <span class="coursename">@course.Name</span>
+            <table id="GetAllExamsDataTables" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>نام آزمون</th>
+                        <th>تاریخ شروع</th>
+                        <th>تاریخ پایان</th>
+                        <th>زمان امتحان</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>

@@ -23,11 +23,19 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
         public IActionResult Index(int courseId)
         {
-            List<Exam> model = examRepository.GetAllCourses(courseId);
+            List<Exam> model = examRepository.GetAllExams(courseId);
+
             ViewBag.Course = courseRepository.Get(courseId);
             return View(model);
 
         }
+        public IActionResult GetAllExamsDataTables(int courseId)
+        {
+            List<Exam> model = examRepository.GetAllExams(courseId);
+
+            return Json(new { data = model });
+        }
+
 
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -45,19 +53,19 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
             if (model.EndDate == DateTime.MinValue)
                 model.EndDate = DateTime.Now.AddYears(10);
-        
-                Exam exam = new Exam
-                {
-                    Name = model.Name,
-                    Duration = model.Duration,
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
-                    CourseId = model.CourseId
-                };
-                examRepository.Add(exam);
-                return RedirectToAction("Index", new { courseId = model.CourseId });
-           
-          
+
+            Exam exam = new Exam
+            {
+                Name = model.Name,
+                Duration = model.Duration,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                CourseId = model.CourseId
+            };
+            examRepository.Add(exam);
+            return RedirectToAction("Index", new { courseId = model.CourseId });
+
+
 
         }
         [Authorize(Roles = "admin")]

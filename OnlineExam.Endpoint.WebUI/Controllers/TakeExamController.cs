@@ -171,7 +171,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             }
 
             return Json(new { data = examResults });
-
         }
 
         [Authorize(Roles = "admin")]
@@ -204,10 +203,8 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 };
                 examResults.Add(examResult);
             }
-          
-
+         
             return Json(new { data = examResults });
-
         }
 
         public ActionResult ExamsCountForAdmin()

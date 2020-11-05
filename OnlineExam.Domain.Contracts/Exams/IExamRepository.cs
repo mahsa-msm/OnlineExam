@@ -7,6 +7,6 @@ namespace OnlineExam.Domain.Contracts.Exams
     public interface IExamRepository : IBaseRepository<Exam>
     {
 
-        List<Exam> GetAllCourses(int id);
+        List<Exam> GetAllExams(int id);
     }
 }

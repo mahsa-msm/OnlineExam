@@ -15,7 +15,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Exams
             this.dbContext = dbContext;
         }
 
-        public List<Exam> GetAllCourses(int id)
+        public List<Exam> GetAllExams(int id)
         {
             var CourseExam = dbContext.Exams.Where(c => c.CourseId == id).ToList();
             return CourseExam;
