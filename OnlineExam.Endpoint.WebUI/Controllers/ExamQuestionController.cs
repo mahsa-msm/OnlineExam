@@ -99,6 +99,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            questionRepository.Delete(id);
+            return RedirectToAction("Index");
+
+        }
 
     }
 }

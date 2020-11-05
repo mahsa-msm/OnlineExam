@@ -33,7 +33,10 @@
                         i = i + 1;
                     }
                 }
+
             </div>
+            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-delete"></i></a>
+
             questionNumber++;
         }
     </div>

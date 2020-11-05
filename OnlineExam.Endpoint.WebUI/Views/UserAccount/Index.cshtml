@@ -8,13 +8,12 @@
 
 @if (User.IsInRole("admin"))
 {
-    <div id="ExamCounts">
+    <div  id="ExamCounts">
 
     </div>
 }
 else
 {
-
 
     <div>
         <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
