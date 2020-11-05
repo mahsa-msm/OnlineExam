@@ -1,4 +1,30 @@
-﻿@model IEnumerable<OnlineExam.Endpoint.WebUI.Models.Exams.ExamResultsViewModel>
+﻿
+<div class="row  d-flex justify-content-center align-items-center ">
+    <div class="col-md-10  p-3 text-justify">
+        @{
+            ViewData["Title"] = "نتایج آزمون";
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+
+        <h1 class="main-title">لیست آزمون های داده شده </h1>
+        <hr style="border-top:1px solid white"/>
+
+        <table id="resultForUserTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>نام آزمون</th>
+                    <th>نام درس</th>
+                    <th>امتیاز</th>
+                    <th>تاریخ </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+@*@model IEnumerable<OnlineExam.Endpoint.WebUI.Models.Exams.ExamResultsViewModel>
 
 @{
     ViewData["Title"] = "نتایج آزمون";
@@ -32,21 +58,46 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExamName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Score)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateTime)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExamName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTime)
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
-    </div>
+</div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

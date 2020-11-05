@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Contracts.ExamQuestions;
 using OnlineExam.Domain.Contracts.Exams;
@@ -14,6 +15,7 @@ using System.Collections.Generic;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
+    [Authorize]
     public class ExamQuestionController : Controller
     {
         private readonly IExamQuestionRepository examQuestionRepository;
@@ -43,7 +45,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View(examQuestions);
         }
 
-
+        [Authorize(Roles = "admin")]
         public IActionResult AddQuestion(int examId)
         {
             ViewBag.Exam = examRepository.Get(examId);

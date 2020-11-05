@@ -121,5 +121,58 @@ function DeleteCourse(courseId) {
 
 }
 
+    $(document).ready(function () {
 
-  
+        dataTable = $('#resultForUserTable').DataTable({
+            "ajax": {
+                "url": "/TakeExam/ExamResultsForUser",
+                "type": 'GET',
+                "datatype": 'json'
+            },
+            //"stateSave": "true",
+            "columns": [
+
+                { "data": "examName" },
+                { "data": "courseName" },
+                { "data": "score" },
+                { "data": "dateTime" }
+            ],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+            },
+            "lengthChange": true,
+            //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+            autoWidth: true
+        });
+});
+
+
+
+
+    $(document).ready(function () {
+
+        dataTable = $('#resultForAdminTable').DataTable({
+            "ajax": {
+                "url": "/TakeExam/AllExamResultsForAdminDataTable",
+                "type": 'GET',
+                "datatype": 'json'
+            },
+            //"stateSave": "true",
+            "columns": [
+                { "data": "userName" },
+                { "data": "examName" },
+                { "data": "courseName" },
+                { "data": "score" },
+                { "data": "dateTime" }
+            ],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+            },
+            "lengthChange": true,
+            //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+            autoWidth: true
+        });
+});
+
+
+

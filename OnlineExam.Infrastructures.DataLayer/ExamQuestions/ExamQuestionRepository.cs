@@ -26,8 +26,6 @@ namespace OnlineExam.Infrastructures.DataLayer.ExamQuestions
             .Where(q => q.ExamId == examId)
             .ToList();
             return exam;
-
-
         }
     }
 }

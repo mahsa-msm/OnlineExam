@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Courses;
 using OnlineExam.Domain.Contracts.Exams;
 using OnlineExam.Domain.Core.Exams;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
+    [Authorize]
     public class ExamController : Controller
     {
         private readonly IExamRepository examRepository;
@@ -27,6 +29,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Create(int courseId)
         {
@@ -57,6 +60,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
           
 
         }
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Update(int courseId, int examId)
         {
@@ -77,6 +81,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         public IActionResult Update(ExamViewModel model)
         {
@@ -95,7 +100,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id, int courseId)
         {
             examRepository.Delete(id);

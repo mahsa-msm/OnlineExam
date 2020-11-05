@@ -1,11 +1,7 @@
 ﻿
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css" />
 <div class="row  d-flex justify-content-center align-items-center ">
-    <div class="col-md-10  p-3">
-        <table id="grid" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+    <div class="col-md-10  p-3 text-justify" >
+        <table id="resultForAdminTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>نام کاربر</th>
@@ -23,38 +19,4 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"></script>
 
-
-<script>
-    $(document).ready(function () {
-
-        dataTable = $('#grid').DataTable({
-            "ajax": {
-                "url": "/TakeExam/AllExamResultsForAdminDataTable",
-                "type": 'GET',
-                "datatype": 'json'
-            },
-            //"stateSave": "true",
-            "columns": [
-                { "data": "userName" },
-                { "data": "examName" },
-                { "data": "courseName" },
-                { "data": "score" },
-                { "data": "dateTime" }
-            ],
-            "language": {
-                "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
-            },
-            "lengthChange": true,
-            //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
-            autoWidth: true
-        });
-    });
-
-</script>

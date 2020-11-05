@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Courses;
 using OnlineExam.Domain.Core.Courses;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Linq;
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
 
-    //[Authorize(Roles ="admin")]
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ICourseRepository courseRepository;
@@ -20,6 +21,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View(courses);
         }
 
+        [Authorize(Roles ="admin")]
         public IActionResult Create()
         {
             return View();
@@ -36,14 +38,14 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             courseRepository.Delete(id);
             return RedirectToAction("Index");
 
         }
-
+        [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
             Course course = courseRepository.Get(id);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Endpoint.WebUI.Models.UserApp;
@@ -88,7 +89,6 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                             ModelState.AddModelError(item.Code, item.Description);
                         }
                     }
-
                 }
                 else
                 {
@@ -96,10 +96,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                     {
                         ModelState.AddModelError(item.Code, item.Description);
                     }
-
-
                 }
-
             }
             return View(model);
         }
@@ -125,6 +122,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             roleManager.CreateAsync(role);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "admin")]
         public IActionResult AddAdmin()
         {
             return View();
@@ -181,7 +179,6 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                         }
                     }
                 }
-
             }
             return View(model);
         }

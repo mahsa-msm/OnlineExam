@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Answers;
 using OnlineExam.Domain.Contracts.Choices;
@@ -18,6 +19,7 @@ using System.Linq;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
+    [Authorize]
     public class TakeExamController : Controller
     {
         private readonly UserManager<AppUser> userManager;
@@ -143,6 +145,10 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
         public ActionResult ExamResults()
         {
+            return View();
+        }
+        public ActionResult ExamResultsForUser()
+        {
             var user = userManager.GetUserId(User);
             List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
 
@@ -164,16 +170,17 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 examResults.Add(examResult);
             }
 
-            return View(examResults);
+            return Json(new { data = examResults });
+
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult AllExamResultsForAdmin()
         {
-
             return View();
         }
 
-        public ActionResult AllExamResultsForAdminDataTable()
+            public ActionResult AllExamResultsForAdminDataTable()
         {
             List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
 
