@@ -38,7 +38,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
-                               
+
                                     <td>
 
                                         <a href=@Url.ActionLink("Index", "Exam", new { courseId = item.Id }, null)> لیست آزمون ها </a>|
@@ -65,34 +65,58 @@
             }
             else
             {
-                <div class="">
-                    <table class="table border">
-                        <thead class="thead-inverse">
+                @*<div class="">
+                <table class="table border">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
                             <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </th>
-                                <th>
-
-                                </th>
-
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    <a href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست ازمون</a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
-                                    <td>
-                                        <a href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست ازمون</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                    </tbody>
+                </table>
+            </div>*@
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class=" col-md-4 ">
+                        <div class="m-1 p-3  course-box">
+
+                            <div class="course-name">
+                                @item.Name
+                            </div>
+                            <div class="course-description">
+                                @item.Description
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center ">
+                                <a class="course-exam-btn"  href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست آزمون</a>
+                            </div>
+                        </div>
+                    
+                    </div>
+                }
+            </div>
+        </div>
+     
+              
 
             }
 

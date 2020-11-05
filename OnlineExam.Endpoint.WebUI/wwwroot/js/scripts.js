@@ -176,3 +176,22 @@ function DeleteCourse(courseId) {
 
 
 
+$(document).ready(function () {
+
+    $.ajax({
+        type: "POST",
+        url: "/TakeExam/ExamsCountForAdmin",
+        success: function (response) {
+            document.getElementById("ExamCounts").innerHTML=response.data;
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    })
+        
+
+});
+

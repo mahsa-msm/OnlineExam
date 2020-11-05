@@ -9,6 +9,7 @@ namespace OnlineExam.Domain.Core.Courses
         [Required(ErrorMessage = "فیلد نام درس اجباری میباشد")]
         [Display(Name = "نام درس")]
         public string Name { get; set; }
+        public string Description { get; set; }
         public ICollection<Exam> Exams { get; set; }
     }
 }

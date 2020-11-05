@@ -71,7 +71,7 @@ namespace OnlineExam.Endpoint.WebUI
             .AddNewtonsoftJson(options =>
               options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-
+            
         }
 
 
@@ -84,6 +84,7 @@ namespace OnlineExam.Endpoint.WebUI
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>

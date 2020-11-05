@@ -210,6 +210,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
 
         }
 
+        public ActionResult ExamsCountForAdmin()
+        {
+            var examCoutns = resultRepository.GetAll().Count();
+            return Json(new { data = examCoutns });
+        }
 
     }
 }
