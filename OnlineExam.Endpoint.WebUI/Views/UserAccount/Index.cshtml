@@ -8,9 +8,31 @@
 
 @if (User.IsInRole("admin"))
 {
-    <div  id="ExamCounts">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="mainpage-counter-box">
+                    <span class="mainpage-counter-title">
+                        تعداد کل ازمون های داده شده :
+                    </span>
+                    <span id="ExamCounts">
 
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="mainpage-counter-box">
+                    <span class="mainpage-counter-title">
+                        تعداد کاربران :
+                    </span>
+                    <span id="UserCounts">
+
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
+  
 }
 else
 {

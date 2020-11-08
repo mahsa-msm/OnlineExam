@@ -302,9 +302,9 @@ header {
     text-align: center;
 }
 
-.timercounter{
-    text-align:center;
-    font-size : 30px
+.timercounter {
+    text-align: center;
+    font-size: 30px
 }
 
 .adminaddtext {
@@ -314,19 +314,21 @@ header {
     color: #5c72bf;
 }
 
-
 .course-box {
     background-color: #edf0f5;
     box-shadow: 1px 1px #7e8fcc;
 }
+
 .course-name {
     color: #ba72d8;
     font-size: 20px;
     padding: 3px;
 }
-.course-description{
-    font-size:inherit
+
+.course-description {
+    font-size: inherit
 }
+
 .course-exam-btn {
     background-color: #e8ebff;
     color: #470c6b;
@@ -341,3 +343,15 @@ header {
     font-size: 18px;
     color: #c26ac7;
 }
+
+.mainpage-counter-box{
+background-color: #edf0f5;
+box-shadow: 1px 1px #7e8fcc;
+height:120px
+}
+.mainpage-counter-title{
+color: #ba72d8;
+font-size: 20px;
+padding: 3px;
+}
+

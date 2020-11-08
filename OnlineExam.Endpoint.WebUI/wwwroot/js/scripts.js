@@ -192,6 +192,24 @@ $(document).ready(function () {
 
 });
 
+$(document).ready(function () {
+
+    $.ajax({
+        type: "POST",
+        url: "/UserAccount/UserCounts",
+        success: function (response) {
+            document.getElementById("UserCounts").innerHTML = response.data;
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    })
+
+
+});
 
 
 

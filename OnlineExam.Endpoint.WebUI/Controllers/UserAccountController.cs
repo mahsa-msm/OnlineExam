@@ -182,6 +182,10 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             }
             return View(model);
         }
+        public ActionResult UserCounts()
+        {
+
+        }
     }
 }
 
