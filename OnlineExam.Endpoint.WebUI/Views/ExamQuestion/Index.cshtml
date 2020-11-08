@@ -7,7 +7,7 @@
 
 
 <div class="row d-flex justify-content-center align-items-center">
-    <div class="col-md-10 shadow p-4">
+    <div class="col-md-8 shadow p-4">
 
         <span class="courselable"> امتحان : </span>
         <span class="coursename">@exams.Name</span>
@@ -21,21 +21,29 @@
         @foreach (var item in Model)
         {
             <hr class="hr" />
-            <div>@questionNumber _ @Html.DisplayFor(modelItem => item.Question.Text) </div>
-            <div class="choicebox">
-                @{
-                    var choices = item.Question.QuestionChoices.Select(x => x.Choice);
+            <div>
+                <div style="display: inline-block;">
+                    <div><span class="question-choice-count">  @questionNumber </span> _ @Html.DisplayFor(modelItem => item.Question.Text) </div>
+                    <div class="choicebox">
+                        @{
+                            var choices = item.Question.QuestionChoices.Select(x => x.Choice);
 
-                    int i = 1;
-                    foreach (var choice in choices)
-                    {
-                        <div class="choice-@choice.IsCorrect">@i- @choice.Text</div>
-                        i = i + 1;
-                    }
-                }
+                            int i = 1;
+                            foreach (var choice in choices)
+                            {
+                                <div class="choice-@choice.IsCorrect">@i- @choice.Text</div>
+                                i = i + 1;
+                            }
+                        }
+                    </div>
+                </div>
+                <div style="float:left">
+                    <a onclick="deleteQuestions(@item.QuestionId ,@exams.Id)" class="btn btn-danger "><i class="fa fa-trash"></i>  </a>
+
+                </div>
 
             </div>
-            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-delete"></i></a>
+
 
             questionNumber++;
         }

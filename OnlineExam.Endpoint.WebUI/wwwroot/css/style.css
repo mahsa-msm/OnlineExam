@@ -335,3 +335,9 @@ header {
     padding: 6px;
     margin: 10px 0 0 0;
 }
+
+.question-choice-count {
+    font-weight: 500;
+    font-size: 18px;
+    color: #c26ac7;
+}

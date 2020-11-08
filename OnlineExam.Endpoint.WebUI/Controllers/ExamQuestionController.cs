@@ -12,6 +12,7 @@ using OnlineExam.Domain.Core.QuestionChoices;
 using OnlineExam.Domain.Core.Questions;
 using OnlineExam.Endpoint.WebUI.Models.Exams;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineExam.Endpoint.WebUI.Controllers
 {
@@ -100,10 +101,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public  IActionResult Delete(int id,int examId)
         {
-            questionRepository.Delete(id);
-            return RedirectToAction("Index");
+            
+             questionRepository.Delete(id);
+            return RedirectToAction("Index", new { examId = examId });
 
         }
 

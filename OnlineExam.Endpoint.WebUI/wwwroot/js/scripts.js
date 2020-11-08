@@ -193,9 +193,11 @@ $(document).ready(function () {
 });
 
 
-function loadAllExamDataTable(courseId) {
 
-    dataTable = $('#GetAllExamsDataTables').DataTable({
+
+$(document).ready(function () {
+    var courseId = document.getElementById("courseIdInExamDatatable").value;
+    dataTable = $('#GetAllExamsDataTablesforUser').DataTable({
         "ajax": {
             "url": "/Exam/GetAllExamsDataTables?courseId=" + courseId,
             "type": 'GEt',
@@ -203,11 +205,18 @@ function loadAllExamDataTable(courseId) {
         },
         //"stateSave": "true",
         "columns": [
+
             { "data": "name" },
             { "data": "startDate" },
             { "data": "endDate" },
             { "data": "duration" },
-            {}
+            {
+                "data": "id",
+                "render": function (data) {
+                    btn = '<a href="/TakeExam/TakeExam?examId= ' + data + '" class="btn">شرکت در ازمون </a >'
+                    return btn
+                }
+            }
         ],
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
@@ -215,11 +224,75 @@ function loadAllExamDataTable(courseId) {
         "lengthChange": true,
         //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
         autoWidth: true
-    });
 
-}
+    })
+})
 
 
+$(document).ready(function () {
+    var courseId = document.getElementById("courseIdInExamDatatable").value;
+    dataTable = $('#GetAllExamsDataTablesforAdmin').DataTable({
+        "ajax": {
+            "url": "/Exam/GetAllExamsDataTables?courseId=" + courseId,
+            "type": 'GEt',
+            "datatype": 'json'
+        },
+        //"stateSave": "true",
+        "columns": [
+
+            { "data": "name" },
+            { "data": "startDate" },
+            { "data": "endDate" },
+            { "data": "duration" },
+            {
+                "data": "id",
+                "render": function (data) {
+                    btnQuestion = '<a href="/ExamQuestion/Index?examId=' + data +'" class="btn">لیست سوال ها </a >'
+
+
+                    return btnQuestion 
+                }
+            },
+            {
+                "data": "id",
+                "render": function (data) {
+                    btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-warning"><i class="fa fa-edit" ></i ></a >'
+                    btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-danger"><i class="fa fa-trash" ></i ></a >'
+
+                    return btnEdit + btnDelete
+                }
+            }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+        },
+        "lengthChange": true,
+        //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        autoWidth: true
+
+    })
+})
+
+
+
+function deleteQuestions(id,examId){
+
+    $.ajax({
+        type: "POST",
+        url: "/ExamQuestion/Delete?id=" + id+"&examId="+examId,
+        success: function (response) {
+            location.reload();
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    })
+
+
+};
 
 
 

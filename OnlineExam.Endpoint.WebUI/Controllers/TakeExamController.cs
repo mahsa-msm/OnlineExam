@@ -179,7 +179,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View();
         }
 
-            public ActionResult AllExamResultsForAdminDataTable()
+        public ActionResult AllExamResultsForAdminDataTable()
         {
             List<ExamResultsViewModel> examResults = new List<ExamResultsViewModel>();
 
@@ -203,7 +203,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 };
                 examResults.Add(examResult);
             }
-         
+
             return Json(new { data = examResults });
         }
 

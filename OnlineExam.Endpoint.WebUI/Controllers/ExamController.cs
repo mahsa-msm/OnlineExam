@@ -24,7 +24,6 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult Index(int courseId)
         {
             List<Exam> model = examRepository.GetAllExams(courseId);
-
             ViewBag.Course = courseRepository.Get(courseId);
             return View(model);
 
