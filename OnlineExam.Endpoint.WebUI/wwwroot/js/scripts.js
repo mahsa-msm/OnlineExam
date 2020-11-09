@@ -248,7 +248,7 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data) {
-                    btn = '<a href="/TakeExam/TakeExam?examId= ' + data + '" class="btn">شرکت در ازمون </a >'
+                    btn = '<a href="/TakeExam/TakeExam?examId= ' + data + '" class="btn  p-0 m-0">شرکت در ازمون </a >'
                     return btn
                 }
             }
@@ -282,7 +282,7 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data) {
-                    btnQuestion = '<a style="color: #a679ff;" href="/ExamQuestion/Index?examId=' + data +'" class="btn">لیست سوال ها </a >'
+                    btnQuestion = '<a style="color: #a679ff;" href="/ExamQuestion/Index?examId=' + data +'" class="btn p-0 m-0">لیست سوال ها </a >'
 
 
                     return btnQuestion 

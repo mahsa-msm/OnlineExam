@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using OnlineExam.Domain.Contracts.Answers;
+using OnlineExam.Domain.Contracts.Blogs;
 using OnlineExam.Domain.Contracts.Choices;
 using OnlineExam.Domain.Contracts.Courses;
 using OnlineExam.Domain.Contracts.ExamQuestions;
@@ -16,6 +17,7 @@ using OnlineExam.Domain.Contracts.Questions;
 using OnlineExam.Domain.Contracts.Results;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Infrastructures.DataLayer.Answers;
+using OnlineExam.Infrastructures.DataLayer.Blogs;
 using OnlineExam.Infrastructures.DataLayer.Choices;
 using OnlineExam.Infrastructures.DataLayer.Common;
 using OnlineExam.Infrastructures.DataLayer.Courses;
@@ -46,7 +48,8 @@ namespace OnlineExam.Endpoint.WebUI
             services.AddScoped<IQuestionChoiceRepository, QuestionChoiceRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResultRepository, ResultRepository>();
-
+            services.AddScoped<IBlogRepository, BlogRepository>();
+ 
             services.AddDbContext<OnlineExamDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("OnlineExam")));
 
             services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidator>();

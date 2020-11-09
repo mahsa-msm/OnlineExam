@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OnlineExam.Domain.Contracts.Blogs;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Endpoint.WebUI.Models.UserApp;
 using System.Collections.Generic;
@@ -15,17 +16,21 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
         private readonly RoleManager<MyIdentityRole> roleManager;
+        private readonly IBlogRepository blogRepository;
 
         public UserAccountController(UserManager<AppUser> userMgr,
-        SignInManager<AppUser> signInMgr, RoleManager<MyIdentityRole> roleManager
+        SignInManager<AppUser> signInMgr, RoleManager<MyIdentityRole> roleManager,
+        IBlogRepository BlogRepository
   )
         {
             userManager = userMgr;
             signInManager = signInMgr;
             this.roleManager = roleManager;
+            blogRepository = BlogRepository;
         }
         public IActionResult Index()
         {
+           ViewBag.Blogs= blogRepository.GetAll().OrderByDescending(x=>x.Id);
             return View();
         }
 
