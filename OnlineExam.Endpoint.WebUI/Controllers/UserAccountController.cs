@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineExam.Domain.Core.AppUsers;
 using OnlineExam.Endpoint.WebUI.Models.UserApp;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineExam.Endpoint.MVC.Controllers
@@ -185,6 +188,20 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         public ActionResult UserCounts()
         {
 
+            var data = userManager.Users.Count();
+            return Json(new { data = data });
+        }
+
+        public async Task<ActionResult> AdminsDataTable()
+        {
+            List<AppUser> admins = new List<AppUser>();
+
+            foreach (var user in userManager.Users.ToList())
+            {
+                if (user != null && await userManager.IsInRoleAsync(user, "admin"))
+                    admins.Add(user);
+            }
+            return Json(new { data = admins });
         }
     }
 }

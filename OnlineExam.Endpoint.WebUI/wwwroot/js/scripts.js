@@ -293,6 +293,29 @@ $(document).ready(function () {
 
 
 
+$(document).ready(function () {
+
+    dataTable = $('#adminsDataTable').DataTable({
+        "ajax": {
+            "url": "/UserAccount/AdminsDataTable" ,
+            "type": 'GET',
+            "datatype": 'json'
+        },
+        //"stateSave": "true",
+        "columns": [
+
+            { "data": "userName" },
+            { "data": "email" }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+        },
+        "lengthChange": true,
+        //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        autoWidth: true
+    })
+})
+
 function deleteQuestions(id,examId){
 
     $.ajax({
@@ -308,7 +331,6 @@ function deleteQuestions(id,examId){
             alert(response.responseText);
         }
     })
-
 
 };
 
