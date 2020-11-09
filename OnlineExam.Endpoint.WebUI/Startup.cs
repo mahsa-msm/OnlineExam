@@ -64,13 +64,6 @@ namespace OnlineExam.Endpoint.WebUI
             }
 
             ).AddEntityFrameworkStores<OnlineExamDbContext>();
-
-
-
-            //services.AddControllersWithViews()
-            //.AddNewtonsoftJson(options =>
-            //  options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-
             
         }
 

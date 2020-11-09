@@ -207,6 +207,23 @@ $(document).ready(function () {
             alert(response.responseText);
         }
     })
+});
+
+$(document).ready(function () {
+
+    $.ajax({
+        type: "POST",
+        url: "/UserAccount/AdminCounts",
+        success: function (response) {
+            document.getElementById("AdminCounts").innerHTML = response.data;
+        },
+        failure: function (response) {
+            alert(response.responseText);
+        },
+        error: function (response) {
+            alert(response.responseText);
+        }
+    })
 
 
 });
@@ -265,7 +282,7 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data) {
-                    btnQuestion = '<a href="/ExamQuestion/Index?examId=' + data +'" class="btn">لیست سوال ها </a >'
+                    btnQuestion = '<a style="color: #a679ff;" href="/ExamQuestion/Index?examId=' + data +'" class="btn">لیست سوال ها </a >'
 
 
                     return btnQuestion 
@@ -274,8 +291,8 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data) {
-                    btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-warning"><i class="fa fa-edit" ></i ></a >'
-                    btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-danger"><i class="fa fa-trash" ></i ></a >'
+                    btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-primary"><i class="fa fa-edit" ></i ></a >'
+                    btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-danger" style="margin-left: 5px; color: white;" ><i class="fa fa-trash" ></i ></a >'
 
                     return btnEdit + btnDelete
                 }

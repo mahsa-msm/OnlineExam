@@ -92,10 +92,12 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [HttpPost]
         public IActionResult Update(ExamViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                if (model.StartDate == null)
-                    model.StartDate = DateTime.Now;
+            if (model.StartDate == DateTime.MinValue)
+                model.StartDate = DateTime.Now;
+
+            if (model.EndDate == DateTime.MinValue)
+                model.EndDate = DateTime.Now.AddYears(10);
+
                 Exam exam = examRepository.Get(model.Id);
 
                 exam.Name = model.Name;
@@ -104,8 +106,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                 exam.Duration = model.Duration;
                 examRepository.Update(exam);
                 return RedirectToAction("Index", new { courseId = model.CourseId });
-            }
-            return View();
+
         }
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id, int courseId)

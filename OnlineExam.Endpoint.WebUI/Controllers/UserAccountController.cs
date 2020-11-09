@@ -191,6 +191,18 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             var data = userManager.Users.Count();
             return Json(new { data });
         }
+        public async Task<ActionResult> AdminCounts()
+        {
+          
+            int counts = 0 ; 
+            foreach (var user in userManager.Users.ToList())
+            {
+                if (user != null && await userManager.IsInRoleAsync(user, "admin"))
+                    counts++;
+            }
+            return Json(new { data = counts });
+          
+        }
 
         public async Task<ActionResult> AdminsDataTable()
         {
