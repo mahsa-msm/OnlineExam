@@ -1,60 +1,74 @@
 ﻿@model IEnumerable<OnlineExam.Domain.Core.Blogs.Blog>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "بلاگ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+@if (User.IsInRole("admin"))
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var blog in Model)
+            {
+                <div class="col-md-4 mt-md-4">
+                    <div class="blog-box">
+                        <div>
+                            <img src="~/images/BlogImages/@blog.ImageName" class="blog-img" />
+                        </div>
+                        <div class="p-2">
+                            <div class="blog-title">  @blog.Title</div>
+                            <div class="pt-2 pb-3">  @blog.Description </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CourseId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+                            <div style="font-size:0.9em">
+                                <div> <i class="	fa fa-user-circle" aria-hidden="true"></i>  @blog.CreateBy</div>
+                                <div><i class="	fa fa-calendar-o" aria-hidden="true"></i> @blog.CreateDate</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center ">
+                            <a style="width:150px" class="course-exam-btn mb-2 mx-2" href=@Url.Action("Index", "Exam", new { courseId = blog.CourseId }, null)> آزمون های مربوطه</a>
+                      
+                            <a asp-action="Update" asp-route-id="@blog.Id" class="btn btn-primary d-inline-block mx-1"><i class="fa fa-edit"></i></a>
+
+                            <form asp-action="Delete" asp-route-id="@blog.Id" method="post" class="d-inline-block">
+                                <button type="submit" class="btn btn-danger mx-1" onclick="return DeleteBlog(@blog.Id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+else
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var blog in Model)
+            {
+                <div class="col-md-4 mt-md-4">
+                    <div class="blog-box">
+                        <div>
+                            <img src="~/images/BlogImages/@blog.ImageName" class="blog-img" />
+                        </div>
+                        <div class="p-2">
+                            <div class="blog-title">  @blog.Title</div>
+                            <div class="pt-2 pb-3">  @blog.Description </div>
+
+                            <div style="font-size:0.9em">
+                                <div> <i class="	fa fa-user-circle" aria-hidden="true"></i>  @blog.CreateBy</div>
+                                <div><i class="	fa fa-calendar-o" aria-hidden="true"></i> @blog.CreateDate</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center ">
+                            <a style="width:150px" class="course-exam-btn mb-2" href=@Url.Action("Index", "Exam", new { courseId = blog.CourseId }, null)> آزمون های مربوطه</a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

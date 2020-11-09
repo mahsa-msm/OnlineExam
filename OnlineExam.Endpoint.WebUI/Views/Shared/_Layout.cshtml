@@ -29,23 +29,26 @@
             <label for="menuToggle" class="menu-icon"><i class="fa fa-bars"></i></label>
             @if (User.IsInRole("admin"))
             {
-                <ul>
-                    <li>
-                        <a asp-controller="UserAccount" asp-action="Index">خانه </a>
-                    </li>
-                    <li>
-                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
-                    </li>
-                    <li>
-                        <a asp-controller="UserAccount" asp-action="AddAdmin"> اضافه کردن ادمین </a>
-                    </li>
-                    <li>
-                        <a asp-controller="TakeExam" asp-action="AllExamResultsForAdmin">لیست نتایج آزمون </a>
-                    </li>
-                    <li>
-                        <a asp-controller="UserAccount" asp-action="Logout">خروج</a>
-                    </li>
-                </ul>
+        <ul>
+            <li>
+                <a asp-controller="UserAccount" asp-action="Index">خانه </a>
+            </li>
+            <li>
+                <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+            </li>
+            <li>
+                <a asp-controller="UserAccount" asp-action="AddAdmin"> اضافه کردن ادمین </a>
+            </li>
+            <li>
+                <a asp-controller="TakeExam" asp-action="AllExamResultsForAdmin">لیست نتایج آزمون </a>
+            </li>
+            <li>
+                <a asp-controller="Blog" asp-action="Index">بلاگ ها  </a>
+            </li>
+            <li>
+                <a asp-controller="UserAccount" asp-action="Logout">خروج</a>
+            </li>
+        </ul>
             }
             else
             {
@@ -60,7 +63,7 @@
                         <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
                     </li>
                     <li>
-                        <a asp-controller="Course" asp-action="Index">لیست درس ها </a>
+                        <a asp-controller="Blog" asp-action="Index">بلاگ ها  </a>
                     </li>
                     <li>
                         <a asp-controller="UserAccount" asp-action="Logout">خروج</a>

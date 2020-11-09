@@ -27,7 +27,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
         public IActionResult Index()
         {
-            var Blogs = BlogRepository.GetAll().ToList();
+            var Blogs = BlogRepository.GetAll().OrderByDescending(x=>x.Id).ToList();
             return View(Blogs);
         }
 
