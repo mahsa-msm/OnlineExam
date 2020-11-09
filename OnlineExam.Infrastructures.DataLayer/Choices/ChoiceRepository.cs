@@ -13,10 +13,6 @@ namespace OnlineExam.Infrastructures.DataLayer.Choices
             this.dbContext = dbContext;
         }
 
-        //public List<Exam> GetALlChoice(int examId)
-        //{
-        //return    dbContext.Choices.Include(c => c.QuestionChoice).ThenInclude(d => d.Question).ThenInclude(x => x.ExamQuestions).ThenInclude(g => g.Exam).ToListAsync();
-
-        //}
+  
     }
 }

@@ -317,6 +317,7 @@ header {
 .course-box {
     background-color: #edf0f5;
     box-shadow: 1px 1px #7e8fcc;
+    height:100%
 }
 
 .course-name {

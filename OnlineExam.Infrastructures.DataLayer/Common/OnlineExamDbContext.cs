@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineExam.Domain.Core.Answers;
 using OnlineExam.Domain.Core.AppUsers;
+using OnlineExam.Domain.Core.Blogs;
 using OnlineExam.Domain.Core.Choices;
 using OnlineExam.Domain.Core.Courses;
 using OnlineExam.Domain.Core.ExamQuestions;
@@ -10,6 +11,7 @@ using OnlineExam.Domain.Core.QuestionChoices;
 using OnlineExam.Domain.Core.Questions;
 using OnlineExam.Domain.Core.Results;
 using OnlineExam.Infrastructures.DataLayer.Answers;
+using OnlineExam.Infrastructures.DataLayer.Blogs;
 using OnlineExam.Infrastructures.DataLayer.Choices;
 using OnlineExam.Infrastructures.DataLayer.Courses;
 using OnlineExam.Infrastructures.DataLayer.ExamQuestions;
@@ -34,6 +36,7 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
         public DbSet<QuestionChoice> QuestionChoices { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Result> Results { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
 
 
 
@@ -47,6 +50,8 @@ namespace OnlineExam.Infrastructures.DataLayer.Common
             modelBuilder.ApplyConfiguration(new QuestionConfig());
             modelBuilder.ApplyConfiguration(new ExamQuestionsConfig());
             modelBuilder.ApplyConfiguration(new QuestionChoiceConfig());
+            modelBuilder.ApplyConfiguration(new BlogConfig());
+
         }
     }
 }
