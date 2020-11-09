@@ -105,7 +105,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         {
             
              questionRepository.Delete(id);
-            return RedirectToAction("Index", new { examId = examId });
+            return RedirectToAction("Index", new { examId });
 
         }
 

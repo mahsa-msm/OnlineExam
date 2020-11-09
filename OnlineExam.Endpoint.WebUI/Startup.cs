@@ -67,9 +67,9 @@ namespace OnlineExam.Endpoint.WebUI
 
 
 
-            services.AddControllersWithViews()
-            .AddNewtonsoftJson(options =>
-              options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            //services.AddControllersWithViews()
+            //.AddNewtonsoftJson(options =>
+            //  options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             
         }

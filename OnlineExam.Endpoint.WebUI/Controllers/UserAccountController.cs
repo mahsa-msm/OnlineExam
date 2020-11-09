@@ -189,7 +189,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         {
 
             var data = userManager.Users.Count();
-            return Json(new { data = data });
+            return Json(new { data });
         }
 
         public async Task<ActionResult> AdminsDataTable()
