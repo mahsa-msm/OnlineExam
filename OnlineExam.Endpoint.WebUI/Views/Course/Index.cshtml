@@ -44,7 +44,9 @@
                                 <a href=@Url.ActionLink("Create", "Exam", new { courseId = item.Id }, null)> اضافه کردن آزمون</a>
                             </td>
                             <td>
-                                <a href=@Url.ActionLink("Create", "Blog", new { courseId = item.Id }, null)>لیست بلاگ ها</a>
+                                <a href=@Url.ActionLink("Create", "Blog", new { courseId = item.Id }, null)>ایجاد بلاگ</a>
+                               @*<a asp-action="Index" asp-controller="Blog">لیست بلاگ ها</a>*@
+
                             </td>
                             <td>
                                 <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>

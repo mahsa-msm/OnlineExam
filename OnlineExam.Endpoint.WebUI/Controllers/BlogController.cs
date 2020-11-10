@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Domain.Contracts.Blogs;
@@ -38,8 +40,11 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(BlogViewModel model)
+        public IActionResult Create(BlogViewModel model, IFormFile file)
         {
+            Random randomNumber = new Random();
+            string ImageName =  randomNumber.Next(11111, 99999) +file.FileName;
+
             if (ModelState.IsValid)
             {
                 Blog blog = new Blog
@@ -47,10 +52,17 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                     Description=model.Description,
                     CourseId = model.CourseId,
                     CreateDate = DateTime.Now,
-                    ImageName = model.ImageName,
+                    ImageName = ImageName,
                     Title = model.Title,
                     CreateBy = userManager.GetUserName(User)
                 };
+
+                string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/BlogImages", ImageName);
+
+                using (var stream = new FileStream(SavePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
 
                 BlogRepository.Add(blog);
                 return RedirectToAction("Index");
