@@ -20,18 +20,27 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly ICourseRepository courseRepository;
-        private readonly IBlogRepository BlogRepository;
-        public BlogController(IBlogRepository BlogRepository , UserManager<AppUser> userManager , ICourseRepository courseRepository)
+        private readonly IBlogRepository blogRepository;
+        public BlogController(IBlogRepository BlogRepository, UserManager<AppUser> userManager, ICourseRepository courseRepository)
         {
             this.userManager = userManager;
             this.courseRepository = courseRepository;
-            this.BlogRepository = BlogRepository;
+            this.blogRepository = BlogRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(int courseId = 0)
         {
-            var Blogs = BlogRepository.GetAll().OrderByDescending(x=>x.Id).ToList();
-            return View(Blogs);
+            if (courseId == 0)
+            {
+                var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).ToList();
+                return View(Blogs);
+            }
+            else
+            {
+                var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).Where(c => c.CourseId == courseId).ToList();
+                return View(Blogs);
+            }
         }
+
 
         [Authorize(Roles = "admin")]
         public IActionResult Create(int courseId)
@@ -43,13 +52,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult Create(BlogViewModel model, IFormFile file)
         {
             Random randomNumber = new Random();
-            string ImageName =  randomNumber.Next(11111, 99999) +file.FileName;
+            string ImageName = randomNumber.Next(11111, 99999) + file.FileName;
 
             if (ModelState.IsValid)
             {
                 Blog blog = new Blog
                 {
-                    Description=model.Description,
+                    Description = model.Description,
                     CourseId = model.CourseId,
                     CreateDate = DateTime.Now,
                     ImageName = ImageName,
@@ -64,7 +73,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
                     file.CopyTo(stream);
                 }
 
-                BlogRepository.Add(blog);
+                blogRepository.Add(blog);
                 return RedirectToAction("Index");
             }
             return View();
@@ -73,7 +82,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
-            BlogRepository.Delete(id);
+            blogRepository.Delete(id);
             return RedirectToAction("Index");
 
         }
@@ -81,28 +90,35 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
-            Blog Blog = BlogRepository.Get(id);
+            Blog Blog = blogRepository.Get(id);
             return View(Blog);
         }
 
         [HttpPost]
-        public IActionResult Update(Blog model)
+        public IActionResult Update(Blog model, IFormFile file)
         {
-            if (ModelState.IsValid)
-            {
-                if (model.Id == 0)
-                {
-                    BlogRepository.Add(model);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
+            Random randomNumber = new Random();
+            string ImageName = randomNumber.Next(11111, 99999) + file.FileName;
 
-                    BlogRepository.Update(model);
-                    return RedirectToAction("Index");
-                }
+            var blog = blogRepository.Get(model.Id);
+            blog.ImageName = ImageName;
+            blog.Description = model.Description;
+            blog.CreateDate = DateTime.Now;
+            blog.Title = model.Title;
+
+
+            string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/BlogImages", ImageName);
+
+            using (var stream = new FileStream(SavePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
             }
-            return View(model);
+
+            blogRepository.Update(blog);
+
+            return RedirectToAction("Index");
+
+
         }
 
     }

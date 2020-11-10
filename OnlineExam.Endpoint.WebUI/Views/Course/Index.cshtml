@@ -45,7 +45,9 @@
                             </td>
                             <td>
                                 <a href=@Url.ActionLink("Create", "Blog", new { courseId = item.Id }, null)>ایجاد بلاگ</a>
-                               @*<a asp-action="Index" asp-controller="Blog">لیست بلاگ ها</a>*@
+                                <a href=@Url.ActionLink("Index", "Blog", new { courseId = item.Id }, null)>لیست بلاگ ها </a>
+
+                                @*<a asp-action="Index" asp-controller="Blog">لیست بلاگ ها</a>*@
 
                             </td>
                             <td>
