@@ -101,6 +101,9 @@ li {
     background: #384d98;
     color: #efefef
 }
+    .bg-bluecolor:hover {
+        background: #6f6eab
+    }
 
 .main-title {
     color: #303ea7;
@@ -230,7 +233,11 @@ header {
         font-size: 1.7em;
     }
 }
-
+.mainpageheader {
+    font-size: 40px;
+    font-weight: 600;
+    color: #60096b;
+}
 
 #main {
     transition: margin-left 0.5s;
@@ -241,27 +248,27 @@ header {
 
 .mainpagebox {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 30%;
+   
     text-align: center;
 }
 
 .mainbtn {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 5px 20px;
     border-radius: 50px;
     transition: 0.5s;
     margin: 10px;
     color: #fff;
-    width: 120px;
-    border: 2px solid #e96b56;
-    background: #e96b56;
+    width: 110px;
+    border: 2px solid #bd57e6;
+    background: #6843a8;
+    font-size: 18px;
 }
 
     .mainbtn:hover {
         background: #fff;
-        color: #e96b56
+        color: #bd57e6
     }
 
 .login-form .form-control {
@@ -420,7 +427,9 @@ header {
 .mainpage-counter-box {
     background-color: #edf0f5;
     box-shadow: 1px 1px #7e8fcc;
-    height: 120px
+    height: 120px;
+    padding: 11% 15%;
+    margin-top:5px
 }
 
 .mainpage-counter-title {
@@ -442,4 +451,8 @@ header {
     font-size: 17px;
     color: #7150f7;
     font-weight: 500;
+}
+#adminsDataTable_filter
+{
+    float:left
 }
