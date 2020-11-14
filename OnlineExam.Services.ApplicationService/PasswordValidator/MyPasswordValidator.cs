@@ -13,6 +13,23 @@ namespace OnlineExam.Services.ApplicationService.MyPasswordValidator
             var parentResult = base.ValidateAsync(manager, user, password).Result;
 
             List<IdentityError> errors = new List<IdentityError>();
+            if (password.Contains(" "))
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "Password",
+                    Description = "پسوورد نمیتواند شامل فاصله باشد "
+                });
+            }
+            if (user.UserName.Length < 5)
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "Password",
+                    Description = "نام کاربری باید بیشتر از 4 کاراکتر باشد  "
+                });
+            }
+       
             if (!parentResult.Succeeded)
             {
                 errors = parentResult.Errors.ToList();

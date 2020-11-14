@@ -17,6 +17,8 @@
 
             @{int i = 0;
                 int num = 1;
+                string checkName = "question" + num;
+
                 @foreach (var item in Model.Questions)
                 {
 
@@ -25,7 +27,7 @@
 
                     @foreach (var choice in choices)
                     {
-                        <input type="checkbox" asp-for="Answers[i].IsSelected">
+                        <input type="checkbox" asp-for="Answers[i].IsSelected" class=@checkName  onclick="radiobtn(this)">
                         <Lable>  @choice.Text</Lable>
                         <input type="hidden" asp-for="Answers[i].ChoiceId" value="@choice.Id">
                         <input type="hidden" asp-for="Answers[i].Id">
@@ -34,6 +36,7 @@
                     }
 
                     num++;
+                    checkName = "question" + num;
                     <hr />
                 }
             }
@@ -62,7 +65,7 @@
 
         document.getElementById('timer').innerHTML =
             m + ":" + s;
-        console.log(m)
+  
 
          if (m == 0 && s <= 5) {
 

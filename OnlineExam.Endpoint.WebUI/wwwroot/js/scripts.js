@@ -407,4 +407,12 @@ function deleteQuestions(id, examId) {
 
 
 
+function radiobtn(checkbox) {
 
+    if (checkbox.checked == true) {
+        $("." + checkbox.className).each(function () {
+            this.checked = false;
+        });
+        checkbox.checked = true
+    }
+}

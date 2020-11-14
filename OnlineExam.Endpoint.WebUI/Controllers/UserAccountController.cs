@@ -88,7 +88,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                     if (result2.Succeeded)
                     {
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Login");
                     }
                     else
                     {
@@ -107,6 +107,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                 }
             }
             return View(model);
+
         }
 
 

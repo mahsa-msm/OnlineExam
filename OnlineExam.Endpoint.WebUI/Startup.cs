@@ -49,7 +49,7 @@ namespace OnlineExam.Endpoint.WebUI
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResultRepository, ResultRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
- 
+
             services.AddDbContext<OnlineExamDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("OnlineExam")));
 
             services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidator>();
@@ -58,16 +58,18 @@ namespace OnlineExam.Endpoint.WebUI
             services.AddIdentity<AppUser, MyIdentityRole>(c =>
             {
                 c.User.RequireUniqueEmail = false;
-                c.Password.RequireDigit = false;
+                c.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-" ;
+                c.Password.RequireDigit = true;
                 c.Password.RequireLowercase = false;
                 c.Password.RequireUppercase = false;
                 c.Password.RequiredUniqueChars = 0;
                 c.Password.RequiredLength = 6;
                 c.Password.RequireNonAlphanumeric = false;
+           
             }
 
             ).AddEntityFrameworkStores<OnlineExamDbContext>();
-            
+
         }
 
 
