@@ -12,28 +12,26 @@
     <div class="login-title">
         <i class="fa fa-user login-icon"></i>
     </div>
-    <hr style="border-top:1px solid white"/>
+    <hr style="border-top:1px solid white" />
 
 
 
     <div class="login-form">
         <form asp-action="Login" asp-controller="UserAccount" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
 
             <div class="form-group">
                 <label class="login-lable">نام کاربری:</label>
                 <input asp-for="Name" type="text" class="form-control form-control-user">
-                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="login-lable">رمز عبور:</label>
                 <input asp-for="Password" type="password" class="form-control form-control-user">
-                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
             <button class="btn bg-bluecolor  btn-block" type="submit">ورود</button>
 
-            <div asp-validation-summary="All" class="text-danger"></div>
 
 
         </form>

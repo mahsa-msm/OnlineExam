@@ -25,11 +25,45 @@ namespace OnlineExam.Services.ApplicationService.MyPasswordValidator
             {
                 errors.Add(new IdentityError
                 {
-                    Code = "Password",
+                    Code = "user",
                     Description = "نام کاربری باید بیشتر از 4 کاراکتر باشد  "
                 });
             }
-       
+            if (user.UserName.Contains("0") ||
+                user.UserName.Contains("1") ||
+                user.UserName.Contains("2") ||
+                user.UserName.Contains("3") ||
+                user.UserName.Contains("4") ||
+                user.UserName.Contains("5") ||
+                user.UserName.Contains("6") ||
+                user.UserName.Contains("7") ||
+                user.UserName.Contains("8") ||
+                user.UserName.Contains("9") ||
+               user.UserName.Contains(" ")
+                )
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "user",
+                    Description = "نام کاربری نمیتواند شامل عدد و فاصله باشد   "
+                });
+            }
+            if (user.UserName.Any(c=>c > 255))
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "Password",
+                    Description = "مجاز به استفاده از کاراکتر فارسی نیستید "
+                });
+            }
+            if (password.Length < 6)
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "Password",
+                    Description = "پسوورد باید حداقل 6 کاراکتر باشد  "
+                });
+            }
             if (!parentResult.Succeeded)
             {
                 errors = parentResult.Errors.ToList();

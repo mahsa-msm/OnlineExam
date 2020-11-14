@@ -59,11 +59,10 @@ namespace OnlineExam.Endpoint.WebUI
             {
                 c.User.RequireUniqueEmail = false;
                 c.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-" ;
-                c.Password.RequireDigit = true;
                 c.Password.RequireLowercase = false;
                 c.Password.RequireUppercase = false;
                 c.Password.RequiredUniqueChars = 0;
-                c.Password.RequiredLength = 6;
+                c.Password.RequiredLength = 0;
                 c.Password.RequireNonAlphanumeric = false;
            
             }

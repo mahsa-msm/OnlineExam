@@ -16,26 +16,24 @@
     </div>
     <hr style="border-top:1px solid white" />
     <div class="login-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
         <form asp-action="SignUp" method="post">
             <div class="form-group">
                 <label asp-for="Name" class="login-lable"></label>
                 <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="login-lable"></label>
-                <input type="email" asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input type="text" asp-for="Email" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="login-lable"></label>
                 <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn bg-bluecolor btn-block"> ثبت نام</button>
             </div>
-            <div asp-validation-summary="All" class="text-danger"></div>
 
         </form>
     </div>
