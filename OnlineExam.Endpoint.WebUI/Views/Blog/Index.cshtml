@@ -8,8 +8,7 @@
 @if (User.IsInRole("admin"))
 {
     <div class="container">
-        <a asp-controller="Blog" asp-action="Create" asp-route-courseId=@ViewBag.courseId class="btn main-btn"> <i class="fa fa-plus" aria-hidden="true"> </i>اضافه کردن بلاگ</a>
-
+   برای ایجاد بلاگ جدید به لیست درس ها مراجعه کنید
     </div>
     <hr />
 
@@ -34,10 +33,10 @@
                         <div class="d-flex justify-content-center align-items-center ">
                             <a style="width:150px" class="course-exam-btn mb-2 mx-2" href=@Url.Action("Index", "Exam", new { courseId = blog.CourseId }, null)> آزمون های مربوطه</a>
 
-                            <a asp-action="Update" asp-route-id="@blog.Id" class="btn btn-primary d-inline-block mx-1"><i class="fa fa-edit"></i></a>
+                            <a asp-action="Update" asp-route-id="@blog.Id" class="btn btn-outline-primary d-inline-block mx-1"><i class="fa fa-edit"></i></a>
 
                             <form asp-action="Delete" asp-route-id="@blog.Id" method="post" class="d-inline-block">
-                                <button type="submit" class="btn btn-danger mx-1" onclick="return DeleteBlog(@blog.Id)">
+                                <button type="submit" class="btn btn-outline-danger mx-1" onclick="return DeleteBlog(@blog.Id)">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </form>
