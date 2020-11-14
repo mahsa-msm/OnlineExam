@@ -240,6 +240,7 @@ $(document).ready(function () {
             },
             {
                 "data": "id",
+                
                 "render": function (data) {
                     btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-outline-primary"><i class="fa fa-edit" ></i ></a >'
                     btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></i ></a >'
@@ -253,12 +254,12 @@ $(document).ready(function () {
         },
         "lengthChange": true,
         //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
-        autoWidth: true
+        autoWidth: true,
+        responsive: true,
+
 
     })
 })
-
-
 $(document).ready(function () {
 
     dataTable = $('#allCourseDataTableForAdmin').DataTable({
@@ -271,8 +272,12 @@ $(document).ready(function () {
         "columns": [
 
             { "data": "name" },
-            { "data": "description" },
             {
+                "data": "description",
+               
+            },
+            {
+                'className': "wraps",
                 "data": "id",
                 "render": function (data) {
                     exambtn = '<a href="/Exam/Index?courseId=' + data + '" class="">لیست آزمون</a >'
@@ -280,20 +285,68 @@ $(document).ready(function () {
                 }
             },
             {
+                'className': "wraps",
                 "data": "id",
                 "render": function (data) {
-                    blogbtn = '<a href="/Blog/Index?courseId=' + data + '" class="">لیست بلاگ ها</a >'
-                    return blogbtn
+                    blogbtn = '<a href="/Blog/Index?courseId=' + data + '" class="">لیست بلاگ ها</a >',
+                        createblogbtn = '  <a href="/Blog/Create?courseId=' + data + '" class="">ایجاد بلاگ </a >'
+
+                    return blogbtn + createblogbtn
                 }
             },
             {
+                'className': "wraps",
                 "data": "id",
                 "render": function (data) {
                     btnEdit = '<a href="/Course/Update?id=' + data + '" class="btn btn-outline-primary"><i class="fa fa-edit" ></i ></a >'
                     btnDelete = '<a href="/Course/Delete?id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></i ></a >'
-
                     return btnEdit + btnDelete
+                }
+                
+            }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+        },
+        "lengthChange": true,
+        //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        autoWidth: true,
+        responsive: true,
 
+    })
+})
+
+
+$(document).ready(function () {
+
+    dataTable = $('#allCourseDataTableForUser').DataTable({
+        "ajax": {
+            "url": "/Course/GetAllCourseDataTable",
+            "type": 'GET',
+            "datatype": 'json'
+        },
+        //"stateSave": "true",
+        "columns": [
+
+            { "data": "name" },
+            {
+                "data": "description",
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    exambtn = '<a href="/Exam/Index?courseId=' + data + '" class="">لیست آزمون</a >'
+                    return exambtn
+                }
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    blogbtn = '<a href="/Blog/Index?courseId=' + data + '" class="">لیست بلاگ ها</a >'
+
+                    return blogbtn
                 }
             }
         ],
@@ -302,9 +355,12 @@ $(document).ready(function () {
         },
         "lengthChange": true,
         //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
-        autoWidth: true
+        autoWidth: true,
+        responsive: true,
+
     })
 })
+
 
 
 

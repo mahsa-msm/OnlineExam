@@ -70,10 +70,10 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             int startDateCompare = DateTime.Compare(Exam.StartDate, DateTime.Now);
             int endDateCompare = DateTime.Compare(Exam.EndDate, DateTime.Now);
 
-            if (startDateCompare < 0 && endDateCompare > 0)
-            {
-                return RedirectToAction("NotExistExam");
-            }
+            //if (startDateCompare < 0 && endDateCompare > 0)
+            //{
+               // return RedirectToAction("NotExistExam");
+           // }
             return View(takeExam);
         }
         [HttpPost]

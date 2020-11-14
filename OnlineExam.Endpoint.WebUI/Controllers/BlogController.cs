@@ -32,11 +32,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             if (courseId == 0)
             {
                 var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).ToList();
+               
                 return View(Blogs);
             }
             else
             {
-                var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).Where(c => c.CourseId == courseId).ToList();
+                ViewBag.courseId = courseId;
+               var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).Where(c => c.CourseId == courseId).ToList();
                 return View(Blogs);
             }
         }
