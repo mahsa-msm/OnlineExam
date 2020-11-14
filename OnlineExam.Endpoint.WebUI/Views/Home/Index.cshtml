@@ -17,19 +17,35 @@
 </head>
 <body>
 
-   
 
 
 
-  
 
-    <div class="mainpagebox">
-        <h2 class="mainpageheader">به سایت آزمون آنلاین برنامه نویسی خوش آمدید</h2>
-        <p class="mainpagedescription">
-            در این سایت شما میتوانید مهارت های برنامه نویسی خود را بسنجید
-        </p>
-        <a asp-controller="UserAccount" asp-action="Login" class="mainbtn">ورود</a>
-        <a asp-controller="UserAccount" asp-action="SignUp" class="mainbtn">ثبت نام </a>
+
+
+    <div class="">
+        <div class="row">
+            <div class="col-md-7">
+                <img src="~/images/mainPage.jpg" style="width:100%" />
+            </div>
+            <div class="col-md-5 ">
+                <div class="mainpagebox">
+                    <h2 class="mainpageheader">به تست آنلاین خوش آمدید</h2>
+                    <p class="mainpagedescription">
+                         در این سایت شما میتوانید مهارت های برنامه نویسی خود را بسنجید . 
+                    
+                    </p>
+                    @*<p>
+                        برای مشاهده ی آزمون ها وارد سایت شوید . 
+                    </p>*@
+                    <a asp-controller="UserAccount" asp-action="Login" class="mainbtn">ورود</a>
+                    <a asp-controller="UserAccount" asp-action="SignUp" class=" mainbtn " >ثبت نام </a>
+                </div>
+              
+
+            </div>
+        </div>
+       
     </div>
 
 

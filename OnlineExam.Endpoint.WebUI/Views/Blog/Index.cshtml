@@ -8,6 +8,12 @@
 @if (User.IsInRole("admin"))
 {
     <div class="container">
+        <a asp-controller="Blog" asp-action="Create" asp-route-courseId=@ViewBag.courseId class="btn main-btn"> <i class="fa fa-plus" aria-hidden="true"> </i>اضافه کردن بلاگ</a>
+
+    </div>
+    <hr />
+
+    <div class="container">
         <div class="row">
             @foreach (var blog in Model)
             {
@@ -27,7 +33,7 @@
                         </div>
                         <div class="d-flex justify-content-center align-items-center ">
                             <a style="width:150px" class="course-exam-btn mb-2 mx-2" href=@Url.Action("Index", "Exam", new { courseId = blog.CourseId }, null)> آزمون های مربوطه</a>
-                      
+
                             <a asp-action="Update" asp-route-id="@blog.Id" class="btn btn-primary d-inline-block mx-1"><i class="fa fa-edit"></i></a>
 
                             <form asp-action="Delete" asp-route-id="@blog.Id" method="post" class="d-inline-block">

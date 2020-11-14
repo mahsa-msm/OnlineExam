@@ -1,48 +1,4 @@
-﻿//function DeleteCourse(id) {
-//    console.log('test');
-//    swal({
-//        title: 'از حذف درس مطمئن هستید؟',
-//        text: false,
-//        type: 'warning',
-//        showCancelButton: true,
-//        cancelButtonText: 'خیر',
-//        cancelButtonClass: 'btn btn-danger',
-//        showConfirmButton: true,
-//        confirmButtonText: 'بله',
-//        confirmButtonClass: 'btn btn-success'
-//    }, function (isConfirm) {
-//        if (isConfirm) {
-//            window.location.href = '/Course/Delete/'+ id;
-//        }
-//        else {
-//            return false;
-//        }
-//    });
-//    return false;
-//}
-
-//function DeleteExam(id) {
-//    swal({
-//        title: 'از حذف امتحان مطمئن هستید؟',
-//        text: false,
-//        type: 'warning',
-//        showCancelButton: true,
-//        cancelButtonText: 'خیر',
-//        cancelButtonClass: 'btn btn-danger',
-//        showConfirmButton: true,
-//        confirmButtonText: 'بله',
-//        confirmButtonClass: 'btn btn-success'
-//    }, function (isConfirm) {
-//        if (isConfirm) {
-//            window.location.href = '/Exam/Delete/' + id;
-//        }
-//        else {
-//            return false;
-//        }
-//    });
-//    return false;
-//}
-
+﻿
 $(function () {
     function close() {
         $('body').removeClass('has-active-menu');
@@ -76,8 +32,8 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function btn(data) {
-                    var Updatebtn = "<a  onclick='UpdateCourse(" + data + ")' class='btn btn-primary d-inline-block'><i class='fa fa-edit'></i></a>";
-                    var Deletebtn = "<form onclick='DeleteCourse(" + data + ")' class='d-inline-block'><button type='submit' class='btn btn-danger' onclick='return DeleteCourse(" + data + ")'><i class='fa fa-trash'></i> </button> </form>";
+                    var Updatebtn = "<a  onclick='UpdateCourse(" + data + ")' class='btn btn-outline-primary d-inline-block'><i class='fa fa-edit'></i></a>";
+                    var Deletebtn = "<form onclick='DeleteCourse(" + data + ")' class='d-inline-block'><button type='submit' class='btn btn-outline-danger' onclick='return DeleteCourse(" + data + ")'><i class='fa fa-trash'></i> </button> </form>";
 
                     return Updatebtn + Deletebtn;
 
@@ -182,10 +138,8 @@ $(document).ready(function () {
             document.getElementById("ExamCounts").innerHTML = response.data;
         },
         failure: function (response) {
-            alert(response.responseText);
         },
         error: function (response) {
-            alert(response.responseText);
         }
     })
 
@@ -201,10 +155,8 @@ $(document).ready(function () {
             document.getElementById("UserCounts").innerHTML = response.data;
         },
         failure: function (response) {
-            alert(response.responseText);
         },
         error: function (response) {
-            alert(response.responseText);
         }
     })
 });
@@ -218,10 +170,8 @@ $(document).ready(function () {
             document.getElementById("AdminCounts").innerHTML = response.data;
         },
         failure: function (response) {
-            alert(response.responseText);
         },
         error: function (response) {
-            alert(response.responseText);
         }
     })
 
@@ -282,17 +232,18 @@ $(document).ready(function () {
             {
                 "data": "id",
                 "render": function (data) {
-                    btnQuestion = '<a style="color: #a679ff;" href="/ExamQuestion/Index?examId=' + data +'" class="btn p-0 m-0">لیست سوال ها </a >'
+                    btnQuestion = '<a style="color: #a679ff;" href="/ExamQuestion/Index?examId=' + data + '" class="btn p-0 m-0">لیست سوال ها </a >'
 
 
-                    return btnQuestion 
+                    return btnQuestion
                 }
             },
             {
                 "data": "id",
+                
                 "render": function (data) {
-                    btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-primary"><i class="fa fa-edit" ></i ></a >'
-                    btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-danger" style="margin-left: 5px; color: white;" ><i class="fa fa-trash" ></i ></a >'
+                    btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-outline-primary"><i class="fa fa-edit" ></i ></a >'
+                    btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></i ></a >'
 
                     return btnEdit + btnDelete
                 }
@@ -303,10 +254,114 @@ $(document).ready(function () {
         },
         "lengthChange": true,
         //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
-        autoWidth: true
+        autoWidth: true,
+        responsive: true,
+
 
     })
 })
+$(document).ready(function () {
+
+    dataTable = $('#allCourseDataTableForAdmin').DataTable({
+        "ajax": {
+            "url": "/Course/GetAllCourseDataTable",
+            "type": 'GET',
+            "datatype": 'json'
+        },
+        //"stateSave": "true",
+        "columns": [
+
+            { "data": "name" },
+            {
+                "data": "description",
+               
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    exambtn = '<a href="/Exam/Index?courseId=' + data + '" class="">لیست آزمون</a >'
+                    return exambtn
+                }
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    blogbtn = '<a href="/Blog/Index?courseId=' + data + '" class="">لیست بلاگ ها</a >',
+                        createblogbtn = '  <a href="/Blog/Create?courseId=' + data + '" class="">ایجاد بلاگ </a >'
+
+                    return blogbtn + createblogbtn
+                }
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    btnEdit = '<a href="/Course/Update?id=' + data + '" class="btn btn-outline-primary"><i class="fa fa-edit" ></i ></a >'
+                    btnDelete = '<a href="/Course/Delete?id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></i ></a >'
+                    return btnEdit + btnDelete
+                }
+                
+            }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+        },
+        "lengthChange": true,
+        //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        autoWidth: true,
+        responsive: true,
+
+    })
+})
+
+
+$(document).ready(function () {
+
+    dataTable = $('#allCourseDataTableForUser').DataTable({
+        "ajax": {
+            "url": "/Course/GetAllCourseDataTable",
+            "type": 'GET',
+            "datatype": 'json'
+        },
+        //"stateSave": "true",
+        "columns": [
+
+            { "data": "name" },
+            {
+                "data": "description",
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    exambtn = '<a href="/Exam/Index?courseId=' + data + '" class="">لیست آزمون</a >'
+                    return exambtn
+                }
+            },
+            {
+                'className': "wraps",
+                "data": "id",
+                "render": function (data) {
+                    blogbtn = '<a href="/Blog/Index?courseId=' + data + '" class="">لیست بلاگ ها</a >'
+
+                    return blogbtn
+                }
+            }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+        },
+        "lengthChange": true,
+        //"aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+        autoWidth: true,
+        responsive: true,
+
+    })
+})
+
+
 
 
 
@@ -314,7 +369,7 @@ $(document).ready(function () {
 
     dataTable = $('#adminsDataTable').DataTable({
         "ajax": {
-            "url": "/UserAccount/AdminsDataTable" ,
+            "url": "/UserAccount/AdminsDataTable",
             "type": 'GET',
             "datatype": 'json'
         },
@@ -333,19 +388,18 @@ $(document).ready(function () {
     })
 })
 
-function deleteQuestions(id,examId){
+function deleteQuestions(id, examId) {
 
     $.ajax({
         type: "POST",
-        url: "/ExamQuestion/Delete?id=" + id+"&examId="+examId,
+        url: "/ExamQuestion/Delete?id=" + id + "&examId=" + examId,
         success: function (response) {
             location.reload();
         },
         failure: function (response) {
-            alert(response.responseText);
         },
         error: function (response) {
-            alert(response.responseText);
+
         }
     })
 

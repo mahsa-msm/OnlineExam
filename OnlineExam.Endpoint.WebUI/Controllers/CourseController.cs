@@ -17,11 +17,17 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         }
         public IActionResult Index()
         {
-            var courses = courseRepository.GetAll().ToList();
-            return View(courses);
+            return View();
         }
 
-        [Authorize(Roles ="admin")]
+        public IActionResult GetAllCourseDataTable()
+        {
+            var courses = courseRepository.GetAll().ToList();
+
+            return Json(new { data = courses });
+        }
+
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -57,17 +63,9 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Id == 0)
-                {
-                    courseRepository.Add(model);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
+                courseRepository.Update(model);
+                return RedirectToAction("Index");
 
-                    courseRepository.Update(model);
-                    return RedirectToAction("Index");
-                }
             }
             return View(model);
         }

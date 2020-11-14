@@ -4,25 +4,73 @@
     ViewData["Title"] = "لیست دروس";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row  d-flex justify-content-center align-items-center ">
+
+
+
+
+
+@if (User.IsInRole("admin"))
+{
+    <div class="container">
+        <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
+    </div>
+    <hr style=" border-top: 1px solid white" />
+    <div class="row  d-flex justify-content-center align-items-center ">
+        <div class="col-md-11 p-3 text-justify">
+            <table id="allCourseDataTableForAdmin" class="table table-striped table-bordered dt-responsive  " style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="white-space: nowrap; ">نام درس</th>
+                        <th>توضیحات</th>
+                        <th>آزمون</th>
+                        <th>بلاگ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <hr style=" border-top: 1px solid white" />
+    <div class="row  d-flex justify-content-center align-items-center ">
+        <div class="col-md-11 p-3 text-justify">
+            <table id="allCourseDataTableForUser" class="table table-striped table-bordered dt-responsive  " style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="white-space: nowrap; ">نام درس</th>
+                        <th>توضیحات</th>
+                        <th>آزمون</th>
+                        <th>بلاگ</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+}
+
+
+<!--<div class="row  d-flex justify-content-center align-items-center ">
     <div class="col-md-10 shadow p-3">
         <h1 class="main-title">لیست دروس</h1>
 
         <hr />
 
-        @if (User.IsInRole("admin"))
+        if (User.IsInRole("admin"))
         {
 
-            <div>
-                <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
-            </div>
+           
             <hr style=" border-top: 1px solid white" />
             <div class="">
                 <table class="table border">
                     <thead class="thead">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                Html.DisplayNameFor(model => model.Name)
                             </th>
                             <th>
                                 عملیات آزمون
@@ -32,29 +80,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        foreach (var item in Model)
                         {
-                        <tr>
+                        <t<!--r>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                            //    Html.DisplayFor(modelItem => item.Name)
                             </td>
 
                             <td>
-                                <a href=@Url.ActionLink("Index", "Exam", new { courseId = item.Id }, null)> لیست آزمون ها </a>|
-                                <a href=@Url.ActionLink("Create", "Exam", new { courseId = item.Id }, null)> اضافه کردن آزمون</a>
+                                <a href=Url.ActionLink("Index", "Exam", new { courseId = item.Id }, null)> لیست آزمون ها </a>|
                             </td>
                             <td>
-                                <a href=@Url.ActionLink("Create", "Blog", new { courseId = item.Id }, null)>ایجاد بلاگ</a>
-                                <a href=@Url.ActionLink("Index", "Blog", new { courseId = item.Id }, null)>لیست بلاگ ها </a>
-
-                                @*<a asp-action="Index" asp-controller="Blog">لیست بلاگ ها</a>*@
-
-                            </td>
+                                <a href=Url.ActionLink("Create", "Blog", new { courseId = item.Id }, null)>ایجاد بلاگ</a>
+                                <a href=Url.ActionLink("Index", "Blog", new { courseId = item.Id }, null)>لیست بلاگ ها </a>-->
+<!----<a asp-action="Index" asp-controller="Blog">لیست بلاگ ها</a>-->
+<!--</td>
                             <td>
-                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
+                                <a asp-action="Update" asp-route-id="item.Id" class="btn btn-primary d-inline-block"><i class="fa fa-edit"></i></a>
 
-                                <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline-block">
-                                    <button type="submit" class="btn btn-danger" onclick="return DeleteCourse(@item.Id)">
+                                <form asp-action="Delete" asp-route-id="item.Id" method="post" class="d-inline-block">
+                                    <button type="submit" class="btn btn-danger" onclick="return DeleteCourse(item.Id)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
@@ -72,19 +117,19 @@
 
             <div class="container">
                 <div class="row">
-                    @foreach (var item in Model)
+                    foreach (var item in Model)
                     {
                         <div class=" col-md-4  mt-2 ">
                             <div class="m-1 p-3 course-box ">
 
                                 <div class="course-name">
-                                    @item.Name
+                                    item.Name
                                 </div>
                                 <div class="course-description">
-                                    @item.Description
+                                   item.Description
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center ">
-                                    <a class="course-exam-btn" href=@Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست آزمون</a>
+                                    <a class="course-exam-btn" href=Url.Action("Index", "Exam", new { courseId = item.Id }, null)>لیست آزمون</a>
                                 </div>
                             </div>
 
@@ -98,4 +143,4 @@
         }
 
     </div>
-</div>
+</div>-->

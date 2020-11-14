@@ -120,12 +120,12 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             return Redirect(returnUrl);
         }
 
-
+     //   [Authorize(Roles = "admin")]
         public IActionResult Role()
         {
             MyIdentityRole role = new MyIdentityRole
             {
-                Name = "user"
+                Name = "admin"
             };
             roleManager.CreateAsync(role);
             return RedirectToAction("Index");

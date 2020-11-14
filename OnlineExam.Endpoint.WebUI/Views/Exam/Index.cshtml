@@ -8,8 +8,15 @@
 @if (User.IsInRole("admin"))
 {
     <input id="courseIdInExamDatatable" type="hidden" value="@course.Id" />
+
     <div class="row  d-flex justify-content-center align-items-center ">
         <div class="col-md-10  p-3 text-justify">
+            <div>
+                <a asp-controller="Exam" asp-action="Create" asp-route-courseId=@course.Id class="btn main-btn"> <i class="fa fa-plus" aria-hidden="true"> </i>اضافه کردن آزمون</a>
+
+            </div>
+            <hr />
+
             <span class="courselable"> درس: </span>
             <span class="coursename">@course.Name</span>
             <table id="GetAllExamsDataTablesforAdmin" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
@@ -30,11 +37,13 @@
 }
 else
 {
+
     <input id="courseIdInExamDatatable" type="hidden" value="@course.Id" />
     <div class="row  d-flex justify-content-center align-items-center ">
         <div class="col-md-10  p-3 text-justify">
             <span class="courselable"> درس: </span>
             <span class="coursename">@course.Name</span>
+
             <table id="GetAllExamsDataTablesforUser" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
