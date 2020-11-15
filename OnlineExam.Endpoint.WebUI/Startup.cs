@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -58,18 +59,20 @@ namespace OnlineExam.Endpoint.WebUI
             services.AddIdentity<AppUser, MyIdentityRole>(c =>
             {
                 c.User.RequireUniqueEmail = false;
-                c.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-" ;
+                c.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
                 c.Password.RequireLowercase = false;
                 c.Password.RequireUppercase = false;
                 c.Password.RequiredUniqueChars = 0;
                 c.Password.RequiredLength = 0;
                 c.Password.RequireNonAlphanumeric = false;
-           
+
             }
 
             ).AddEntityFrameworkStores<OnlineExamDbContext>();
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         }
+
+
 
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -11,12 +11,14 @@
 
 @if (User.IsInRole("admin"))
 {
-    <div class="container">
-        <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
-    </div>
-    <hr style=" border-top: 1px solid white" />
+    
+ 
     <div class="row  d-flex justify-content-center align-items-center ">
         <div class="col-md-11 p-3 text-justify">
+            <div>
+                <a asp-action="Create" class="btn main-btn"><i class="fa fa-plus" aria-hidden="true"> </i>  ایجاد درس جدید</a>
+            </div>
+            <hr style=" border-top: 1px solid white" />
             <table id="allCourseDataTableForAdmin" class="table table-striped table-bordered dt-responsive  " style="width:100%">
                 <thead>
                     <tr>
