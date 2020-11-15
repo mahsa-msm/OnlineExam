@@ -32,13 +32,13 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
             if (courseId == 0)
             {
                 var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).ToList();
-               
+
                 return View(Blogs);
             }
             else
             {
                 ViewBag.courseId = courseId;
-               var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).Where(c => c.CourseId == courseId).ToList();
+                var Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id).Where(c => c.CourseId == courseId).ToList();
                 return View(Blogs);
             }
         }
@@ -54,6 +54,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult Create(BlogViewModel model, IFormFile file)
         {
             Random randomNumber = new Random();
+
             string ImageName = randomNumber.Next(11111, 99999) + file.FileName;
 
             if (ModelState.IsValid)
@@ -92,6 +93,7 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Update(int id)
         {
+
             Blog Blog = blogRepository.Get(id);
             return View(Blog);
         }
@@ -100,24 +102,32 @@ namespace OnlineExam.Endpoint.WebUI.Controllers
         public IActionResult Update(Blog model, IFormFile file)
         {
             Random randomNumber = new Random();
-            string ImageName = randomNumber.Next(11111, 99999) + file.FileName;
-
-            var blog = blogRepository.Get(model.Id);
-            blog.ImageName = ImageName;
-            blog.Description = model.Description;
-            blog.CreateDate = DateTime.Now;
-            blog.Title = model.Title;
-
-
-            string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/BlogImages", ImageName);
-
-            using (var stream = new FileStream(SavePath, FileMode.Create))
+            if (file != null)
             {
-                file.CopyTo(stream);
+                string ImageName = randomNumber.Next(11111, 99999) + file.FileName;
+                var blog = blogRepository.Get(model.Id);
+                blog.ImageName = ImageName;
+                blog.Description = model.Description;
+                blog.CreateDate = DateTime.Now;
+                blog.Title = model.Title;
+
+                string SavePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/BlogImages", ImageName);
+
+                using (var stream = new FileStream(SavePath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                blogRepository.Update(blog);
             }
-
-            blogRepository.Update(blog);
-
+            else {
+                var blog = blogRepository.Get(model.Id);
+                blog.ImageName = blogRepository.Get(model.Id).ImageName;
+                blog.Description = model.Description;
+                blog.CreateDate = DateTime.Now;
+                blog.Title = model.Title;
+                blogRepository.Update(blog);
+            }
             return RedirectToAction("Index");
 
 

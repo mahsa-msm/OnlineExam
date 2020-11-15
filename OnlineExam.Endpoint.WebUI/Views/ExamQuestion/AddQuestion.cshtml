@@ -31,7 +31,7 @@
                 {
                     <div class="row mt-3 mx-0 question-box">
                         
-                        <input type="checkbox" asp-for="Choices[i].IsCorrect" class="float-right" />
+                        <input type="checkbox" asp-for="Choices[i].IsCorrect" class="float-right" onclick="radiobtn(this)" />
                         <input class="form-control float-left " required asp-for="Choices[i].Text" />
 
                     </div>

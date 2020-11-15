@@ -452,6 +452,9 @@ header {
     color: #7150f7;
     font-weight: 500;
 }
+.blog-description{
+    height : 140px 
+}
 .dataTables_filter {
     float: left
 }

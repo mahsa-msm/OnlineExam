@@ -7,8 +7,8 @@
 
 @if (User.IsInRole("admin"))
 {
-    <div class="container">
-   برای ایجاد بلاگ جدید به لیست درس ها مراجعه کنید
+    <div class="container main-title">
+        برای ایجاد بلاگ جدید به لیست درس ها مراجعه کنید
     </div>
     <hr />
 
@@ -23,7 +23,7 @@
                         </div>
                         <div class="p-2">
                             <div class="blog-title">  @blog.Title</div>
-                            <div class="pt-2 pb-3">  @blog.Description </div>
+                            <div class="pt-2 pb-3 blog-description">  @blog.Description </div>
 
                             <div style="font-size:0.9em">
                                 <div> <i class="	fa fa-user-circle" aria-hidden="true"></i>  @blog.CreateBy</div>

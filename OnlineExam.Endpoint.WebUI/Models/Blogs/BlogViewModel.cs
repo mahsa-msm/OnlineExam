@@ -13,6 +13,7 @@ namespace OnlineExam.Endpoint.WebUI.Models.Blogs
         public string Title { get; set; }
         [Required]
         [Display(Name = "توضیحات ")]
+        [MaxLength(200,ErrorMessage ="تعداد کاراکتر مجاز 200 است ")]
         public string Description { get; set; }
         public string ImageName { get; set; }
         public int CourseId { get; set; }
