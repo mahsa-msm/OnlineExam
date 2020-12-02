@@ -30,7 +30,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         }
         public IActionResult Index()
         {
-           ViewBag.Blogs= blogRepository.GetAll().OrderByDescending(x=>x.Id);
+            ViewBag.Blogs = blogRepository.GetAll().OrderByDescending(x => x.Id);
             return View();
         }
 
@@ -121,7 +121,7 @@ namespace OnlineExam.Endpoint.MVC.Controllers
             return Redirect(returnUrl);
         }
 
-     //   [Authorize(Roles = "admin")]
+        //   [Authorize(Roles = "admin")]
         public IActionResult Role()
         {
             MyIdentityRole role = new MyIdentityRole
@@ -199,15 +199,15 @@ namespace OnlineExam.Endpoint.MVC.Controllers
         }
         public async Task<ActionResult> AdminCounts()
         {
-          
-            int counts = 0 ; 
+
+            int counts = 0;
             foreach (var user in userManager.Users.ToList())
             {
                 if (user != null && await userManager.IsInRoleAsync(user, "admin"))
                     counts++;
             }
             return Json(new { data = counts });
-          
+
         }
 
         public async Task<ActionResult> AdminsDataTable()
@@ -220,6 +220,35 @@ namespace OnlineExam.Endpoint.MVC.Controllers
                     admins.Add(user);
             }
             return Json(new { data = admins });
+        }
+        public ActionResult UserList()
+        {
+            return View();
+        }
+        public ActionResult UsersDataTable()
+        {
+            List<AppUser> admins = new List<AppUser>();
+
+            foreach (var user in userManager.Users.ToList())
+            {
+                admins.Add(user);
+            }
+            return Json(new { data = admins });
+        }
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+
+            var user = await userManager.FindByIdAsync(id.ToString());
+            var roles = await userManager.GetRolesAsync(user);
+            IdentityResult result;
+            foreach (var role in roles)
+            {
+                result = await userManager.RemoveFromRoleAsync(user, role);
+            }
+            
+            result = await userManager.DeleteAsync(user);
+
+            return RedirectToAction("UserList");
         }
     }
 }

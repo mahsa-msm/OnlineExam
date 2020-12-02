@@ -240,7 +240,7 @@ $(document).ready(function () {
             },
             {
                 "data": "id",
-                
+
                 "render": function (data) {
                     btnEdit = '<a href="/Exam/Update?courseId=' + courseId + '&examId=' + data + '" class="btn btn-outline-primary"><i class="fa fa-edit" ></i ></a >'
                     btnDelete = '<a href="/Exam/Delete?courseId=' + courseId + '&id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></i ></a >'
@@ -274,7 +274,7 @@ $(document).ready(function () {
             { "data": "name" },
             {
                 "data": "description",
-               
+
             },
             {
                 'className': "wraps",
@@ -302,7 +302,7 @@ $(document).ready(function () {
                     btnDelete = '<a href="/Course/Delete?id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></i ></a >'
                     return btnEdit + btnDelete
                 }
-                
+
             }
         ],
         "language": {
@@ -416,3 +416,33 @@ function radiobtn(checkbox) {
         checkbox.checked = true
     }
 }
+
+
+$(document).ready(function () {
+
+    dataTable = $('#usersDataTable').DataTable({
+        "ajax": {
+            "url": "/UserAccount/UsersDataTable",
+            "type": 'GET',
+            "datatype": 'json'
+        },
+        "columns": [
+
+            { "data": "userName" },
+            { "data": "email" },
+            {
+                "data": "id",
+                "render": function (data) {
+                    deletebtn = '<a href="/UserAccount/DeleteUser?id=' + data + '" class="btn btn-outline-danger" style="margin-right: 5px; " ><i class="fa fa-trash" ></a >'
+
+                    return deletebtn
+                }
+            }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Persian.json"
+        },
+        "lengthChange": true,
+        autoWidth: true
+    })
+})
